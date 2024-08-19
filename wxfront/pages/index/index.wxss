@@ -1,4 +1,5 @@
 /**index.wxss**/
+/* 搜索框无返回栏 */
 .search-bar__form {
   -webkit-box-flex: 1;
   background: #eeeeef;
@@ -27,6 +28,7 @@
   margin-left: 10rpx; /* 左边距改为 rpx */
 }
 
+/* 滑动标签 */
 .scroll-view-tab {
   width: 100%;
   overflow-x: auto;
@@ -53,15 +55,16 @@
 .map-container {
   position: relative;
   width: 100vw;
-  height: 80vh;
+  height: calc(100vh - 50px - env(safe-area-inset-bottom));
+  box-sizing: border-box; /* 包括内边距和边框在内的总宽度和高度 */
 }
 
 /* 定位按钮样式 */
 .location-btn {
   position: absolute;
-  right: 50%; /* 水平居中，根据实际情况调整 */
-  bottom: 20%; /* 留出底部20%空间 */
-  transform: translate(50%, 50%); /* 确保按钮完全居中于指定位置 */
+  bottom: 30%; /* 距离底部30rpx */
+  left: 50%; /* 水平居中 */
+  transform: translateX(-50%); /* 水平居中对齐 */
   width: 60rpx; /* 图标大小，适当调整以适配图片 */
   height: 60rpx; /* 确保按钮为圆形 */
   border-radius: 50%; /* 圆形 */
@@ -69,6 +72,9 @@
   border: none; /* 无边框 */
   padding: 0; /* 移除内边距 */
   overflow: hidden; /* 防止内容溢出 */
+  display: flex; /* 使用 flexbox 来居中图标 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
 }
 
 .location-icon {

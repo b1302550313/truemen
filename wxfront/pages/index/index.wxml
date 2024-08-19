@@ -1,6 +1,6 @@
 <!-- pages/index/index.wxml -->
 <view style="height:{{m.height}}px;padding-top:{{s.statusBarHeight+(m.top-s.statusBarHeight)}}px;padding-bottom:{{(m.top-s.statusBarHeight)}}px;width:{{m.left}}px;">
-  <view bindtap="onSearch" class="search-bar__form">
+  <view bindtap="goToSearch" class="search-bar__form">
     <view class="search-bar__box" style="height: {{m.height}}px;">
       <icon size="{{m.height/2+1}}" type="search"></icon>
       <input class="search-bar__input" disabled="true" placeholder="搜索地点、活动、你感兴趣的地方" style="font-size: {{m.height/2.5}}px" type="text"></input>
@@ -35,7 +35,7 @@
 </scroll-view>
 <!-- 在地图上添加一个圆形的定位按钮 -->
 <view class="map-container">
-  <map id="map" subkey="{{mapSubKey}}" longitude="{{longitude}}" latitude="{{latitude}}" style="width: 100vw; height: 80vh;" show-location="true" enable-building="true" enable-3D="true"></map>
+  <map id="map" subkey="{{mapSubKey}}" longitude="{{longitude}}" latitude="{{latitude}}" style="width: 100%; height: 100%;" show-location="true" enable-building="true" enable-3D="true"></map>
   <button class="location-btn" bindtap="moveToLocation">
     <image src="../../images/icons/icon_tab_sport.png" class="location-icon"></image>
   </button>

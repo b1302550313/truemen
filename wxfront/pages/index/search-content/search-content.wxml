@@ -1,0 +1,22 @@
+<view style="height:{{m.height}}px; padding-top:{{s.statusBarHeight + (m.top - s.statusBarHeight)}}px; padding-bottom:{{(m.top - s.statusBarHeight)}}px; width:{{m.left}}px;display: flex; align-items: center;">
+    <!-- 返回按钮 -->
+    <van-icon name="arrow-left" style="margin-left: 20rpx;" bindtap="goBack" />
+    <!-- 搜索框 -->
+    <view class="search-bar__form">
+        <view class="search-bar__box" style="height: {{m.height}}px;">
+            <icon size="{{m.height/2+1}}" type="search" style="margin-left: 20rpx;"></icon>
+            <input class="search-bar__input" focus="{{autoFocus}}" style="font-size: {{m.height/2.5}}px;" type="text"></input>
+        </view>
+    </view>
+</view>
+<view class="history-search" style="padding: 20rpx;">
+    <view style="display: flex; justify-content: space-between; align-items: center;">
+        <text class="history-title">历史搜索</text>
+        <van-icon name="delete" bindtap="clearHistory" />
+    </view>
+    <view class="history-list" style="margin-top: 10rpx; display: flex; flex-wrap: wrap;">
+        <block wx:for="{{historyList}}" wx:key="index">
+            <text class="history-item">{{item}}</text>
+        </block>
+    </view>
+</view>

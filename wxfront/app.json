@@ -11,22 +11,13 @@
     "pages/register/phone-register/phone-register",
     "pages/register/wechat-register/wechat-register",
     "pages/login/other-phone-login/other-phone-login",
-    "pages/friend/friend-chat/friend-chat"
+    "pages/friend/friend-chat/friend-chat",
+    "pages/index/search-content/search-content"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
-  },
-  "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "tabBar": {
@@ -58,6 +49,8 @@
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
-    "tags-pannel": "/components/tags-pannel/index"
+    "tags-pannel": "/components/tags-pannel/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-icon": "@vant/weapp/icon/index"
   }
 }
