@@ -11,7 +11,8 @@
     "pages/register/phone-register/phone-register",
     "pages/register/wechat-register/wechat-register",
     "pages/login/other-phone-login/other-phone-login",
-    "pages/friend/friend-chat/friend-chat"
+    "pages/friend/friend-chat/friend-chat",
+    "pages/myself/user-profile/user-profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",

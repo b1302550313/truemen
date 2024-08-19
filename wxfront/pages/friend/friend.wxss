@@ -50,6 +50,7 @@
   flex-direction: column;
   padding-top:10rpx;
 }
+
 .add-friend-button {
   position: fixed;
   right: 50rpx;

@@ -1,4 +1,4 @@
-// pages/myself/myself.js
+// pages/myself/user-profile/user-profile.js
 Page({
   
   /**
@@ -23,10 +23,12 @@ Page({
     aboutMe: '开心每一天',
     userId: '我的ID:',
     gender: '男/女/其他',
-    birthday: '2007-01-04',
-    zodiac: '金牛座',
+    birthday: '生日：',
+    zodiac: '星座：',
     tags: ['各种标签', '各种标签', '各种标签', '各种标签','各种标签', '各种标签', '各种标签', '各种标签'],
     monthIndex: 0,
+    months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    days: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日']
   },
 
   /**
