@@ -1,4 +1,4 @@
-/* pages/myself/myself.wxss */
+/* pages/myself/user-profile/user-profile.wxss */
 .container {
   display: flex;
   flex-direction: column;
@@ -47,11 +47,6 @@
 }
 .blue-bg{
   background-color: #C8DAEA;
-  height: auto;
-}
-.edit{
-  width: 14px;
-  height: 14px;
 }
 .scroll-content {
   white-space: nowrap; /* 不换行，使内容可以在一行内水平排列 */
@@ -105,11 +100,6 @@
   margin-left: 32rpx;
   /* gap: 6rpx; */
   border: 1rpx red solid;
-}
-.about-me-line{
-  display: flex;
-  justify-content: space-between;
-  /* border: red solid; */
 }
 .about-me-title {
   font-family: PingFang SC;

@@ -17,6 +17,13 @@
           "scene": null
         },
         {
+          "name": "pages/myself/user-profile/user-profile",
+          "pathName": "pages/myself/user-profile/user-profile",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/friend/friend-chat/friend-chat",
           "pathName": "pages/friend/friend-chat/friend-chat",
           "query": "",

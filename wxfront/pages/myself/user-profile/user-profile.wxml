@@ -1,4 +1,4 @@
-<!--pages/myself/myself.wxml-->
+<!--pages/myself/user-profile/user-profile.wxml-->
 <!-- <scroll-view scroll-y="true" > -->
   <view class="container">
   <view class="avatar-container">
@@ -30,11 +30,7 @@
   <view class="two-col">
     <view class="about-me">
       <view class="about-me-inner">
-        <view class="about-me-line">
-          <text class="about-me-title">关于我</text>
-        <image  src="/images/icons/edit.png" class="edit" />
-        </view>
-
+        <text class="about-me-title">关于我</text>
         <text class="about-me-content">{{ aboutMe }}</text>
       </view>
     </view>

@@ -13,6 +13,7 @@
     "pages/login/other-phone-login/other-phone-login",
     "pages/friend/friend-chat/friend-chat",
     "pages/index/search-content/search-content"
+    "pages/myself/user-profile/user-profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",
