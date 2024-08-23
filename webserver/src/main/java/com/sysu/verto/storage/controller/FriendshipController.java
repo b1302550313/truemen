@@ -1,34 +1,49 @@
 package com.sysu.verto.storage.controller;
 
 import com.sysu.verto.storage.model.Friendship;
-import com.sysu.verto.storage.model.Message;
 import com.sysu.verto.storage.service.FriendshipService;
-import com.sysu.verto.storage.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/friends")
 public class FriendshipController {
 
     @Autowired
     private FriendshipService friendshipService;
 
-    @Autowired
-    private MessageService messageService;
-
-    @GetMapping("/friends")
-    public List<Friendship> getFriends(@RequestParam String identifier) {
-        return friendshipService.getFriends(identifier);
+    @PostMapping
+    public ResponseEntity<String> addFriend(@RequestParam Long currentUserId, @RequestParam Long friendId) {
+        boolean result = friendshipService.addFriend(currentUserId, friendId);
+        if (result) {
+            return ResponseEntity.ok("Friend request sent successfully.");
+        } else {
+            return ResponseEntity.status(400).body("Failed to send friend request.");
+        }
     }
 
-    @GetMapping("/messages")
-    public ResponseEntity<List<Message>> getMessages(@RequestParam Long userId1, @RequestParam Long userId2) {
-        List<Message> messages = messageService.getMessagesBetweenUsers(userId1, userId2);
-        return ResponseEntity.ok(messages);
+    @DeleteMapping("/{friendId}")
+    public ResponseEntity<String> deleteFriend(@RequestParam Long currentUserId, @PathVariable Long friendId) {
+        boolean result = friendshipService.deleteFriend(currentUserId, friendId);
+        if (result) {
+            return ResponseEntity.ok("Friend deleted successfully.");
+        } else {
+            return ResponseEntity.status(400).body("Failed to delete friend.");
+        }
     }
 
+    @GetMapping("/users/{userId}/friends")
+    public ResponseEntity<List<Friendship>> getFriends(@PathVariable Long userId) {
+        List<Friendship> friends = friendshipService.getFriends(String.valueOf(userId));
+        return ResponseEntity.ok(friends);
+    }
+
+    @GetMapping("/requests")
+    public ResponseEntity<List<Friendship>> getFriendRequests(@RequestParam Long currentUserId) {
+        List<Friendship> requests = friendshipService.getFriendRequests(currentUserId);
+        return ResponseEntity.ok(requests);
+    }
 }

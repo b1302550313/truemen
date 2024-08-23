@@ -1,32 +1,59 @@
 package com.sysu.verto.storage.model;
 
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "friendship")
 public class Friendship {
-    private int userID1;
-    private int userID2;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "uid")
+    private UserCoreInfo user;
+
+    @Column(name = "friend_id")
+    private Long friendId;
+
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
-    public Friendship(int userID1, int userID2, Timestamp createdAt) {
-        this.userID1 = userID1;
-        this.userID2 = userID2;
+    // Constructors
+    public Friendship() {}
+
+    public Friendship(UserCoreInfo user, Long friendId, Timestamp createdAt) {
+        this.user = user;
+        this.friendId = friendId;
         this.createdAt = createdAt;
     }
 
-    public int getUserID1() {
-        return userID1;
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setUserID1(int userID1) {
-        this.userID1 = userID1;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public int getUserID2() {
-        return userID2;
+    public UserCoreInfo getUser() {
+        return user;
     }
 
-    public void setUserID2(int userID2) {
-        this.userID2 = userID2;
+    public void setUser(UserCoreInfo user) {
+        this.user = user;
+    }
+
+    public Long getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
     }
 
     public Timestamp getCreatedAt() {
