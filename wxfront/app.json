@@ -12,7 +12,7 @@
     "pages/register/wechat-register/wechat-register",
     "pages/login/other-phone-login/other-phone-login",
     "pages/friend/friend-chat/friend-chat",
-    "pages/index/search-content/search-content"
+    "pages/index/search-content/search-content",
     "pages/myself/user-profile/user-profile"
   ],
   "window": {

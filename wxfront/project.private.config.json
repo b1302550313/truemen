@@ -3,7 +3,7 @@
   "projectname": "verto",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": true,
+    "urlCheck": false,
     "skylineRenderEnable": false
   },
   "condition": {

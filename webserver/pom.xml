@@ -49,6 +49,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+		<dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.33</version> <!-- 根据实际情况选择版本 -->
+    </dependency>
+
     </dependencies>
 
 	<build>
@@ -63,6 +69,8 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<includeSystemScope>true</includeSystemScope>
+           			<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
 				</configuration>
 			</plugin>
 		</plugins>

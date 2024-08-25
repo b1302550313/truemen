@@ -114,27 +114,61 @@ Page({
 
   // 启动注册
   onRegister: function() {
-      wx.showModal({
-        title: '确认',
-        content: '您确定要注册吗？',
-        success: function(res) {
-          if (res.confirm) {
-            // 这里还要和后端交互，要保证手机号是不一样的！！！
-            wx.showToast({
-              title: '注册成功',
-              icon: 'success',
-              duration: 2000,
-              complete: function() {
-                // 在提示结束后跳转到 index 页面
-                wx.switchTab({
-                  url: '../../index/index'
+    wx.showModal({
+      title: '确认',
+      content: '您确定要注册吗？',
+      success: function(res) {
+        if (res.confirm) {
+          // 发送 POST 请求到后端
+          wx.request({
+            url: getApp().globalData.host + '/api/users/register', // 后端 API 地址
+            method: 'POST',
+            data: JSON.stringify({
+              phoneNumber: this.data.phoneNumber,
+              password:this.data.password,
+              userName:"新用户",
+              permissionLevel:1
+            }),
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success: function(res) {
+              console.log(res);
+              if (res.statusCode === 200) {
+                // 注册成功
+                wx.showToast({
+                  title: '注册成功',
+                  icon: 'success',
+                  duration: 2000,
+                  complete: function() {
+                    // 在提示结束后跳转到 index 页面
+                    wx.switchTab({
+                      url: '../../index/index'
+                    });
+                  }
+                });
+              } else {
+                // 注册失败
+                wx.showToast({
+                  title: '注册失败',
+                  icon: 'none',
+                  duration: 2000
                 });
               }
-            });
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
+            },
+            fail: function(error) {
+              // 请求失败
+              wx.showToast({
+                title: '网络错误',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消');
         }
-      });
+      }.bind(this) // 注意这里绑定 this
+    });
   }
 });

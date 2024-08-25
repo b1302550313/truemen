@@ -6,7 +6,7 @@ Page({
    */
   data: {
     avatarUrl: '/images/register/register.webp',
-    username: '用户名',
+    username: '用户名1',
     doubleArrowFriends: '120',
     youFollowed: '130',
     followedYou: '140',
@@ -33,9 +33,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.setData({
-      avatarUrl: app.globalData.avatarUrl || ''
-    })
+    // this.setData({
+    //   avatarUrl: app.globalData.avatarUrl || ''
+    // })
   },
   
   openAvatarUploader: function () {
