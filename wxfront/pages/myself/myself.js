@@ -5,23 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarUrl: '/images/register/register.webp',
-    username: '用户名1',
+    avatarUrl: '/images/icons/pie.png',
+    username: '用户名2',
     doubleArrowFriends: '120',
     youFollowed: '130',
     followedYou: '140',
     items: [
-      { imageSrc: '/images/register/register.webp', text: '我的合集1' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集2' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集3' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集4' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集5' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集6' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集7' },
-      { imageSrc: '/images/register/register.webp', text: '我的合集8' }
+      { imageSrc: '/images/icons/pie.png', text: '我的合集1' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集2' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集3' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集4' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集5' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集6' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集7' },
+      { imageSrc: '/images/icons/pie.png', text: '我的合集8' }
     ],
-    aboutMe: '开心每一天',
-    userId: '我的ID:',
+    aboutMe: '开心每一天红红火火恍恍惚惚哈哈哈哈',
+    userId: '888',
     gender: '男/女/其他',
     birthday: '2007-01-04',
     zodiac: '金牛座',
