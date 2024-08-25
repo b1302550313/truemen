@@ -23,7 +23,8 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "urlCheck": true
   },
   "condition": {},
   "editorSetting": {
