@@ -3,6 +3,8 @@ package com.sysu.verto.dao.impl;
 import com.sysu.verto.dao.FriendshipDAO;
 import com.sysu.verto.model.Friendship;
 import com.sysu.verto.model.UserCoreInfo;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

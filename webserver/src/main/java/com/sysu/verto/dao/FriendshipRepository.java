@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+
 public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
 
     List<Friendship> findByUserUidAndFriendId(Long userId, Long friendId);

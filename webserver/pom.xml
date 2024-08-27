@@ -81,22 +81,14 @@
             <version>1.0</version>
         </dependency>
 
+		<!--引入 MyBatis-Plus 之后请不要再次引入 MyBatis 以及
+		mybatis-spring-boot-starter和MyBatis-Spring，
+		以避免因版本差异导致的问题。-->
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot3-starter -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.5.11</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mybatis.dynamic-sql</groupId>
-			<artifactId>mybatis-dynamic-sql</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>3.0.4</version>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+			<version>3.5.7</version>
 		</dependency>
 
 

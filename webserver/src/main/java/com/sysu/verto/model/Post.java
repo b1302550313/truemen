@@ -1,9 +1,11 @@
 package com.sysu.verto.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
+@TableName("post")
 @Data
 public class Post {
     private Long postId;
