@@ -37,6 +37,7 @@ create table `post` (
     `type` enum('Text', 'Image', 'Video', 'Audio') not null comment '帖子类型',
     `content` varchar(5000) not null comment '帖子内容',
     `create_time` datetime default current_timestamp comment '发布时间',
+    `media_urls` varchar(2000) null comment '资源连接',
     foreign key (uid) references user_core_info (uid) on update cascade
 );
 
