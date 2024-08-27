@@ -3,27 +3,21 @@ package com.sysu.verto.controller;
 import com.sysu.verto.framework.exception.ErrorCode;
 import com.sysu.verto.framework.exception.ServerException;
 import com.sysu.verto.framework.result.Result;
-import com.sysu.verto.model.Post;
 import com.sysu.verto.service.PostService;
 import com.sysu.verto.vo.PostUpdateQuery;
 import com.sysu.verto.vo.PostVo;
 import com.sysu.verto.vo.PostWithIDVo;
-import jakarta.servlet.http.PushBuilder;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/comment")
 @Validated
-public class PostController {
+public class CommentController {
     private static final Logger log = LoggerFactory.getLogger(PostController.class);
     @Autowired
     private PostService postService;

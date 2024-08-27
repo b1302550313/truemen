@@ -10,7 +10,4 @@ import java.util.List;
 
 @Mapper
 public interface PostDao extends BaseMapper<Post> {
-//    @Select("select * from post")
-//    List<Post> findAllPosts();
-
 }
