@@ -260,7 +260,7 @@ CREATE TABLE `user` (
   `Password` varchar(255) NOT NULL,
   `Avatar` varchar(255) DEFAULT NULL,
   `RegistrationTime` datetime DEFAULT CURRENT_TIMESTAMP,
-  `PermissionLevel` int DEFAULT NULL,
+  `PermissionLevel` ENUM('Guest', 'User', 'Admin') DEFAULT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

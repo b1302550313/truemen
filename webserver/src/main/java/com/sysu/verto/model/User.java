@@ -1,5 +1,5 @@
 package com.sysu.verto.model;
-
+import java.time.LocalDateTime;
 
 public class User {
     private int userID;
@@ -8,11 +8,16 @@ public class User {
     private String phoneNumber;
     private String password;
     private String avatar;
-    private Integer permissionLevel;
+    private LocalDateTime registrationTime;
+    private PermissionLevel permissionLevel;
+
+    public enum PermissionLevel {
+        Guest, User, Admin
+    }
 
     public User() {}
 
-    public User(int userID, String userName, String weChatID, String phoneNumber, String password, String avatar, Integer permissionLevel) {
+    public User(int userID, String userName, String weChatID, String phoneNumber, String password, String avatar, PermissionLevel permissionLevel) {
         this.userID = userID;
         this.userName = userName;
         this.weChatID = weChatID;
@@ -73,11 +78,20 @@ public class User {
 
 
 
-    public Integer getPermissionLevel() {
+    public PermissionLevel getPermissionLevel() {
         return permissionLevel;
     }
 
-    public void setPermissionLevel(Integer permissionLevel) {
+    public void setPermissionLevel(PermissionLevel permissionLevel) {
         this.permissionLevel = permissionLevel;
     }
+
+    public LocalDateTime getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public void setRegistrationTime(LocalDateTime registrationTime) {
+        this.registrationTime = registrationTime;
+    }
+    
 }

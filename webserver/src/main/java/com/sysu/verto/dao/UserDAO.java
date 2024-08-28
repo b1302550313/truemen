@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 @Repository
 public class UserDAO {
@@ -17,7 +19,9 @@ public class UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private RowMapper<User> userRowMapper = (ResultSet rs, int rowNum) -> {
+    private RowMapper<User> userRowMapper = new RowMapper<User>() {
+    @Override
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = new User();
         user.setUserID(rs.getInt("UserID"));
         user.setUserName(rs.getString("UserName"));
@@ -25,9 +29,11 @@ public class UserDAO {
         user.setPhoneNumber(rs.getString("PhoneNumber"));
         user.setPassword(rs.getString("Password"));
         user.setAvatar(rs.getString("Avatar"));
-        user.setPermissionLevel(rs.getInt("PermissionLevel"));
+        user.setRegistrationTime(rs.getTimestamp("RegistrationTime").toLocalDateTime());
+        user.setPermissionLevel(User.PermissionLevel.valueOf(rs.getString("PermissionLevel")));
         return user;
-    };
+    }
+};
 
     public User checkUserByPhoneNumberOrWeChatID(String phoneNumber, String weChatID) {
             String sql = "SELECT * FROM user WHERE PhoneNumber = ? OR WeChatID = ?";
@@ -40,8 +46,24 @@ public class UserDAO {
     }
 
     public boolean registerUser(User user) {
-        String sql = "INSERT INTO user (UserName, WeChatID, PhoneNumber, Password, Avatar, PermissionLevel) VALUES (?, ?, ?, ?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(sql, user.getUserName(), user.getWeChatID(), user.getPhoneNumber(), user.getPassword(), user.getAvatar(), user.getPermissionLevel());
+        String sql = "INSERT INTO user (UserName, WeChatID, PhoneNumber, Password, Avatar, RegistrationTime, PermissionLevel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql, user.getUserName(), user.getWeChatID(), user.getPhoneNumber(), user.getPassword(), user.getAvatar(), user.getRegistrationTime(), user.getPermissionLevel().name());
+        return rowsAffected > 0;
+    }
+
+    public User getUserById(int userId) {
+        String sql = "SELECT * FROM user WHERE UserID = ?";
+        try {
+            User user = jdbcTemplate.queryForObject(sql, userRowMapper, userId);
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public boolean updateUser(User user) {
+        String sql = "UPDATE user SET UserName = ?, WeChatID = ?, PhoneNumber = ?, Password = ?, Avatar = ?, PermissionLevel = ? WHERE UserID = ?";
+        int rowsAffected = jdbcTemplate.update(sql, user.getUserName(), user.getWeChatID(), user.getPhoneNumber(), user.getPassword(), user.getAvatar(), user.getPermissionLevel(), user.getUserID());
         return rowsAffected > 0;
     }
 }
