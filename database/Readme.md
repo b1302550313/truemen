@@ -10,6 +10,11 @@
 
 ### 数据库更改记录
 
+
+user表分为user_base_info表和user_core_info表【注意统一】
+
+添加了部分数据
+
 ```sql
 ```
 
