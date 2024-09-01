@@ -80,6 +80,102 @@ CREATE TABLE `talk_box` (
     FOREIGN KEY (`userId`) REFERENCES `user_core_info`(`uid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 帖子表
+create table `post` (
+    `post_id` bigint primary key auto_increment comment '帖子ID',
+    `uid` bigint not null comment '用户ID',
+    `title` varchar(100) not null comment '帖子标题',
+    `content` varchar(5000) not null comment '帖子内容',
+    `create_time` datetime default current_timestamp comment '发布时间',
+    `update_time` datetime COMMENT '更新时间',
+    `tags` varchar(100) null comment '标签，逗号隔开，可多个,对应0123',
+    `visibility` int not null comment '对谁可见，1所有人，2朋友可见，3仅自己可见',
+    `allow_comment` int not null comment '是否可评论，0可，1不可',
+    `duration` int not null comment '0永久，1一年，2一月，3一天，4一小时',
+    `contact_info` varchar(200) null comment  '联系方式，逗号隔开，依次为手机；qq;微信',
+    foreign key (uid) references user_core_info (uid) on update cascade
+);
+
+-- 帖子关联资源表
+CREATE TABLE `post_media` (
+    `media_id` bigint AUTO_INCREMENT PRIMARY KEY comment '资源id',
+    `post_id` bigint NOT NULL comment '帖子id',
+    `type` int NOT NULL comment '资源类别，0图片，1音频，2视频',
+    `media_url` VARCHAR(300) NOT NULL,
+    `create_time` DATETIME NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+);
+
+-- 帖子点赞
+CREATE TABLE `post_like` (
+    `id` bigint AUTO_INCREMENT PRIMARY KEY,
+    `post_id` bigint NOT NULL,
+    `user_id` bigint NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(post_id),
+    FOREIGN KEY (user_id) REFERENCES user_core_info(uid)
+);
+
+-- 评论表
+create table `comment` (
+    `comment_id` bigint primary key auto_increment comment '评论ID',
+    `uid` bigint not null comment '用户ID',
+    `post_id` bigint not null comment '帖子ID',
+    `content` varchar(200) not null comment '评论内容',
+    `create_time` datetime default current_timestamp comment '发布时间',
+    foreign key (uid) references user_core_info (uid) on update cascade,
+    foreign key (post_id) references post (post_id) on update cascade
+);
+
+-- 弹幕类型帖子
+create table `bullet_screen` (
+    `bullet_id` bigint primary key auto_increment comment '弹幕ID',
+    `uid` bigint not null comment '用户ID',
+    `content` varchar(5000) not null comment '弹幕内容',
+    `create_time` datetime default current_timestamp comment '发布时间',
+    `update_time` datetime COMMENT '更新时间',
+    `tags` varchar(100) null comment '标签，逗号隔开，可多个,对应0123',
+    `visibility` int not null comment '对谁可见，1所有人，2朋友可见，3仅自己可见',
+    `allow_comment` int not null comment '是否可评论，0可，1不可',
+    `duration` int not null comment '0永久，1一年，2一月，3一天，4一小时',
+    `contact_info` varchar(200) null comment  '联系方式，逗号隔开，依次为手机；qq;微信',
+    foreign key (uid) references user_core_info (uid) on update cascade
+);
+
+-- 弹幕点赞
+CREATE TABLE `bullet_screen_like` (
+    `id` bigint AUTO_INCREMENT PRIMARY KEY,
+    `bullet_id` bigint NOT NULL,
+    `user_id` bigint NOT NULL,
+    FOREIGN KEY (bullet_id) REFERENCES bullet_screen(bullet_id),
+    FOREIGN KEY (user_id) REFERENCES user_core_info(uid)
+);
+
+-- 地标表
+CREATE TABLE `landmark` (
+    landmark_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    address VARCHAR(255),
+    city VARCHAR(100),
+    province VARCHAR(100),
+    country VARCHAR(100),
+    latitude DECIMAL(9, 6),  -- 纬度
+    longitude DECIMAL(9, 6), -- 经度
+    category INT
+);
+
+-- 地标评论表
+CREATE TABLE landmark_review (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    landmark_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating DECIMAL(3, 1),  -- 评分，例如 1.0 到 5.0
+    comment TEXT,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (landmark_id) REFERENCES landmark(landmark_id),
+    FOREIGN KEY (user_id) REFERENCES user_core_info(uid)
+);
+
 -- 插入用户核心信息
 INSERT INTO `user_core_info` (`phone`, `permission`) VALUES 
 ('1234567890', 1), 
