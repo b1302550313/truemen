@@ -1,0 +1,20 @@
+<!--pages/myself/edit-myself.wxml-->
+<view class="container">
+  <view class="avatar-container">
+    <image bindtap="openAvatarUploader" src="{{avatarUrl}}" class="avatar"  mode="widthFix"/>
+  </view>
+
+  <view class="edit-name-container">
+    <text class="name-label">我的名字</text>
+    <view class="input-container">
+      <input class="name-input" type="text" placeholder="不用改名也可以改名！" bindinput="onNameInput" value="{{name}}" />
+      <text class="character-count">{{name.length}}/10</text>
+    </view>
+
+
+
+    
+</view>
+
+
+</view>
