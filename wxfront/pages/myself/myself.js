@@ -10,6 +10,7 @@ Page({
     doubleArrowFriends: '120',
     youFollowed: '130',
     followedYou: '140',
+    userInfo:null,
     items: [
       { imageSrc: '/images/icons/pie.png', text: '我的合集1' },
       { imageSrc: '/images/icons/pie.png', text: '我的合集2' },
@@ -33,9 +34,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    // this.setData({
-    //   avatarUrl: app.globalData.avatarUrl || ''
-    // })
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: res => {
+              this.setData({
+                userInfo: res.userInfo
+              });
+            }
+          });
+        }
+      }
+    });
   },
   
   openAvatarUploader: function () {
