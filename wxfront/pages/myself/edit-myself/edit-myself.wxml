@@ -4,17 +4,50 @@
     <image bindtap="openAvatarUploader" src="{{avatarUrl}}" class="avatar"  mode="widthFix"/>
   </view>
 
-  <view class="edit-name-container">
-    <text class="name-label">我的名字</text>
-    <view class="input-container">
-      <input class="name-input" type="text" placeholder="不用改名也可以改名！" bindinput="onNameInput" value="{{name}}" />
-      <text class="character-count">{{name.length}}/10</text>
+  <view class="edit-line">
+    <view class="name-display">
+      <text>我的名字</text>
     </view>
+    <view class="input-area">
+      <input type="text"  value="{{ userName }}" placeholder="不去民政局也可以改名" bindinput="onNameChange" />
+    </view>
+  </view>
+
+  <view class="edit-line">
+    <view class="name-display">
+      <text>我的ID</text>
+    </view>
+    <text class="minitext">可以是一段有意义的数字哦</text>
+    <view class="input-area">
+      <input type="text" value="{{ userId }}"placeholder="第几位用户+加入年月日" bindinput="onUserIdChange" />
+    </view>
+  </view>
+
+  <view class="edit-line">
+    <view class="name-display">
+      <text>关于我</text>
+    </view>
+    <view class="input-area">
+      <input type="text"  value="{{ aboutMe }}" placeholder="妈妈再也不用担心我的自我介绍了" bindinput="onAboutMeChange" />
+    </view>
+  </view>
+
+  <view class="edit-line">
+    <view class="name-display">
+      <text>性别</text>
+    </view>
+    <view class="input-area">
+      <picker mode="selector" range="{{ genderOptions }}" bindchange="onGenderChange">
+        <view class="picker">
+          {{ genderOptions[currentGenderIndex] }}
+        </view>
+      </picker>
+    </view>
+  </view>
 
 
 
-    
-</view>
+ 
 
 
 </view>

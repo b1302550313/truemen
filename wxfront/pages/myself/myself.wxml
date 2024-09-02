@@ -8,6 +8,7 @@
     <image bindtap="openAvatarUploader" src="{{avatarUrl}}" class="avatar"  mode="widthFix"/>
    
   </view>
+
   <text class="username">{{ username }}</text>
   <view class="stats">
     <view class="stat">
@@ -26,7 +27,7 @@
     </view>
   </view>
   
-  <view class="blue-region">
+  <view class="region">
     <scroll-view scroll-x="true" class="scroll-content">
       <view class="item" wx:for="{{items}}" wx:key="*this">
         <image class="item-image" src="{{item.imageSrc}}" mode="aspectFill"></image>
@@ -34,48 +35,50 @@
       </view>
     </scroll-view>
   </view>
-  <view class="divider">1</view>
 
-<view class="blue-region two-col">
+<view class="myBackground">
+  <view class="profile-info">
 
-    <view class="about-me">
+<view class="info-item info-item-edit">
+  <text class="info-key">我的ID:</text>
+  <text class="info-value">{{ userId }}</text>
+  <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" class="edit">
+      <image src="/images/icons/edit.png" class="edit" />
+    </navigator>
+</view>
+
+<view class="info-item">
+  <text class="info-key">性别：</text>
+  <text class="info-value">{{ gender }}</text>
+</view>
+
+<view class="info-item">
+  <text class="info-key">生日：</text>
+  <text class="info-value">{{ birthday }}</text>
+</view>
+
+<view class="info-item">
+  <text class="info-key">星座：</text>
+  <text class="info-value">{{ zodiac }}</text>
+</view>
+
+</view>
+</view>
+  
+<view class="aboutMeBg">
+  <view class="about-me">
         <view class="about-me-line">
           <text class="about-me-title">关于我</text>
-        <image  src="/images/icons/edit.png" class="edit" />
+          <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" class="edit">
+      <image src="/images/icons/edit.png" class="edit" />
+    </navigator>
         </view>
         <text class="about-me-content">{{ aboutMe }}</text>
     </view>
-
-  <view class="profile-info">
-
-      <view class="info-item info-item-edit">
-        <text class="info-key">我的ID:</text>
-        <text class="info-value">{{ userId }}</text>
-        <image  src="/images/icons/edit.png" class="edit" />
-      </view>
-
-      <view class="info-item">
-        <text class="info-key">性别：</text>
-        <text class="info-value">{{ gender }}</text>
-      </view>
-
-      <view class="info-item">
-        <text class="info-key">生日：</text>
-        <text class="info-value">{{ birthday }}</text>
-      </view>
-
-      <view class="info-item">
-        <text class="info-key">星座：</text>
-        <text class="info-value">{{ zodiac }}</text>
-      </view>
-
-    </view>
-
 </view>
-  
 
-<view class="divider">1</view>
-  <view class="blue-region ">
+<view class="nowMeBg">
+  <view class="region ">
     <view class="white-card current-me">
       <view class="current-me-line">
         <text class="current-me-title">现在的我</text>
@@ -91,13 +94,17 @@
     </view>
     </view>
   </view>
+</view>
+ 
   
-<view class="divider">1</view>
-<view class="blue-region">
+<view class="nowMeBg">
+  <view class="region">
   <view class="calendar">
     <text class="calendar-title">心情日历</text>
     <calendar></calendar>
   </view>
 </view>
+</view>
+
   
 </view>
