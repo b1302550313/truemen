@@ -1,4 +1,4 @@
-package com.sysu.verto.user.model;
+package com.sysu.verto.friendship.model;
 
 import jakarta.persistence.*;
 
@@ -14,6 +14,10 @@ public class UserBaseInfo {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    public enum Gender {
+        男, 女
+    }
 
     @OneToOne
     @JoinColumn(name = "uid")

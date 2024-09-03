@@ -1,4 +1,4 @@
-package com.sysu.verto.user.model;
+package com.sysu.verto.friendship.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

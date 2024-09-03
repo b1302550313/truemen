@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
-import com.sysu.verto.user.model.UserCoreInfo;
+import com.sysu.verto.friendship.model.UserCoreInfo;
 
 @Entity
 @Table(name = "friendship")

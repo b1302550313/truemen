@@ -25,25 +25,36 @@ public class UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-    public User checkUser(String phoneNumber, String weChatID) {
-        return userDAO.checkUserByPhoneNumberOrWeChatID(phoneNumber, weChatID);
+    public User checkUser(String phone, String wechatId) {
+        return userDAO.checkUserByPhoneNumberOrWeChatID(phone, wechatId);
     }
 
     public boolean register(User user) {
-        if (userDAO.checkUserByPhoneNumberOrWeChatID(user.getPhoneNumber(), user.getWeChatID()) != null) {
+        if (userDAO.checkUserByPhoneNumberOrWeChatID(user.getPhone(), user.getWechatId()) != null) {
             return false; // 用户已存在
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRegistrationTime(LocalDateTime.now());
-        user.setPermissionLevel(User.PermissionLevel.User);
+        user.setCreateTime(LocalDateTime.now());
+        user.setPermission(1);
+
+        // 如果 userId 为空，生成默认值
+        if (user.getUserId() == null || user.getUserId().isEmpty()) {
+            user.setUserId(generateUserId(user));
+        }
+
         return userDAO.registerUser(user);
     }
 
-    public User getUserById(int userId) {
+    public User getUserById(String userId) {
         return userDAO.getUserById(userId);
     }
 
     public boolean updateUser(User user) {
         return userDAO.updateUser(user);
+    }
+
+    private String generateUserId(User user) {
+        // 生成 userId 的逻辑，例如基于用户名或其他规则生成
+        return "user_" + System.currentTimeMillis(); // 基于当前时间戳生成
     }
 }

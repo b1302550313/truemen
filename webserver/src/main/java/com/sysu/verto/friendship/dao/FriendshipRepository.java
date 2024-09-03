@@ -1,7 +1,7 @@
 package com.sysu.verto.friendship.dao;
 
 import com.sysu.verto.friendship.model.Friendship;
-import com.sysu.verto.user.model.UserCoreInfo;
+import com.sysu.verto.friendship.model.UserCoreInfo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

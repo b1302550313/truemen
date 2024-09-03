@@ -127,7 +127,7 @@ Page({
               phoneNumber: this.data.phoneNumber,
               password:this.data.password,
               userName:"新用户",
-              permissionLevel:1
+              int:1
             }),
             header: {
               'content-type': 'application/json' // 默认值

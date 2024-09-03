@@ -2,7 +2,7 @@ package com.sysu.verto.friendship.dao.impl;
 
 import com.sysu.verto.friendship.dao.FriendshipDAO;
 import com.sysu.verto.friendship.model.Friendship;
-import com.sysu.verto.user.model.UserCoreInfo;
+import com.sysu.verto.friendship.model.UserCoreInfo;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;

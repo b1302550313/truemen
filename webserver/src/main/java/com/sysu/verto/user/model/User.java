@@ -3,40 +3,54 @@ package com.sysu.verto.user.model;
 import java.time.LocalDateTime;
 
 public class User {
-    private int userID;
+    private long uid; // 系统生成的唯一标识符
+    private String userId; // 用户自定义的标识符
     private String userName;
-    private String weChatID;
-    private String phoneNumber;
+    private String wechatId;
+    private String phone;
     private String password;
     private String avatar;
-    private LocalDateTime registrationTime;
-    private PermissionLevel permissionLevel;
+    private LocalDateTime createTime;
+    private int permission;
+    private String bio;
+    private Gender gender;
 
-    public enum PermissionLevel {
-        Guest, User, Admin
+    public enum Gender {
+        男, 女
     }
 
     public User() {
     }
 
-    public User(int userID, String userName, String weChatID, String phoneNumber, String password, String avatar,
-            PermissionLevel permissionLevel) {
-        this.userID = userID;
+    public User(long uid, String userId, String userName, String wechatId, String phone, String password, String avatar,
+            int permission, String bio, Gender gender) {
+        this.uid = uid;
+        this.userId = userId;
         this.userName = userName;
-        this.weChatID = weChatID;
-        this.phoneNumber = phoneNumber;
+        this.wechatId = wechatId;
+        this.phone = phone;
         this.password = password;
         this.avatar = avatar;
-        this.permissionLevel = permissionLevel;
+        this.permission = permission;
+        this.bio = bio;
+        this.gender = gender;
     }
 
     // Getters and Setters
-    public int getUserID() {
-        return userID;
+    public long getUid() {
+        return uid;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -47,20 +61,20 @@ public class User {
         this.userName = userName;
     }
 
-    public String getWeChatID() {
-        return weChatID;
+    public String getWechatId() {
+        return wechatId;
     }
 
-    public void setWeChatID(String weChatID) {
-        this.weChatID = weChatID;
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -79,20 +93,35 @@ public class User {
         this.avatar = avatar;
     }
 
-    public PermissionLevel getPermissionLevel() {
-        return permissionLevel;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setPermissionLevel(PermissionLevel permissionLevel) {
-        this.permissionLevel = permissionLevel;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
-    public LocalDateTime getRegistrationTime() {
-        return registrationTime;
+    public int getPermission() {
+        return permission;
     }
 
-    public void setRegistrationTime(LocalDateTime registrationTime) {
-        this.registrationTime = registrationTime;
+    public void setPermission(int permission) {
+        this.permission = permission;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }
