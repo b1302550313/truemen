@@ -1,7 +1,7 @@
 // app.js
 App({
   globalData: {
-    host: 'http://localhost:8000',
+    host: 'http://localhost:8080',
     // host: 'http://192.168.43.216:8000',// 域名
     userName:'',
     navBarHeight: 0, // 导航栏高度
