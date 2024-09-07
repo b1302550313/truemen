@@ -3,7 +3,32 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    activities: [
+      {
+        id: 1,
+        title: "活动1",
+        category: "分类1",
+        time: "2024/09/21 13:00:00",
+        location: "地点1",
+        desc: "描述1",
+        details: "详情1",
+        img: "https://img.yzcdn.cn/vant/cat.jpeg",
+        img_title: "图片1",
+      },
+      {
+        id: 2,
+        title: "活动2",
+        category: "分类2",
+        time: "2024/10/07 09:00:00",
+        location: "地点2",
+        desc: "描述2",
+        details: "详情2",
+        img: "https://img.yzcdn.cn/vant/cat.jpeg",
+        img_title: "图片2",
+      }
+    ]
+  },
 
   /**
    * 生命周期函数--监听页面加载

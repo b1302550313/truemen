@@ -1,2 +1,22 @@
 <!--pages/activity/activity.wxml-->
-<text>pages/activity/activity.wxml</text>
+
+<view class="activity-container">
+  <view wx:for="{{activities}}">
+    <view class="activity">
+      <view class="header">
+        <image src="{{item.img}}" alt="{{item.img_title}}"></image>
+        <span class="date">{{item.time}}</span>
+      </view>
+      <view class="details">
+        <span class="category">{{item.category}}</span>
+        <h3>{{item.title}}</h3>
+        <view class="desc">
+          <p>{{item.desc}}</p>
+          <view class="details">
+            <p>{{item.details}}</p>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
