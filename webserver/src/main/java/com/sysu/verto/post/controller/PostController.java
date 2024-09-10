@@ -1,30 +1,31 @@
 package com.sysu.verto.post.controller;
 
-import com.sysu.verto.common.exception.ErrorCode;
-import com.sysu.verto.common.exception.ServerException;
-import com.sysu.verto.common.result.Result;
-import com.sysu.verto.post.model.Post;
-import com.sysu.verto.post.model.vo.PostUpdateQuery;
-import com.sysu.verto.post.model.vo.PostVo;
-import com.sysu.verto.post.model.vo.PostWithIDVo;
-import com.sysu.verto.post.service.PostService;
+import java.util.Map;
 
-import jakarta.servlet.http.PushBuilder;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+import com.sysu.verto.common.exception.ErrorCode;
+import com.sysu.verto.common.exception.ServerException;
+import com.sysu.verto.common.result.Result;
 import com.sysu.verto.post.model.PostCollection;
+import com.sysu.verto.post.model.vo.PostUpdateQuery;
+import com.sysu.verto.post.model.vo.PostVo;
+import com.sysu.verto.post.model.vo.PostWithIDVo;
 import com.sysu.verto.post.service.PostCollectionService;
+import com.sysu.verto.post.service.PostService;
+
 import jakarta.validation.Valid;
-import java.util.Map;
 
 
 @RestController
@@ -120,7 +121,7 @@ public class PostController {
    * - 描述: 删除帖子合集。
    * - 响应数据: 操作结果（成功或失败）
    */
-  @DeleteMapping("/collection/{collectionId}")
+  @DeleteMapping("/decollection/{collectionId}")
   public Result deleteCollection(@PathVariable Long collectionId) {
       boolean result = postCollectionService.deleteCollection(collectionId);
       if (result) {
