@@ -56,4 +56,40 @@ public class FriendshipDAOImpl implements FriendshipDAO {
 
         return friendship;
     }
+
+    @Override
+    public int getMutualFriendsCount(Long userId) {
+        String sql = "SELECT COUNT(*) FROM friendship f1 JOIN friendship f2 ON f1.friend_id = f2.uid AND f2.friend_id = f1.uid WHERE f1.uid = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
+    @Override
+    public int getFollowingCount(Long userId) {
+        String sql = "SELECT COUNT(*) FROM friendship WHERE uid = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
+    @Override
+    public int getFollowersCount(Long userId) {
+        String sql = "SELECT COUNT(*) FROM friendship WHERE friend_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
+    @Override
+    public List<Friendship> getMutualFriends(Long userId) {
+        String sql = "SELECT f1.* FROM friendship f1 JOIN friendship f2 ON f1.friend_id = f2.uid AND f2.friend_id = f1.uid WHERE f1.uid = ?";
+        return jdbcTemplate.query(sql, this::mapRowToFriendship, userId);
+    }
+
+    @Override
+    public List<Friendship> getFollowingFriends(Long userId) {
+        String sql = "SELECT * FROM friendship WHERE uid = ?";
+        return jdbcTemplate.query(sql, this::mapRowToFriendship, userId);
+    }
+
+    @Override
+    public List<Friendship> getFollowers(Long userId) {
+        String sql = "SELECT * FROM friendship WHERE friend_id = ?";
+        return jdbcTemplate.query(sql, this::mapRowToFriendship, userId);
+    }
 }

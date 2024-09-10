@@ -8,6 +8,7 @@ import com.sysu.verto.common.exception.ServerException;
 import com.sysu.verto.common.util.ConVertUrlList;
 import com.sysu.verto.post.dao.PostDao;
 import com.sysu.verto.post.model.Post;
+import com.sysu.verto.post.model.PostCollectionPost;
 import com.sysu.verto.post.model.vo.PostUpdateQuery;
 import com.sysu.verto.post.model.vo.PostVo;
 import com.sysu.verto.post.model.vo.PostWithIDVo;
@@ -16,9 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.sysu.verto.post.dao.PostCollectionPostDao;
 
 @Service
 public class PostService extends ServiceImpl<PostDao, Post> {
+
+    @Autowired
+    private PostCollectionPostDao postCollectionPostDao;
 
     public PostWithIDVo getPost(Integer pid) {
 
@@ -47,6 +56,16 @@ public class PostService extends ServiceImpl<PostDao, Post> {
                 .mediaUrls(ConVertUrlList.convertMediaUrlsToString(postVo.getMediaUrls()))
                 .location(postVo.getLocation())
                 .build();
+        baseMapper.insert(post);
+
+        // 添加帖子到合集
+        if (postVo.getCollectionId() != null) {
+            PostCollectionPost collectionPost = PostCollectionPost.builder()
+                    .collectionId(postVo.getCollectionId())
+                    .postId(post.getPostId())
+                    .build();
+            postCollectionPostDao.insert(collectionPost);
+        }
         return baseMapper.insert(post);
     }
 
@@ -69,5 +88,12 @@ public class PostService extends ServiceImpl<PostDao, Post> {
             return false;
         else
             return true;
+    }
+
+    public Map<String, Long> getPostCountByLocation() {
+        List<Post> posts = list();
+        return posts.stream()
+                .filter(post -> post.getLocation() != null)
+                .collect(Collectors.groupingBy(Post::getLocation, Collectors.counting()));
     }
 }

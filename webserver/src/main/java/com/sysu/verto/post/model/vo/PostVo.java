@@ -1,15 +1,11 @@
 package com.sysu.verto.post.model.vo;
 
-import jakarta.validation.constraints.NotBlank;
+import java.util.List;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -30,6 +26,8 @@ public class PostVo {
     protected List<String> mediaUrls;
 
     protected String location; // 发布位置，可以为空
+
+    protected Long collectionId; // 新增字段，表示帖子所属的合集
 
     public enum PostType {
         Text, Image, Video, Audio

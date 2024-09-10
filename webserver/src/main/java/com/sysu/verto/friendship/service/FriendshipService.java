@@ -1,14 +1,14 @@
 package com.sysu.verto.friendship.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sysu.verto.friendship.dao.FriendshipDAO;
 import com.sysu.verto.friendship.dao.FriendshipRepository;
 import com.sysu.verto.friendship.model.Friendship;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FriendshipService {
@@ -56,4 +56,35 @@ public class FriendshipService {
         }
         return false;
     }
+
+    // 获取双箭头好友数
+    public int getMutualFriendsCount(Long userId) {
+        return friendshipDAO.getMutualFriendsCount(userId);
+    }
+
+    // 获取你关注的好友数
+    public int getFollowingCount(Long userId) {
+        return friendshipDAO.getFollowingCount(userId);
+    }
+
+    // 获取关注你的好友数
+    public int getFollowersCount(Long userId) {
+        return friendshipDAO.getFollowersCount(userId);
+    }
+
+    // 获取双箭头好友列表
+    public List<Friendship> getMutualFriends(Long userId) {
+        return friendshipDAO.getMutualFriends(userId);
+    }
+
+    // 获取你关注的好友列表
+    public List<Friendship> getFollowingFriends(Long userId) {
+        return friendshipDAO.getFollowingFriends(userId);
+    }
+
+    // 获取关注你的好友列表
+    public List<Friendship> getFollowers(Long userId) {
+        return friendshipDAO.getFollowers(userId);
+    }
+
 }

@@ -21,6 +21,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import com.sysu.verto.post.model.PostCollection;
+import com.sysu.verto.post.service.PostCollectionService;
+import jakarta.validation.Valid;
+import java.util.Map;
+
+
 @RestController
 @RequestMapping(value = "/post")
 @Validated
@@ -29,6 +35,8 @@ public class PostController {
   @Autowired
   private PostService postService;
 
+  @Autowired
+  private PostCollectionService postCollectionService;
   /*
    * - 描述: 用户创建新帖子。帖子可以包含文本、图片、音频等内容。
    * - 响应数据: 新创建帖子的ID
@@ -77,41 +85,96 @@ public class PostController {
     } else {
       return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
     }
-
   }
 
-}
+  /*
+   * - 描述: 创建帖子合集。
+   * - 响应数据: 操作结果（成功或失败）
+   */
+  @PostMapping("/collection")
+  public Result createCollection(@Valid @RequestBody PostCollection collection) {
+      boolean result = postCollectionService.createCollection(collection);
+      if (result) {
+          return Result.ok();
+      } else {
+          return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
+      }
+  }
 
-/*
- * 
- * 评论管理接口:
- * - 接口5: POST /api/v1/posts/{postId}/comments
- * - 描述: 用户对帖子进行评论。
- * - 请求参数:
- * - postId - 帖子ID
- * - userId - 评论者ID
- * - comment - 评论内容
- * - 响应数据: 新创建评论的ID
- * - 接口6: GET /api/v1/posts/{postId}/comments
- * - 描述: 获取指定帖子的评论列表。
- * - 请求参数:
- * - postId - 帖子ID
- * - page - 页码（用于分页）
- * - pageSize - 每页评论数
- * - 响应数据: 评论列表（数组）
- * - 接口7: POST /api/v1/comments/{commentId}/replies
- * - 描述: 用户对某条评论进行回复。
- * - 请求参数:
- * - commentId - 评论ID
- * - userId - 回复者ID
- * - reply - 回复内容
- * - 响应数据: 新创建回复的ID
- * - 接口8: GET /api/v1/comments/{commentId}/replies
- * - 描述: 获取某条评论的回复列表。
- * - 请求参数:
- * - commentId - 评论ID
- * - page - 页码（用于分页）
- * - pageSize - 每页回复数
- * - 响应数据: 回复列表（数组）
- * 点赞管理接口:
- */
+  /*
+   * - 描述: 更新帖子合集。
+   * - 响应数据: 操作结果（成功或失败）
+   */
+  @PutMapping("/collection/{collectionId}")
+  public Result updateCollection(@PathVariable Long collectionId, @Valid @RequestBody PostCollection collection) {
+      collection.setCollectionId(collectionId);
+      boolean result = postCollectionService.updateCollection(collection);
+      if (result) {
+          return Result.ok();
+      } else {
+          return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
+      }
+  }
+
+  /*
+   * - 描述: 删除帖子合集。
+   * - 响应数据: 操作结果（成功或失败）
+   */
+  @DeleteMapping("/collection/{collectionId}")
+  public Result deleteCollection(@PathVariable Long collectionId) {
+      boolean result = postCollectionService.deleteCollection(collectionId);
+      if (result) {
+          return Result.ok();
+      } else {
+          return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
+      }
+  }
+
+  /*
+   * - 描述: 获取指定帖子合集的详细信息。
+   * - 响应数据: 帖子合集详细信息
+   */
+  @GetMapping("/collection/{collectionId}")
+  public Result<PostCollection> getCollectionDetail(@PathVariable Long collectionId) {
+      PostCollection collection = postCollectionService.getCollection(collectionId);
+      return Result.ok(collection);
+  }
+
+  /*
+   * - 描述: 获取不同地点的帖子数。
+   * - 响应数据: 不同地点的帖子数
+   */
+  @GetMapping("/location/count")
+  public Result<Map<String, Long>> getPostCountByLocation() {
+      Map<String, Long> postCountByLocation = postService.getPostCountByLocation();
+      return Result.ok(postCountByLocation);
+  }
+
+  /*
+   * - 描述: 添加帖子到合集。
+   * - 响应数据: 操作结果（成功或失败）
+   */
+  @PostMapping("/collection/{collectionId}/post/{postId}")
+  public Result addPostToCollection(@PathVariable Long collectionId, @PathVariable Long postId) {
+      boolean result = postCollectionService.addPostToCollection(collectionId, postId);
+      if (result) {
+          return Result.ok();
+      } else {
+          return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
+      }
+  }
+
+  /*
+   * - 描述: 从合集中移除帖子。
+   * - 响应数据: 操作结果（成功或失败）
+   */
+  @DeleteMapping("/collection/{collectionId}/post/{postId}")
+  public Result removePostFromCollection(@PathVariable Long collectionId, @PathVariable Long postId) {
+      boolean result = postCollectionService.removePostFromCollection(collectionId, postId);
+      if (result) {
+          return Result.ok();
+      } else {
+          return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
+      }
+  }
+}
