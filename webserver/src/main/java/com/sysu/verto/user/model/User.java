@@ -1,5 +1,6 @@
 package com.sysu.verto.user.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class User {
@@ -14,16 +15,17 @@ public class User {
     private int permission;
     private String bio;
     private Gender gender;
+    private LocalDate birthDate; // 新增生日信息
 
     public enum Gender {
-        男, 女
+        男, 女, 匿 // 新增匿藏选项
     }
 
     public User() {
     }
 
     public User(long uid, String userId, String userName, String wechatId, String phone, String password, String avatar,
-            int permission, String bio, Gender gender) {
+            int permission, String bio, Gender gender, LocalDate birthDate) {
         this.uid = uid;
         this.userId = userId;
         this.userName = userName;
@@ -34,6 +36,7 @@ public class User {
         this.permission = permission;
         this.bio = bio;
         this.gender = gender;
+        this.birthDate = birthDate;
     }
 
     // Getters and Setters
@@ -123,5 +126,13 @@ public class User {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 }
