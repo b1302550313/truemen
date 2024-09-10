@@ -121,7 +121,7 @@ public class PostController {
    * - 描述: 删除帖子合集。
    * - 响应数据: 操作结果（成功或失败）
    */
-  @DeleteMapping("/decollection/{collectionId}")
+  @DeleteMapping("/collection/delete/{collectionId}")
   public Result deleteCollection(@PathVariable Long collectionId) {
       boolean result = postCollectionService.deleteCollection(collectionId);
       if (result) {
@@ -169,7 +169,7 @@ public class PostController {
    * - 描述: 从合集中移除帖子。
    * - 响应数据: 操作结果（成功或失败）
    */
-  @DeleteMapping("/collection/{collectionId}/post/{postId}")
+  @DeleteMapping("/collection/{collectionId}/delete/{postId}")
   public Result removePostFromCollection(@PathVariable Long collectionId, @PathVariable Long postId) {
       boolean result = postCollectionService.removePostFromCollection(collectionId, postId);
       if (result) {
