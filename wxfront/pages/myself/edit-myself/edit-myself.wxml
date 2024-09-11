@@ -36,14 +36,45 @@
     <view class="name-display">
       <text>性别</text>
     </view>
-    <view class="input-area">
       <picker mode="selector" range="{{ genderOptions }}" bindchange="onGenderChange">
-        <view class="picker">
-          {{ genderOptions[currentGenderIndex] }}
+        <view class="input-area">
+          <view class="picker">
+            {{ genderOptions[currentGenderIndex] }}
+          </view>
         </view>
       </picker>
-    </view>
   </view>
+
+  <view class="edit-line">
+    <view class="name-display">
+      <text>生日</text>
+    </view>
+    <picker mode="date" value="{{birthday}}"bindchange="bindDateChange">
+      <view class="input-area">
+      <view class="picker">
+         {{birthday}}
+      </view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="edit-line">
+    <view class="name-display">
+      <text>星座</text>
+    </view>
+      <picker mode="selector" range="{{ constellationList }}" bindchange="handleConstellationChange">
+        <view class="input-area">
+          <view class="picker">
+            {{ constellationList[currentConstellationIndex] }}
+          </view>
+        </view>
+      </picker>
+  </view>
+  <view class="btn">
+  <button class="confirm-btn" bindtap="confirmEdit">确认</button>
+  <button class="cancel-btn" bindtap="cancelEdit">取消</button>
+</view>
+
 
 
 
