@@ -1,6 +1,7 @@
 package com.sysu.verto.user.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Repository
-public class UserDAO {
+public class UserDAO{
     private final JdbcTemplate jdbcTemplate;
 
     public UserDAO(JdbcTemplate jdbcTemplate) {

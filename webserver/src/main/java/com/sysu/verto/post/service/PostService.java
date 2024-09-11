@@ -36,13 +36,13 @@ public class PostService extends ServiceImpl<PostDao, Post> {
             throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
 
         PostWithIDVo postWithIDVo = new PostWithIDVo();
-        postWithIDVo.setPostId(pid.longValue());
-        postWithIDVo.setPostType(PostVo.PostType.valueOf(post.getType().name()));
-        postWithIDVo.setTitle(post.getTitle());
-        postWithIDVo.setContent(post.getContent());
-        postWithIDVo.setLocation(post.getLocation());
-        postWithIDVo.setUserId(post.getUid());
-        postWithIDVo.setMediaUrls(ConVertUrlList.convertStringToUrlList(post.getMediaUrls()));
+//        postWithIDVo.setPostId(pid.longValue());
+//        postWithIDVo.setPostType(PostVo.PostType.valueOf(post.getType().name()));
+//        postWithIDVo.setTitle(post.getTitle());
+//        postWithIDVo.setContent(post.getContent());
+//        postWithIDVo.setLocation(post.getLocation());
+//        postWithIDVo.setUserId(post.getUid());
+//        postWithIDVo.setMediaUrls(ConVertUrlList.convertStringToUrlList(post.getMediaUrls()));
         return postWithIDVo;
     }
 
@@ -51,10 +51,10 @@ public class PostService extends ServiceImpl<PostDao, Post> {
                 .uid(postVo.getUserId())
                 .title(postVo.getTitle())
                 .content(postVo.getContent())
-                .type(Post.PostType.valueOf(postVo.postType.name()))
+//                .type(Post.PostType.valueOf(postVo.postType.name()))
                 .createTime(new Date())
-                .mediaUrls(ConVertUrlList.convertMediaUrlsToString(postVo.getMediaUrls()))
-                .location(postVo.getLocation())
+//                .mediaUrls(ConVertUrlList.convertMediaUrlsToString(postVo.getMediaUrls()))
+//                .location(postVo.getLocation())
                 .build();
         baseMapper.insert(post);
 
@@ -92,8 +92,9 @@ public class PostService extends ServiceImpl<PostDao, Post> {
 
     public Map<String, Long> getPostCountByLocation() {
         List<Post> posts = list();
-        return posts.stream()
-                .filter(post -> post.getLocation() != null)
-                .collect(Collectors.groupingBy(Post::getLocation, Collectors.counting()));
+//        return posts.stream()
+//                .filter(post -> post.getLocation() != null)
+//                .collect(Collectors.groupingBy(Post::getLocation, Collectors.counting()));
+        return null;
     }
 }
