@@ -8,24 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
-@TableName("post")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-    @TableId
+@TableName("postMedia")
+public class PostMedia {
+    @TableId(value = "mediaId")
+    private Long mediaId;
     private Long postId;
-    private Long uid;
-    private String title;
-    private String content;
+    private Integer type;
+    private String mediaUrl;
     private Date createTime;
-    private Date updateTime;
-    private Long tag;
-    private Long visibility;
-    private Long allowComment;
-    private Long duration;
-    private String contactInfo;
 }

@@ -8,24 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
-@TableName("post")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-    @TableId
-    private Long postId;
+@TableName("comment")
+public class Comment{
+    @TableId(value = "commentId")
+    private Long commentId;
     private Long uid;
-    private String title;
+    private Long postId;
     private String content;
     private Date createTime;
-    private Date updateTime;
-    private Long tag;
-    private Long visibility;
-    private Long allowComment;
-    private Long duration;
-    private String contactInfo;
 }
