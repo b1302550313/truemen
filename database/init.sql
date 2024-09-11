@@ -107,7 +107,7 @@ CREATE TABLE `post` (
     `content` VARCHAR(5000) NOT NULL COMMENT '帖子内容',
     `createTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
     `updateTime` TIMESTAMP COMMENT '更新时间',
-    `tags` VARCHAR(100) NULL COMMENT '标签，逗号隔开，可多个,对应0123',
+    `tag` INT NULL COMMENT '标签，只选一个,对应0123',
     `visibility` INT NOT NULL COMMENT '对谁可见，0所有人，1朋友可见，2仅自己可见',
     `allowComment` INT NOT NULL COMMENT '是否可评论，0可，1不可',
     `duration` INT NOT NULL COMMENT '0永久，1一年，2一月，3一天，4一小时',
@@ -213,17 +213,17 @@ INSERT INTO `talkBox` (`userId`, `talkId`, `talkType`, `createTime`, `updateTime
 (3, 1, 1, '2024-02-23 15:26:32', '2024-02-23 15:26:32');
 
 -- 插入帖子数据
-INSERT INTO `post` (`uid`, `title`, `content`, `createTime`, `updateTime`, `tags`, `visibility`, `allowComment`, `duration`, `contactInfo`) VALUES
-(1, '探索宇宙的奥秘', '宇宙是如此浩瀚，充满了无数的星系和未知的秘密。', NOW(), NULL, '0,1', 0, 0, 0, '13800138000;42;wechat_1'),
-(2, '健康生活每一天', '保持健康的生活方式对于提高生活质量至关重要。', NOW(), NULL, '1', 0, 1, 1, '13800138001;3311;wechat_2'),
-(1, '编程的乐趣', '编程不仅仅是一门技术，更是一种艺术和乐趣。', NOW(), NULL, '2,3', 2, 0, 2, '13800138002;123;wechat_3'),
-(2, '旅行的意义', '旅行不仅仅是为了看风景，更是为了体验不同的文化和生活。', NOW(), NULL, '1,3', 1, 1, 3, '13800138003;123;wechat_4'),
-(3, '音乐的力量', '音乐有着无法言喻的力量，能够触动人心，激发情感。', NOW(), NULL, '1,2,3', 0, 0, 4, '13800138004;123123;wechat_5'),
-(1, '摄影的艺术', '摄影是一种捕捉瞬间，记录生活的艺术形式。', NOW(), NULL, '0,1,2,3', 2, 1, 0, '13800138005;4424;wechat_6'),
-(3, '阅读的乐趣', '阅读能够开阔视野，丰富内心世界。', NOW(), NULL, '2,3', 1, 0, 1, '13800138006;123123;wechat_7'),
-(3, '科技改变生活', '科技的发展正在不断地改变着我们的生活方式。', NOW(), NULL, '0', 2, 1, 2, '13800138007;123123;wechat_8'),
-(2, '环保的重要性', '保护环境是每个人的责任，也是为了我们共同的未来。', NOW(), NULL, '0', 1, 0, 3, '13800138008;123123;wechat_9'),
-(1, '运动的好处', '定期运动有助于保持身体健康，提高生活质量。', NOW(), NULL, '1,3', 1, 1, 4, '13800138009;123123;wechat_10');
+INSERT INTO `post` (`uid`, `title`, `content`, `createTime`, `updateTime`, `tag`, `visibility`, `allowComment`, `duration`, `contactInfo`) VALUES
+(1, '探索宇宙的奥秘', '宇宙是如此浩瀚，充满了无数的星系和未知的秘密。', NOW(), NULL, 0, 0, 0, 0, '13800138000;42;wechat_1'),
+(2, '健康生活每一天', '保持健康的生活方式对于提高生活质量至关重要。', NOW(), NULL, 1, 0, 1, 1, '13800138001;3311;wechat_2'),
+(1, '编程的乐趣', '编程不仅仅是一门技术，更是一种艺术和乐趣。', NOW(), NULL, 3, 2, 0, 2, '13800138002;123;wechat_3'),
+(2, '旅行的意义', '旅行不仅仅是为了看风景，更是为了体验不同的文化和生活。', NOW(), NULL, 1, 1, 1, 3, '13800138003;123;wechat_4'),
+(3, '音乐的力量', '音乐有着无法言喻的力量，能够触动人心，激发情感。', NOW(), NULL, 2, 0, 0, 4, '13800138004;123123;wechat_5'),
+(1, '摄影的艺术', '摄影是一种捕捉瞬间，记录生活的艺术形式。', NOW(), NULL, 1, 2, 1, 0, '13800138005;4424;wechat_6'),
+(3, '阅读的乐趣', '阅读能够开阔视野，丰富内心世界。', NOW(), NULL, 3, 1, 0, 1, '13800138006;123123;wechat_7'),
+(3, '科技改变生活', '科技的发展正在不断地改变着我们的生活方式。', NOW(), NULL, 1, 2, 1, 2, '13800138007;123123;wechat_8'),
+(2, '环保的重要性', '保护环境是每个人的责任，也是为了我们共同的未来。', NOW(), NULL, 0, 1, 0, 3, '13800138008;123123;wechat_9'),
+(1, '运动的好处', '定期运动有助于保持身体健康，提高生活质量。', NOW(), NULL, 0, 1, 1, 4, '13800138009;123123;wechat_10');
 
 -- 插入媒体资源数据
 INSERT INTO `postMedia` (`postId`, `type`, `mediaUrl`, `createTime`) VALUES
