@@ -24,7 +24,7 @@ CREATE TABLE `userBaseInfo` (
     FOREIGN KEY (`uid`) REFERENCES `userCoreInfo`(`uid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 地标表
+-- 地标表（待完善）
 CREATE TABLE `landmark` (
     `landmarkId` INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `post` (
     `createTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
     `updateTime` TIMESTAMP COMMENT '更新时间',
     `tags` VARCHAR(100) NULL COMMENT '标签，逗号隔开，可多个,对应0123',
-    `visibility` INT NOT NULL COMMENT '对谁可见，1所有人，2朋友可见，3仅自己可见',
+    `visibility` INT NOT NULL COMMENT '对谁可见，0所有人，1朋友可见，2仅自己可见',
     `allowComment` INT NOT NULL COMMENT '是否可评论，0可，1不可',
     `duration` INT NOT NULL COMMENT '0永久，1一年，2一月，3一天，4一小时',
     `contactInfo` VARCHAR(200) NULL COMMENT  '联系方式，逗号隔开，依次为手机；qq;微信',
@@ -152,9 +152,7 @@ CREATE TABLE `bulletScreen` (
     `content` VARCHAR(5000) NOT NULL COMMENT '弹幕内容',
     `createTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
     `updateTime` TIMESTAMP COMMENT '更新时间',
-    `tags` VARCHAR(100) NULL COMMENT '标签，逗号隔开，可多个,对应0123',
-    `visibility` INT NOT NULL COMMENT '对谁可见，1所有人，2朋友可见，3仅自己可见',
-    `allowComment` INT NOT NULL COMMENT '是否可评论，0可，1不可',
+    `visibility` INT NOT NULL COMMENT '对谁可见，0所有人，1朋友可见，2仅自己可见',
     `duration` INT NOT NULL COMMENT '0永久，1一年，2一月，3一天，4一小时',
     `contactInfo` VARCHAR(200) NULL COMMENT  '联系方式，逗号隔开，依次为手机；qq;微信',
     FOREIGN KEY (`uid`) REFERENCES `userCoreInfo`(`uid`) ON UPDATE CASCADE
@@ -213,3 +211,69 @@ INSERT INTO `talkBox` (`userId`, `talkId`, `talkType`, `createTime`, `updateTime
 (1, 1, 1, '2024-02-23 19:35:54', '2024-02-23 19:35:54'),
 (1, 2, 0, '2024-02-23 19:36:03', '2024-02-23 19:36:03'),
 (3, 1, 1, '2024-02-23 15:26:32', '2024-02-23 15:26:32');
+
+-- 插入帖子数据
+INSERT INTO `post` (`uid`, `title`, `content`, `createTime`, `updateTime`, `tags`, `visibility`, `allowComment`, `duration`, `contactInfo`) VALUES
+(1, '探索宇宙的奥秘', '宇宙是如此浩瀚，充满了无数的星系和未知的秘密。', NOW(), NULL, '0,1', 0, 0, 0, '13800138000;42;wechat_1'),
+(2, '健康生活每一天', '保持健康的生活方式对于提高生活质量至关重要。', NOW(), NULL, '1', 0, 1, 1, '13800138001;3311;wechat_2'),
+(1, '编程的乐趣', '编程不仅仅是一门技术，更是一种艺术和乐趣。', NOW(), NULL, '2,3', 2, 0, 2, '13800138002;123;wechat_3'),
+(2, '旅行的意义', '旅行不仅仅是为了看风景，更是为了体验不同的文化和生活。', NOW(), NULL, '1,3', 1, 1, 3, '13800138003;123;wechat_4'),
+(3, '音乐的力量', '音乐有着无法言喻的力量，能够触动人心，激发情感。', NOW(), NULL, '1,2,3', 0, 0, 4, '13800138004;123123;wechat_5'),
+(1, '摄影的艺术', '摄影是一种捕捉瞬间，记录生活的艺术形式。', NOW(), NULL, '0,1,2,3', 2, 1, 0, '13800138005;4424;wechat_6'),
+(3, '阅读的乐趣', '阅读能够开阔视野，丰富内心世界。', NOW(), NULL, '2,3', 1, 0, 1, '13800138006;123123;wechat_7'),
+(3, '科技改变生活', '科技的发展正在不断地改变着我们的生活方式。', NOW(), NULL, '0', 2, 1, 2, '13800138007;123123;wechat_8'),
+(2, '环保的重要性', '保护环境是每个人的责任，也是为了我们共同的未来。', NOW(), NULL, '0', 1, 0, 3, '13800138008;123123;wechat_9'),
+(1, '运动的好处', '定期运动有助于保持身体健康，提高生活质量。', NOW(), NULL, '1,3', 1, 1, 4, '13800138009;123123;wechat_10');
+
+-- 插入媒体资源数据
+INSERT INTO `postMedia` (`postId`, `type`, `mediaUrl`, `createTime`) VALUES
+(1, 0, 'http://example.com/image1.jpg', NOW()),
+(1, 1, 'http://example.com/audio1.mp3', NOW()),
+(2, 2, 'http://example.com/video1.mp4', NOW()),
+(3, 0, 'http://example.com/image2.jpg', NOW()),
+(3, 1, 'http://example.com/audio2.mp3', NOW()),
+(4, 2, 'http://example.com/video2.mp4', NOW()),
+(5, 0, 'http://example.com/image3.jpg', NOW()),
+(5, 1, 'http://example.com/audio3.mp3', NOW()),
+(6, 2, 'http://example.com/video3.mp4', NOW()),
+(7, 0, 'http://example.com/image4.jpg', NOW()),
+(7, 1, 'http://example.com/audio4.mp3', NOW());
+
+-- 插入帖子点赞
+INSERT INTO `postLike` (`postId`, `userId`) VALUES
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 1),
+(3, 2),
+(3, 2),
+(4, 3),
+(4, 3),
+(5, 1),
+(5, 2);
+
+-- 插入帖子评论
+INSERT INTO `comment` (`uid`, `postId`, `content`) VALUES
+(1, 1, '非常有趣的帖子，学习到了很多！'),
+(2, 1, '同意楼上，内容很有启发性。'),
+(3, 2, '这个观点我不太同意，但我尊重你的看法。'),
+(1, 2, '感谢分享，期待更多类似的讨论。'),
+(1, 3, '很棒的见解，我也有类似的想法。'),
+(3, 3, '这个分析很到位，赞一个！'),
+(2, 4, '旅行总是让人充满期待，期待你的下一篇帖子。'),
+(3, 4, '我也喜欢旅行，可以交流一下经验。'),
+(1, 5, '音乐是生活中不可或缺的部分，感谢分享。'),
+(2, 5, '这首歌我也很喜欢，有类似的推荐吗？');
+
+-- 插入弹幕帖子
+INSERT INTO `bulletScreen` (`uid`, `content`, `visibility`, `duration`, `contactInfo`) VALUES
+(1, '这是一条有趣的弹幕！', 0,  0, '13800138000;123456789;wechat_1'),
+(2, '大家晚上好，这里是我的弹幕。', 2,  1, '13800138001;123456790;wechat_2'),
+(3, '欢迎来到直播间，一起嗨起来！', 0,  2, '13800138002;123456791;wechat_3'),
+(1, '今天的直播太精彩了，不容错过！', 1,  3, '13800138003;123456792;wechat_4'),
+(3, '喜欢这个视频的请点赞哦！', 2,  4, '13800138004;123456793;wechat_5'),
+(2, '求背景音乐的名字！', 0, 0, '13800138005;123456794;wechat_6'),
+(1, '这个技巧太实用了，谢谢分享！', 1,  1, '13800138006;123456795;wechat_7'),
+(1, '大家周末有什么计划吗？', 2,  2, '13800138007;123456796;wechat_8'),
+(3, '直播结束，感谢大家的陪伴！', 0,  3, '13800138008;123456797;wechat_9'),
+(1, '下次直播见，不见不散！', 1,  4, '13800138009;123456798;wechat_10');
