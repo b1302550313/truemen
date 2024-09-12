@@ -1,18 +1,19 @@
 package com.sysu.verto.user.controller;
 
-import com.sysu.verto.user.model.User;
-import com.sysu.verto.user.model.WechatUserInfo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sysu.verto.user.model.User;
 import com.sysu.verto.user.service.UserService;
-import java.util.Optional;
 import com.sysu.verto.user.service.WechatClient;
-
-
-import java.time.Duration;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/users")
@@ -70,7 +71,7 @@ public class UserController {
 
     // 根据id更改个人信息
     @PutMapping("/{userId}/profile")
-    public ResponseEntity<String> updateUserProfile(@PathVariable int userId, @RequestBody User user) {
+    public ResponseEntity<String> updateUserProfile(@PathVariable String userId, @RequestBody User user) {
         user.setUid(userId);
         if (userService.updateUser(user)) {
             return ResponseEntity.ok("User profile updated successfully");

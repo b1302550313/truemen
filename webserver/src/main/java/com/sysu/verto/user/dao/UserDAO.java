@@ -24,7 +24,7 @@ public class UserDAO{
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-            user.setUid(rs.getLong("uid"));
+            user.setUid(rs.getString("uid"));
             user.setUserId(rs.getString("userId")); // 新增这一行，映射userId
             user.setUserName(rs.getString("userName"));
             user.setWechatId(rs.getString("wechatId"));
@@ -34,6 +34,7 @@ public class UserDAO{
             user.setCreateTime(rs.getTimestamp("createTime").toLocalDateTime());
             user.setPermission(rs.getInt("permission"));
             user.setBio(rs.getString("bio"));
+            user.setBirthDate(rs.getDate("birthDate").toLocalDate());
             user.setGender(User.Gender.valueOf(rs.getString("gender")));
             return user;
         }
