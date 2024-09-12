@@ -1,6 +1,5 @@
-package com.sysu.verto.comment.model.vo;
+package com.sysu.verto.post.model.vo;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;

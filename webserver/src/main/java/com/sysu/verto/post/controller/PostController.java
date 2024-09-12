@@ -32,17 +32,17 @@ import jakarta.validation.Valid;
 @RequestMapping(value = "/post")
 @Validated
 public class PostController {
-  private static final Logger log = LoggerFactory.getLogger(PostController.class);
   @Autowired
   private PostService postService;
 
   @Autowired
   private PostCollectionService postCollectionService;
+
   /*
    * - 描述: 用户创建新帖子。帖子可以包含文本、图片、音频等内容。
    * - 响应数据: 新创建帖子的ID
    */
-  @PostMapping("/upload")
+  @PostMapping("/upload/normal")
   public Result<Integer> uploadPost(@Valid @RequestBody PostVo postVo) {
     Integer pid = postService.upLoadPost(postVo);
     if (pid != null) {
@@ -56,7 +56,7 @@ public class PostController {
    * - 描述: 获取指定帖子的详细信息。
    * - 响应数据: 帖子详细信息
    */
-  @GetMapping("/detail/{postId}")
+  @GetMapping("/detail/normal/{postId}")
   public Result<PostWithIDVo> getPostDetail(@PathVariable Integer postId) {
     PostWithIDVo postWithIDVo = postService.getPost(postId);
     return Result.ok(postWithIDVo);
@@ -66,7 +66,7 @@ public class PostController {
    * - 描述: 更新已有帖子的内容。用户可以修改文本内容，或添加/删除媒体文件
    * - 响应数据: 操作结果（成功或失败）
    */
-  @PutMapping("/detail/{postId}")
+  @PutMapping("/detail/normal/{postId}")
   public Result updatePostDetail(@PathVariable Integer postId, @Valid @RequestBody PostUpdateQuery query) {
     boolean res = postService.updatePost(postId, query);
     if (res == false)
@@ -78,7 +78,7 @@ public class PostController {
    * - 描述: 删除指定帖子。
    * - 响应数据: 操作结果（成功或失败）
    */
-  @DeleteMapping("/{postId}")
+  @DeleteMapping("/delete/normal/{postId}")
   public Result deletePost(@PathVariable Integer postId) {
     boolean reult = postService.deletePost(postId);
     if (reult) {
