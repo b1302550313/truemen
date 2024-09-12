@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -15,27 +18,39 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
     private String uid; // 系统生成的唯一标识符
-    @Column(name = "userId")
+
+    @Column(name = "user_id")
     private String userId; // 用户自定义的标识符
-    @Column(name = "userName")
+
+    @Column(name = "user_name")
     private String userName;
-    @Column(name = "wechatId")
+
+    @Column(name = "wechat_id")
     private String wechatId;
+
     @Column(name = "phone")
     private String phone;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "avatar")
     private String avatar;
-    @Column(name = "createTime")
+
+    @Column(name = "create_time")
     private LocalDateTime createTime;
+
     @Column(name = "permission")
     private int permission;
+
     @Column(name = "bio")
     private String bio;
+
     @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
-    @Column(name = "birthDate")
+
+    @Column(name = "birth_date")
     private LocalDate birthDate; // 新增生日信息
 
     public enum Gender {

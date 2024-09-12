@@ -36,7 +36,7 @@ public class WechatClient {
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url, HttpMethod.GET, HttpEntity.EMPTY, Map.class, uriVariables);
         Map<String, String> response = responseEntity.getBody();
 
-        if (response == null) {
+        if (response == null || !response.containsKey("access_token")) {
             throw new RuntimeException("Failed to get access token from WeChat API");
         }
 

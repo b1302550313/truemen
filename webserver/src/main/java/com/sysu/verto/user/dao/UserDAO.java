@@ -57,7 +57,7 @@ public class UserDAO{
 
         String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio) VALUES (?, ?, ?, ?, ?, ?)";
         int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, user.getUid(), user.getUserName(), user.getAvatar(),
-                user.getGender().name(), null, user.getBio());
+                user.getGender().name(), user.getBirthDate(), user.getBio());
 
         return rowsAffectedCore > 0 && rowsAffectedBase > 0;
     }
