@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sysu.verto.post.dao.CommentDao;
-import com.sysu.verto.comment.model.Comment;
+import com.sysu.verto.post.model.Comment;
 import com.sysu.verto.post.model.vo.CommentListPostQuery;
 import com.sysu.verto.post.model.vo.CommentUploadQuery;
 import com.sysu.verto.post.model.vo.CommentVo;
@@ -34,7 +34,6 @@ public class CommentService extends ServiceImpl<CommentDao, Comment> {
 
     public Integer upLoadComment(CommentUploadQuery commentUploadQuery) {
         Comment comment = Comment.builder()
-                .create_time(new Date())
                 .uid(commentUploadQuery.getUid())
                 .content(commentUploadQuery.getContent())
                 .postId(commentUploadQuery.getPostId())
