@@ -1,7 +1,6 @@
-package com.sysu.verto.comment.model.vo;
+package com.sysu.verto.post.model.vo;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
