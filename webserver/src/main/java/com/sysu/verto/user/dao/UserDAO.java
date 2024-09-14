@@ -1,6 +1,7 @@
 package com.sysu.verto.user.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Repository
-public class UserDAO {
+public class UserDAO{
     private final JdbcTemplate jdbcTemplate;
 
     public UserDAO(JdbcTemplate jdbcTemplate) {
@@ -23,7 +24,7 @@ public class UserDAO {
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-            user.setUid(rs.getLong("uid"));
+            user.setUid(rs.getString("uid"));
             user.setUserId(rs.getString("userId")); // 新增这一行，映射userId
             user.setUserName(rs.getString("userName"));
             user.setWechatId(rs.getString("wechatId"));
@@ -33,6 +34,7 @@ public class UserDAO {
             user.setCreateTime(rs.getTimestamp("createTime").toLocalDateTime());
             user.setPermission(rs.getInt("permission"));
             user.setBio(rs.getString("bio"));
+            user.setBirthDate(rs.getDate("birthDate").toLocalDate());
             user.setGender(User.Gender.valueOf(rs.getString("gender")));
             return user;
         }
@@ -55,7 +57,7 @@ public class UserDAO {
 
         String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio) VALUES (?, ?, ?, ?, ?, ?)";
         int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, user.getUid(), user.getUserName(), user.getAvatar(),
-                user.getGender().name(), null, user.getBio());
+                user.getGender().name(), user.getBirthDate(), user.getBio());
 
         return rowsAffectedCore > 0 && rowsAffectedBase > 0;
     }

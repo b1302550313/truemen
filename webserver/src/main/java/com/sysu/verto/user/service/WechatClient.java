@@ -1,6 +1,8 @@
 package com.sysu.verto.user.service;
 
-import com.sysu.verto.user.model.WechatUserInfo;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -8,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.sysu.verto.user.model.WechatUserInfo;
 
 @Service
 public class WechatClient {
@@ -35,7 +36,7 @@ public class WechatClient {
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url, HttpMethod.GET, HttpEntity.EMPTY, Map.class, uriVariables);
         Map<String, String> response = responseEntity.getBody();
 
-        if (response == null) {
+        if (response == null || !response.containsKey("access_token")) {
             throw new RuntimeException("Failed to get access token from WeChat API");
         }
 

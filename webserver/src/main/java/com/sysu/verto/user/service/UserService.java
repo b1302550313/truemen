@@ -5,11 +5,13 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.sysu.verto.user.dao.UserDAO;
 import com.sysu.verto.user.model.User;
 import com.sysu.verto.user.model.WechatUserInfo;
 import com.sysu.verto.user.storage.UserRepository;
+
 import jakarta.servlet.http.HttpSession;
-import com.sysu.verto.user.dao.UserDAO;
 
 // 登录注册相关
 @Service
@@ -27,8 +29,8 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User getUserByOpenId(String openId) {
-        return userRepository.findByOpenId(openId);
+    public User getUserByUserId(String userId) {
+        return userRepository.findByUserId(userId);
     }
 
     public boolean checkPassword(String rawPassword, String encodedPassword) {
@@ -70,6 +72,7 @@ public class UserService {
 
     public User createNewUser(WechatUserInfo userInfo) {
         User user = new User();
+        user.setUid(generateUserId(user));
         user.setUserId(userInfo.getOpenId());
         user.setUserName(userInfo.getNickname());
         user.setAvatar(userInfo.getAvatar());

@@ -8,23 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
-@TableName("post")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-    @TableId
-    private Long postId;
+@TableName("bulletScreen")
+public class BulletScreen {
+    @TableId(value = "bulletId")
+    private Long bulletId;
     private Long uid;
-    private String title;
     private String content;
     private Date createTime;
     private Date updateTime;
-    private Long tag;
-    private Long visibility;
-    private Long allowComment;
-    private Long duration;
+    private Integer visibility;
+    private Integer duration;
     private String contactInfo;
 }
