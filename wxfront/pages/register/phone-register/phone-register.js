@@ -121,13 +121,12 @@ Page({
         if (res.confirm) {
           // 发送 POST 请求到后端
           wx.request({
-            url: getApp().globalData.host + '/api/users/register', // 后端 API 地址
+            url: getApp().globalData.host + '/api/users/registerByPhone', // 后端 API 地址
             method: 'POST',
             data: JSON.stringify({
-              phoneNumber: this.data.phoneNumber,
+              phone: this.data.phoneNumber,
               password:this.data.password,
-              userName:"新用户",
-              int:1
+              userName:"新用户"
             }),
             header: {
               'content-type': 'application/json' // 默认值

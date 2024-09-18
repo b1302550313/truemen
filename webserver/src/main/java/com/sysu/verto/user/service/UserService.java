@@ -56,6 +56,23 @@ public class UserService {
 
         return userDAO.registerUser(user);
     }
+    // 手机注册
+    public boolean registerByPhone(User user) {
+        if (userDAO.checkUserByPhoneNumberOrWeChatID(user.getPhone(), user.getWechatId()) != null) {
+            return false; // 用户已存在
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreateTime(LocalDateTime.now());
+        user.setPermission(1);
+
+        // 如果 userId 为空，生成默认值
+        if (user.getUserId() == null || user.getUserId().isEmpty()) {
+            user.setUserId(generateUserId(user));
+        }
+        System.out.println(user.getUserId());
+        System.out.println("registerByPhone");
+        return userDAO.registerUserByPhone(user);
+    }
 
     public User getUserById(String userId) {
         return userDAO.getUserById(userId);

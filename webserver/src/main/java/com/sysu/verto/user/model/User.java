@@ -58,10 +58,12 @@ public class User {
     }
 
     public User() {
+        System.out.println("User created");
+        this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
     }
-
     public User(String userId, String userName, String wechatId, String phone, String password, String avatar,
             int permission, String bio, Gender gender, LocalDate birthDate) {
+        System.out.println("User created param");
         this.userId = "user_" + System.currentTimeMillis();
         this.userName = userName;
         this.wechatId = wechatId;
@@ -70,8 +72,9 @@ public class User {
         this.avatar = avatar;
         this.permission = permission;
         this.bio = bio;
-        this.gender = gender;
+        this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
         this.birthDate = birthDate;
+        System.out.println(this.gender);
     }
 
     // Getters and Setters

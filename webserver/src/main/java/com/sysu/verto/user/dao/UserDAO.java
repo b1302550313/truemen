@@ -62,6 +62,27 @@ public class UserDAO{
         return rowsAffectedCore > 0 && rowsAffectedBase > 0;
     }
 
+    public boolean registerUserByPhone(User user) {
+        System.out.println("userDAO registerUserByPhone");
+        String sqlCoreInfo = "INSERT INTO userCoreInfo (userId, phone, password, permission, createTime) VALUES (?, ?, ?, ?, ?)";
+        int rowsAffectedCore = jdbcTemplate.update(sqlCoreInfo, user.getUserId(), user.getPhone(), 
+                user.getPassword(), user.getPermission(), user.getCreateTime()); // 更新插入 userId
+        // 获取自增主键值
+        Long generatedUid = jdbcTemplate.queryForObject(
+            "SELECT LAST_INSERT_ID()", Long.class);
+
+        if (generatedUid == null) {
+            System.err.println("Failed to retrieve the generated UID.");
+            return false;
+        }else{
+            System.out.println("Generated UID: " + generatedUid);
+        }
+        String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, generatedUid, user.getUserName(), user.getAvatar(),
+                user.getGender().name(), user.getBirthDate(), user.getBio());
+        System.out.println(user.getPassword()+" "+user.getPhone());
+        return rowsAffectedCore > 0 && rowsAffectedBase > 0;
+    }
     public User getUserById(String userId) {
         String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.userId = ?";
         try {

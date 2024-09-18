@@ -45,6 +45,16 @@ public class UserController {
             return ResponseEntity.badRequest().body("User already exists");
         }
     }
+    // 手机注册
+    @PostMapping("/registerByPhone")
+    public ResponseEntity<String> registerUserByPhone(@RequestBody User user) {
+        System.out.println("controller registerByPhone");
+        if (userService.registerByPhone(user)) {
+            return ResponseEntity.ok("User registered successfully");
+        } else {
+            return ResponseEntity.badRequest().body("User already exists");
+        }
+    }
 
     // 登录
     @PostMapping("/login")
