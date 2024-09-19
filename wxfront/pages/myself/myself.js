@@ -5,8 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uid:'',
     avatarUrl: '/images/icons/pie.png',
-    username: '用户名2',
+    username: '用户名默认',
     doubleArrowFriends: '120',
     youFollowed: '130',
     followedYou: '140',
@@ -33,22 +34,36 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                userInfo: res.userInfo
-              });
-            }
-          });
-        }
-      }
+  // onLoad: function () {
+  //   wx.getSetting({
+  //     success: res => {
+  //       if (res.authSetting['scope.userInfo']) {
+  //         wx.getUserInfo({
+  //           success: res => {
+  //             this.setData({
+  //               userInfo: res.userInfo
+  //             });
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  // },
+  onLoad: function(options) {
+    // 获取全局变量中的 uid 和 userName
+    const globalData = getApp().globalData;
+    console.log(globalData);
+    const { uid, userName } = globalData;
+
+    // 更新当前页面的数据
+    this.setData({
+      username: userName,
+      uid: uid
     });
+
+    // 利用 uid 向数据库发送请求获取其他信息
+    // this.fetchAdditionalInfo(uid);
   },
-  
   openAvatarUploader: function () {
     // 打开上传头像界面
     console.log('打开上传头像界面')

@@ -126,14 +126,33 @@ Page({
             data: JSON.stringify({
               phone: this.data.phoneNumber,
               password:this.data.password,
-              userName:"新用户"
+              userName:"新用户1",
+              bio:"关于我",
+              birthDate:"2007-01-04"
             }),
             header: {
               'content-type': 'application/json' // 默认值
             },
-            success: function(res) {
+            success: (res)=> {
               console.log(res);
               if (res.statusCode === 200) {
+                // 注册成功
+                const data = res.data; // 假设返回的数据格式为 { msg, userName, uid, phone }
+                console.log(data);
+                // 更新全局变量
+                getApp().setGlobalData({
+                  userName: data.userName,
+                  uid: data.uid,
+                  phone: data.phone
+                });
+                console.log('phone-register');
+                console.log(getApp().globalData);
+                // 更新当前页面的参数
+                this.setData({
+                  userName: data.userName,
+                  uid: data.uid,
+                  phone: data.phone,
+                });
                 // 注册成功
                 wx.showToast({
                   title: '注册成功',

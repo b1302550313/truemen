@@ -17,5 +17,5 @@ user表分为user_base_info表和user_core_info表【注意统一】
 
 ```sql
 ```
-修改了性别，添加了匿
+修改了性别，添加了匿。新的数据库文件是init2.sql。注意执行init2.sql。
 

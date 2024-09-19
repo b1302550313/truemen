@@ -76,6 +76,7 @@ public class UserDAO{
             return false;
         }else{
             System.out.println("Generated UID: " + generatedUid);
+            user.setUid(generatedUid.toString());
         }
         String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio) VALUES (?, ?, ?, ?, ?, ?)";
         int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, generatedUid, user.getUserName(), user.getAvatar(),
@@ -87,6 +88,15 @@ public class UserDAO{
         String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.userId = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, userRowMapper, userId);
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public User getUserByUid(String uid) {
+        String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.uid = ?";
+        try {
+            User user = jdbcTemplate.queryForObject(sql, userRowMapper, uid);
             return user;
         } catch (EmptyResultDataAccessException e) {
             return null;

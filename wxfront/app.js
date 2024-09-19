@@ -12,29 +12,16 @@ App({
     searchMarginTop: 0, // 搜索框上边距
     searchWidth: 0, // 搜索框宽度
     searchHeight: 0, // 搜索框高度
-    avatarUrl: '/images/icons/pie.png',
-    username: '用户名2',
-    doubleArrowFriends: '120',
-    youFollowed: '130',
-    followedYou: '140',
-    userInfo:null,
-    items: [
-      { imageSrc: '/images/icons/pie.png', text: '我的合集1' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集2' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集3' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集4' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集5' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集6' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集7' },
-      { imageSrc: '/images/icons/pie.png', text: '我的合集8' }
-    ],
-    aboutMe: '开心每一天红红火火恍恍惚惚哈哈哈哈',
+    userName: '用户名2',
     userId: '888',
-    gender: '男/女/其他',
-    birthday: '2007-01-04',
-    zodiac: '金牛座',
-    tags: ['各种标签', '各种标签', '各种标签', '各种标签','各种标签', '各种标签', '各种标签', '各种标签'],
-    monthIndex: 0,
+    uid:0
+  },
+  // 设置全局变量的方法
+  setGlobalData: function(obj) {
+    Object.assign(this.globalData, obj);
+  },
+  getGlobalData: function() {
+    return this.globalData;
   },
   onLaunch: function (options) {
     const that = this

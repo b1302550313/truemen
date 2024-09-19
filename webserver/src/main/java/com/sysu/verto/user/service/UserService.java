@@ -77,6 +77,9 @@ public class UserService {
     public User getUserById(String userId) {
         return userDAO.getUserById(userId);
     }
+    public User getUserByUid(String userId) {
+        return userDAO.getUserByUid(userId);
+    }
 
     public boolean updateUser(User user) {
         return userDAO.updateUser(user);

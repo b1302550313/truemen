@@ -118,8 +118,16 @@ input::placeholder{
   margin-bottom: 20rpx;
 }
 
-.confirm-btn, .cancel-btn {
+.confirm-btn{
   margin-top: 10rpx;
   margin-bottom: 10rpx;
+  background-color: #39B54A; /* 微信的绿色 */
+  width: 300rpx;
+}
+.cancel-btn {
+  width: 300rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  background-color: #E63317; /* 微信的红色 */
 }
 

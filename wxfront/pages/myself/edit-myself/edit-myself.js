@@ -10,7 +10,7 @@ Page({
     aboutMe: '开心每一天红红火火恍恍惚惚哈哈哈哈',
     userId: '888',
     gender: '男',
-    genderOptions: ['男', '女', '其他'], 
+    genderOptions: ['男', '女', '匿'], 
     constellationList: [
       '水瓶座',  // 1月20日-2月18日
       '双鱼座',  // 2月19日-3月20日
@@ -30,7 +30,6 @@ Page({
     currentGenderIndex: 0,
     currentConstellationIndex:0
   },
-
 
   onNameChange: function (e) {
     this.setData({
@@ -102,6 +101,7 @@ Page({
       }
     });
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

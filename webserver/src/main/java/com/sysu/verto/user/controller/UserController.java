@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sysu.verto.user.dao.RegisterResponse;
 import com.sysu.verto.user.model.User;
+
 import com.sysu.verto.user.service.UserService;
 import com.sysu.verto.user.service.WechatClient;
 
@@ -47,12 +49,23 @@ public class UserController {
     }
     // 手机注册
     @PostMapping("/registerByPhone")
-    public ResponseEntity<String> registerUserByPhone(@RequestBody User user) {
+    public ResponseEntity<User> registerUserByPhone(@RequestBody User user) {
         System.out.println("controller registerByPhone");
         if (userService.registerByPhone(user)) {
-            return ResponseEntity.ok("User registered successfully");
+            // 获取用户的基本信息
+            String userName = user.getUserName();
+            String uid = user.getUid(); // 假设 userService.registerByPhone 返回 uid 或者你在 service 中设置了 uid
+            String phone = user.getPhone();
+
+            // 创建响应对象
+            // RegisterResponse response = new RegisterResponse("User registered successfully", userName, uid, phone);
+
+            return ResponseEntity.ok(user);
+            // return ResponseEntity.ok("User registered successfully");
         } else {
-            return ResponseEntity.badRequest().body("User already exists");
+             // 返回错误响应
+             RegisterResponse errorResponse = new RegisterResponse("User already exists", null, null, null);
+             return ResponseEntity.badRequest().body(errorResponse);
         }
     }
 
@@ -78,6 +91,17 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+       // 根据uid查看个人信息
+       @GetMapping("/uid/{userId}/profile")
+       public ResponseEntity<User> getUserProfileByUid(@PathVariable String userId) {
+           User user = userService.getUserByUid(userId);
+           if (user != null) {
+               return ResponseEntity.ok(user);
+           } else {
+               return ResponseEntity.notFound().build();
+           }
+       }
+
 
     // 根据id更改个人信息
     @PutMapping("/{userId}/profile")
