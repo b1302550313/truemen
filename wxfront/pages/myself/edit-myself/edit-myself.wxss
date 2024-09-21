@@ -1,0 +1,133 @@
+/* pages/myself/edit-myself.wxss */
+@import "/utils/common-style.wxss";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  background-color:#F5F5F5;
+}
+.avatar-container {
+  width: 750rpx; /* 固定宽度 */
+  height: 354rpx; /* 固定高度 */
+  padding: 80rpx 130rpx 80rpx 130rpx; /* 上、右、下、左四个方向的内边距 */
+  /* border: 1rpx solid red; */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  box-sizing: border-box; /* 确保边框和内边距包含在总宽度和高度内 */
+}
+
+.avatar {
+  width: 194rpx; /* 固定宽度 */
+  height: 194rpx; /* 固定高度 */
+  /* border: 1rpx solid red; */
+}
+.edit-line{
+  display: flex;
+  flex-direction: column;
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  gap:16rpx;
+}
+.name-display {
+
+  width:750rpx;
+  height: 49rpx;
+  padding: 0rpx 32rpx 0px 32rpx;
+  gap: 28rpx;
+  font-family: PingFang SC;
+  font-size: 34rpx;
+  font-weight: 400;
+  line-height: 47.6rpx;
+  letter-spacing: 0.005em;
+  text-align: left;
+
+}
+
+.input-area {
+  width: 686rpx;
+  padding: 20rpx 0px 20rpx 0px;
+  border-radius: 20rpx;
+  border: solid 1rpx;  
+  display: flex;
+  align-items: center;
+  background-color: white;
+  flex-wrap: wrap;
+}
+input{
+  width: 622rpx;
+  padding-left: 30rpx;
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 33.6rpx;
+  letter-spacing: 0.01em;
+  text-align: left;
+
+}
+input::placeholder{
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 33.6rpx;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.minitext{
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 33.6rpx;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color:#3C3C43;
+  padding: 0rpx 32rpx 0px 32rpx;
+}
+.picker {
+  /* width: 90vw; */
+  border-radius: 20rpx;
+  /* border: solid 1rpx red; */
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: PingFang SC;
+  font-weight: 400;
+  text-align: left;
+
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+}
+
+.confirm-btn{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  background-color: #39B54A; /* 微信的绿色 */
+  width: 300rpx;
+}
+.cancel-btn {
+  width: 300rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  background-color: #E63317; /* 微信的红色 */
+}
+

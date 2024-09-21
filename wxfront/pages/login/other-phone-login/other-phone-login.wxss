@@ -1,0 +1,69 @@
+/* pages/login/other-phone-login/other-phone-login.wxss */
+.login-container {
+  padding-bottom: 20rpx;
+  margin-top: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20rpx;
+  width:80%;
+  height: 70rpx;
+  background-color: #C5C5C5;
+  padding: 10rpx;
+}
+
+.phone-input {
+  flex: 1;
+  padding: 10rpx;
+  font-size: 30rpx;
+}
+
+.send-code-btn {
+  background-color: #09f;
+  color: #fff;
+  margin-right: 30rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  font-size: small;
+}
+
+.code-input {
+  background-color: #C5C5C5;
+  width:80%;
+  height: 70rpx;
+  border-bottom: 1px solid #ccc;
+  padding: 10rpx;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.switch-login-method {
+  text-align: left;
+  margin-bottom: 20rpx;
+  padding-left: 0rpx;
+}
+
+.switch-text {
+  color: #09f;
+  font-size: 28rpx;
+}
+
+.login-btn {
+  width: 90%;
+  height: 80rpx;
+  background-color: #09f;
+  color: #fff;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  margin-top: auto;
+}

@@ -1,0 +1,13 @@
+<!--pages/login/other-phone-login/other-phone-login.wxml-->
+<view class="login-container">
+  <view class="phone-input-container">
+    <input class="phone-input" placeholder="请输入手机号" type="number" maxlength="11" bindinput="onPhoneInput" />
+    <button class="send-code-btn" bindtap="sendCode">发送验证码</button>
+  </view>
+  <input class="code-input" placeholder="请输入验证码" type="number" maxlength="6" bindinput="onCodeInput" />
+  <view class="switch-login-method">
+    <text class="switch-text" bindtap="switchToPasswordLogin">密码登录</text>
+  </view>
+  <button class="login-btn" bindtap="doLogin">登录</button>
+  <term-service bind:agreeChanged="onAgreeChange"></term-service>
+</view>

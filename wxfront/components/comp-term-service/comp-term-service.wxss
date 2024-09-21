@@ -1,0 +1,10 @@
+/* components/comp-term-service/comp-term-service.wxss */
+.checkbox-container {
+  margin-bottom: 20rpx;
+  margin-right: 5%;
+  margin-left: 5%;
+  width: 100%;
+}
+.link{
+  color:#4A3AFF;
+}

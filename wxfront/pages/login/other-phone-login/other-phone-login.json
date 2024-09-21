@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "其他电话号码登录",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black", 
+  "enableBackButton": true,
+  "navigationStyle": "default",
+  "renderer": "cover-view",
+  "usingComponents": {"term-service":"/components/comp-term-service/comp-term-service"}
+}

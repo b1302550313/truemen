@@ -1,0 +1,29 @@
+<!-- 搜索框 -->
+<view style="height:{{m.height}}px;padding-top:{{s.statusBarHeight+(m.top-s.statusBarHeight)}}px;padding-bottom:{{(m.top-s.statusBarHeight)}}px;width:{{m.left}}px;">
+    <view bindtap="goToSearch" class="search-bar__form">
+        <view class="search-bar__box" style="height: {{m.height}}px;">
+            <icon size="{{m.height/2+1}}" type="search"></icon>
+            <input class="search-bar__input" disabled="true" placeholder="搜索地点、活动、你感兴趣的地方" style="font-size: {{m.height/2.5}}px" type="text"></input>
+        </view>
+    </view>
+</view>
+<!-- 标签栏和折叠按钮 -->
+<view class="header">
+    <scroll-view scroll-x="true" class="scroll-view-tab">
+        <view class="tab-item" wx:for="{{tabs}}" wx:key="index" bindtap="onTabClick" data-index="{{index}}">
+            <text>{{item.name}}</text>
+        </view>
+    </scroll-view>
+    <van-icon name="{{arrowIcon}}" class="fold-button" bindtap="toggleEditPanel" />
+</view>
+<!-- 悬浮窗，用于编辑标签 -->
+<view wx:if="{{showEditPanel}}" class="edit-panel">
+    <view class="edit-panel-header">
+        <text>主题分类</text>
+    </view>
+    <view class="tag-list">
+        <view class="tag-item" wx:for="{{editableTabs}}" wx:key="index" bindtap="onTagClick" bindlongpress="onTagLongPress" data-index="{{index}}">
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</view>

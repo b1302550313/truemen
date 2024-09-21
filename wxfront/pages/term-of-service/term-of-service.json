@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "用户服务协议",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black", 
+  "enableBackButton": true,
+  "navigationStyle": "default",
+  "renderer": "cover-view",
+  "usingComponents": {}
+}

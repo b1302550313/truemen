@@ -1,0 +1,254 @@
+/* pages/myself/user-profile/user-profile.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto !important;
+  overflow-x: hidden
+}
+
+.avatar-container {
+  width:  200rpx;
+  height: 200rpx;
+  /* border-radius: 75rpx; */
+  /* overflow: hidden; */
+  margin-bottom: 30rpx;
+  /* border: 1px red solid; */
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 38rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 32rpx;
+  margin-left: 50rpx;
+}
+.blue-bg{
+  background-color: #C8DAEA;
+}
+.scroll-content {
+  white-space: nowrap; /* 不换行，使内容可以在一行内水平排列 */
+  overflow-x: auto; /* 允许水平滚动 */
+  width: 100vw;
+  display: flex; /* 使用弹性布局来组织内容 */
+  align-items: center; 
+  height: 200rpx; /* 指定高度 */
+  margin-left: 32rpx;
+  margin-top:32rpx;
+  /* margin-bottom: 32rpx; */
+}
+
+.item {
+  display: inline-block; /* 内容在一行内显示 */
+  margin-right: 20rpx; /* 间距 */
+  width: 120rpx; /* 每个项目的宽度 */
+}
+
+.item-image {
+  width: 120rpx; /* 图片宽度 */
+  height: 120rpx; /* 图片高度 */
+  border-radius: 50%;
+}
+
+.item-text {
+  margin-top: 10rpx; /* 文字与图片之间的间距 */
+  font-size: 28rpx; /* 文字大小 */
+  text-align: center; /* 文字居中对齐 */
+}
+
+.about-me {
+  margin-bottom: 24rpx;
+  margin-top: 24rpx;
+  margin-left: 32rpx;
+  border-radius: 16rpx;
+  width: 304rpx;
+  height: 228rpx;
+  gap: 24rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid #002FA7;
+  opacity: 0px;
+  background-color: #fff;
+}
+.about-me-inner{
+  display: flex;
+  flex-direction: column;
+  width: 242rpx;
+  height:180rpx;
+  margin-top: 20rpx;
+  margin-left: 32rpx;
+  /* gap: 6rpx; */
+  border: 1rpx red solid;
+}
+.about-me-title {
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  font-weight: 400;
+  line-height: 36.4rpx;
+  letter-spacing: 1rpx;
+  text-align: left;
+  
+}
+
+.about-me-content {
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  font-weight: 400;
+  line-height: 30.8rpx;
+  text-align: left;
+}
+
+.profile-info {
+  margin-bottom: 24rpx;
+  margin-top: 24rpx;
+  margin-right: 32rpx;
+  border-radius: 16rpx;
+  width: 304rpx;
+  height: 228rpx;
+  gap: 24rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid #002FA7;
+  opacity: 0px;
+  background-color: #fff;
+
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.two-col{
+  display: flex;
+  width: 750rpx;
+  height: 276rpx;
+  /* top: 341px; */
+  gap: 0px;
+  justify-content: space-between;
+  opacity: 0px;
+  border: solid 2rpx red;
+}
+.info-key {
+  font-size: 32rpx;
+  color: #002FA7;
+  font-family: PingFang SC;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18.2px;
+  letter-spacing: 0.5px;
+  text-align: left;
+
+}
+
+.info-value {
+  color: #333;
+  font-family: PingFang SC;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18.2px;
+  letter-spacing: 0.5px;
+  text-align: left;
+
+}
+
+.current-me {
+  margin-bottom: 30rpx;
+  width: Fixed (343px)px;
+  height: Hug (121px)px;
+  margin: 10px 16px 10px 16px;
+  padding: 10px 16px 10px 16px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 28rpx;
+  border: 2rpx solid #002FA7;
+  background-color: #fff;
+}
+.current-me-title{
+  font-family: PingFang SC;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18.2px;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+.tag-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: Fill (311px)px;
+  height: Hug (58px)px;
+  gap: 10px;
+  opacity: 0px;
+
+}
+.tag {
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+  background-color: #fff;
+
+  width: Hug (69px)px;
+  height: Hug (24px)px;
+  padding: 5px 8px 5px 8px;
+  gap: 2px;
+  border-radius: 14px;
+  border: 1px solid #002FA7;
+  opacity: 0px;
+  font-family: PingFang SC;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: left;
+
+
+}
+
+.calendar {
+  margin-bottom: 30rpx;
+}
+.calendar-title{
+  padding-left: 64rpx;
+}
+.month-selector {
+  font-size: 38rpx;
+  color: #333;
+  cursor: pointer;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.day {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+}

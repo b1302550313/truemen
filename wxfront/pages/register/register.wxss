@@ -1,0 +1,70 @@
+/* pages/register/register.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.logo {
+  width: 300rpx;
+  height: 300rpx;
+  margin-top: 200rpx;
+}
+
+.register-text {
+  font-size: 40rpx;
+  color: #3B4144;
+  margin: 50rpx 0;
+}
+
+.register-btn {
+  width: 750rpx;
+  height: 112rpx;
+  padding: 16px 4px 16px 4px;
+  gap: 16px;
+  opacity: 0px;
+  display: flex; /* 使用flex布局 */
+  align-items: center; /* 垂直居中对齐 */
+  justify-content: center;
+  box-sizing: border-box; /* 包含padding和border */
+}
+.btn-text{
+  font-family: PingFang SC;
+  font-size: 34rpx;
+  font-weight: 400;
+  line-height: 47.6rpx;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+.skip-text{
+  color:#808080;
+  font-family: PingFang SC;
+  font-size: 34rpx;
+  font-weight: 400;
+  line-height: 47.6rpx;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+.icon-wx {
+  width: 34rpx; /* 图标宽度 */
+  height: 34rpx; /* 图标高度 */
+  margin-right: 10rpx; /* 图标右侧的间距 */
+}
+
+
+.wechat-btn {
+  background-color: #4AC96F;
+  color: white;
+}
+
+.phone-btn {
+  background-color: #3190E8;
+  color: white;
+}
+
+.skip-btn {
+  background-color: #D8D8D8;
+  color: #3B4144;
+}

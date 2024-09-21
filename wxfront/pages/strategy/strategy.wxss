@@ -1,0 +1,80 @@
+/* 搜索框无返回栏 */
+.search-bar__form {
+  -webkit-box-flex: 1;
+  background: #eeeeef;
+  border-radius: 40rpx; /* 使用 rpx 单位 */
+  flex: auto;
+  position: relative;
+  margin-left: 20rpx; /* 左边距改为 rpx */
+  margin-right: 20rpx; /* 右边距改为 rpx */
+}
+
+.search-bar__box {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row;
+  padding-left: 40rpx; /* 左内边距改为 rpx */
+  padding-right: 120rpx; /* 右内边距改为 rpx */
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.search-bar__input {
+  height: 100%;
+  line-height: 100%;
+  margin-left: 10rpx; /* 左边距改为 rpx */
+}
+
+/* 标签栏样式 */
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.scroll-view-tab {
+  white-space: nowrap;
+  flex: 1;
+  margin-right: 50rpx;
+}
+
+.tab-item {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.fold-button {
+  font-size: 36rpx;
+  color: #333;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 10rpx;
+  position: absolute;
+  right: 10rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.edit-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0; /* 初始状态：高度为0，隐藏 */
+  background-color: #f7f7f7;
+  padding: 20rpx;
+  z-index: 20;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.edit-panel.show {
+  height: 50%; /* 展开时覆盖页面的下半部分 */
+}

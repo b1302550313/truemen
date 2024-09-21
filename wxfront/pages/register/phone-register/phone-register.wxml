@@ -1,0 +1,37 @@
+<!--pages/register/phone-register/phone-register.wxml-->
+<view class="container">
+  <view class="form-container">
+    <view class="input-group">
+      <input class="input-field input-border-phone-color {{phoneNumberValid ? 'valid' : 'invalid'}}" 
+      type="number"
+      placeholder="手机号码"
+      placeholder-style="color: #C8102E;" 
+      bindinput="onPhoneNumberChange" />
+      <text class="description">为了让手机号码的存在还有意义罢了</text>
+    </view>
+
+    <view class="input-group">
+      <view class="input-field input-border-password-color flex  {{passwordValid ? 'valid' : 'invalid'}}">
+        <input style="width: 90%;"  type="{{showPassword ? 'text' : 'password'}}" placeholder="密码" 
+      placeholder-style="color: #EF852F;padding-right=28rpx;" 
+      bindinput="onPasswordChange" 
+      />
+      <image class="eye-icon" src="{{showPassword ? '../../../images/register/icon-eye.svg' : '../../../images/register/icon-eye-hide.svg'}}" bindtap="togglePasswordVisibility" mode="aspectFit"></image>
+      </view>
+      <text class="description">你一定会记得但别人一定猜不到的——至少8位 字母+数字</text>
+    </view>
+
+    <view class="input-group">
+      <view class="input-field input-border-password-again-color flex  {{confirmPasswordValid ? 'valid' : 'invalid'}}" >
+      <input style="width: 90%;" type="{{showPassword2 ? 'text' : 'password'}}" placeholder="再次确认密码" 
+      placeholder-style="color: #002FA7;padding-right=28rpx; " 
+      bindinput="onConfirmPasswordChange"  />
+      <image class="eye-icon" src="{{showPassword2 ? '../../../images/register/icon-eye.svg' : '../../../images/register/icon-eye-hide.svg'}}" bindtap="togglePasswordVisibility2" mode="aspectFit"></image>
+      </view>
+      <text class="description">把它当成一个小小的记忆测试吧</text>
+    </view>
+    <term-service bind:agreeChanged="onAgreeChange"></term-service>
+    
+    <button class="register-button" bindtap="onRegister" disabled="{{!isFormValid}}">我来了</button>
+  </view>
+</view>

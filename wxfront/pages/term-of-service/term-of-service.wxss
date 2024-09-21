@@ -1,0 +1,49 @@
+/* pages/register/term-of-service/term-of-service.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #f8f8f8;
+}
+
+.back-button {
+  margin-right: 20rpx;
+}
+
+.icon-back {
+  font-size: 40rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.content {
+  padding: 20rpx;
+  flex-grow: 1;
+}
+
+.section-header {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.section-content {
+  font-size: 24rpx;
+  line-height: 1.5;
+  margin-bottom: 10rpx;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx;
+}

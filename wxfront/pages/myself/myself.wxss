@@ -1,0 +1,323 @@
+/* pages/myself/myself.wxss */
+@import "/utils/common-style.wxss";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto !important;
+  overflow-x: hidden
+}
+.home{
+  width: Fixed 750rpx;
+  height: Hug 434rpx;
+  padding: 32rpx 130rpx 32rpx 130rpx;
+  position: relative; /* 设置为相对定位 */
+}
+.home-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450rpx;
+  height: Hug 370rpx;
+}
+.avatar-container {
+  width:  200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.myBackground{
+  width: 750rpx;
+  padding: 64rpx 32rpx 32rpx 32rpx;
+  gap: 52rpx;
+  background-color: #F5F5F5;
+}
+.aboutMeBg{
+  width: 750rpx;
+  padding: 32rpx 32rpx 32rpx 32rpx;
+  gap: 52rpx;
+  
+  background-color: #F5F5F5;
+}
+
+.username {
+  font-size: 40rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  letter-spacing: 4rpx;
+  text-align: left;
+
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  width: 450rpx;
+  height: Hug 78rpx;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-size: 32rpx;
+  /* margin-left: 50rpx; */
+}
+.stat-num{
+  font-family: PingFang SC;
+  font-size: 28rpx;
+  font-weight: 400;
+  line-height: 39.2rpx;
+  text-align: left;
+}
+.stat-name{
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 33.6rpx;
+  text-align: left;
+  
+}
+.blue-bg{
+  background-color: #C8DAEA;
+  height: auto;
+}
+.edit{
+  width: 40rpx;
+  height: 40rpx;
+}
+.scroll-content {
+  white-space: nowrap; /* 不换行，使内容可以在一行内水平排列 */
+  overflow-x: auto; /* 允许水平滚动 */
+  width: 100vw;
+  display: flex; /* 使用弹性布局来组织内容 */
+  align-items: center; 
+  height: 200rpx; /* 指定高度 */
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+.item {
+  display: inline-block; /* 内容在一行内显示 */
+  margin-right: 20rpx; /* 间距 */
+  width: 120rpx; /* 每个项目的宽度 */
+  padding-top: 16rpx;
+}
+.edit-pos{
+  position: absolute;
+  right:10rpx;
+  top:10rpx;
+}
+.item-image {
+  width: 120rpx; /* 图片宽度 */
+  height: 120rpx; /* 图片高度 */
+  border-radius: 50%;
+}
+
+.item-text {
+  margin-top: 10rpx; /* 文字与图片之间的间距 */
+  font-size: 28rpx; /* 文字大小 */
+  text-align: center; /* 文字居中对齐 */
+}
+
+.about-me {
+  margin-left: 32rpx;
+  margin-right:32rpx;
+  border-radius: 16rpx;
+  /* width: 550rpx; */
+  /* height: 228rpx; */
+  gap: 12rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid;
+  opacity: 0rpx;
+  background-color: #fff;
+  /* padding: 20rpx 32rpx 0rpx 32rpx; */
+  padding:24rpx;
+  display: flex;
+  flex-direction: column;
+  
+}
+.about-me-inner{
+  display: flex;
+  flex-direction: column;
+  width: 242rpx;
+  height:180rpx;
+  margin-top: 20rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+.about-me-line{
+  display: flex;
+  justify-content: space-between;
+}
+.about-me-title {
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  font-weight: 400;
+  line-height: 36.4rpx;
+  letter-spacing: 1rpx;
+  text-align: left;
+}
+
+.about-me-content {
+  margin-top:12rpx;
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  font-weight: 400;
+  line-height: 30.8rpx;
+  text-align: left;
+  width: 242rpx;
+  height: 140rpx;
+}
+
+.profile-info {
+  margin-left:32rpx;
+  margin-right: 32rpx;
+  border-radius: 16rpx;
+  /* width: 304rpx; */
+  height: 228rpx;
+  gap: 12rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid;
+  background-color: #fff;
+  padding:20rpx 32rpx 0rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+}
+.info-item-edit{
+  justify-content: space-between;
+}
+.two-col{
+  display: flex;
+  width: 750rpx;
+  height: 238rpx;
+  justify-content: space-between;
+  padding-bottom: 32rpx;
+}
+.info-key {
+  font-size: 32rpx;
+  /* color: #002FA7; */
+  font-family: PingFang SC;
+  font-size: 28rpx;
+  font-weight: 400;
+  line-height: 36.4rpx;
+  letter-spacing: 1rpx;
+  text-align: left;
+}
+.nowMeBg{
+  background-color: #F5F5F5;
+}
+.info-value {
+  /* color: #333; */
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 33.6rpx;
+  letter-spacing: 1rpx;
+  text-align: left;
+}
+
+.current-me {
+  /* margin-top: 2rpx; */
+  width: Fixed 686rpx;
+  height: Hug 242rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: 32rpx;
+  margin-left:32rpx;
+}
+.current-me-line{
+  display: flex;
+  justify-content: space-between;
+  width: 622rpx;
+  margin-bottom: 12rpx;
+}
+.current-me-title{
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  font-weight: 400;
+  line-height: 36.4rpx;
+  letter-spacing: 1rpx;
+  text-align: left;
+}
+.tag-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: Fill 622rpx;
+  height: Hug 232rpx;
+  gap: 20rpx;
+  opacity: 0px;
+
+}
+.tag {
+  line-height: 70rpx;
+  text-align: center;
+  background-color: #fff;
+  /* width: Hug 138rpx;
+  height: Hug 48rpx; */
+  padding: 10rpx 16rpx 10rpx 16rpx;
+  gap: 4rpx;
+  border-radius: 28rpx;
+  border: 2rpx solid #002FA7;
+  font-family: PingFang SC;
+  font-size: 20rpx;
+  font-weight: 400;
+  line-height: 28rpx;
+  text-align: left;
+  margin-bottom: 12rpx;
+  margin-right: 10rpx;
+
+}
+.star-image{
+  width: 22rpx;
+  height: 22rpx;
+}
+.calendar {
+  margin-bottom: 30rpx;
+}
+.calendar-title{
+  padding-left: 64rpx;
+}
+.month-selector {
+  font-size: 38rpx;
+  color: #333;
+  cursor: pointer;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.day {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+}

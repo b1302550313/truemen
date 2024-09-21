@@ -1,0 +1,19 @@
+<!-- components/friend-card/friend-card.wxml -->
+<view class="card">
+          <button class="card-header">
+           
+            <image class="avatar" src="/images/register/icon-avatar-blank.png" mode="aspectFill"></image>
+            <view class="content">
+              <view class="friend-info">
+                <text class="name">{{name}}</text>
+                  <text class="latest-message">{{latestMessage}}</text>
+
+              </view>
+              <view class="meta-info">
+                <text class="time">{{time}}</text>
+                <view class="unread-count" wx:if="{{unreadCount > 0}}">{{unreadCount}}</view>
+
+              </view>
+            </view>
+          </button>
+        </view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {"term-service":"/components/comp-term-service/comp-term-service"},
+  "navigationBarTitleText": "手机号注册",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "default",
+  "renderer": "cover-view"
+}

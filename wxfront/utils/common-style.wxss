@@ -1,0 +1,19 @@
+.white-card{
+  border-radius: 28rpx;
+  border: 2rpx solid;
+  /* margin: 20rpx 32rpx 20rpx 32rpx; */
+  padding: 20rpx 32rpx 20rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.region{
+  /* background-color: #C8DAEA; */
+  padding: 24rpx 20rpx 24rpx 20rpx;
+  width:750rpx;
+}
+.divider {
+  height: 2rpx; /* 设置高度 */
+  background-color: #ffffff; /* 使用背景色 */
+}

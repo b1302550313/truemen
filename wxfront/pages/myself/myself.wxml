@@ -1,0 +1,110 @@
+<!--pages/myself/myself.wxml-->
+  <view class="container">
+  <view class="home">
+    <image  src="/images/icons/edit.png" class="edit edit-pos"  mode="aspectFill"></image>
+
+    <view class="home-inner">
+      <view class="avatar-container">
+    <image bindtap="openAvatarUploader" src="{{avatarUrl}}" class="avatar"  mode="widthFix"/>
+   
+  </view>
+
+  <text class="username">{{ userName }}</text>
+  <view class="stats">
+    <view class="stat">
+      <text class="stat-num">{{ doubleArrowFriends }}</text>
+      <text class="stat-name">双箭头好友</text>
+    </view>
+    <view class="stat">
+      <text class="stat-num">{{ youFollowed }}</text>
+      <text class="stat-name">你关注的</text>
+    </view>
+    <view class="stat">
+      <text class="stat-num">{{ followedYou }}</text>
+      <text class="stat-name">关注你的</text>
+    </view>
+  </view>
+    </view>
+  </view>
+  
+  <view class="region">
+    <scroll-view scroll-x="true" class="scroll-content">
+      <view class="item" wx:for="{{items}}" wx:key="*this">
+        <image class="item-image" src="{{item.imageSrc}}" mode="aspectFill"></image>
+        <view class="item-text">{{item.text}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+<view class="myBackground">
+  <view class="profile-info">
+
+<view class="info-item info-item-edit">
+  <text class="info-key">我的ID:</text>
+  <text class="info-value">{{ userId }}</text>
+  <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" class="edit">
+      <image src="/images/icons/edit.png" class="edit" />
+    </navigator>
+</view>
+
+<view class="info-item">
+  <text class="info-key">性别：</text>
+  <text class="info-value">{{ gender }}</text>
+</view>
+
+<view class="info-item">
+  <text class="info-key">生日：</text>
+  <text class="info-value">{{ birthDate }}</text>
+</view>
+
+<view class="info-item">
+  <text class="info-key">星座：</text>
+  <text class="info-value">{{ zodiac }}</text>
+</view>
+
+</view>
+</view>
+  
+<view class="aboutMeBg">
+  <view class="about-me">
+        <view class="about-me-line">
+          <text class="about-me-title">关于我</text>
+          <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" bindtap="navigateToEditPage" class="edit">
+      <image src="/images/icons/edit.png" class="edit" />
+    </navigator>
+        </view>
+        <text class="about-me-content">{{ bio }}</text>
+    </view>
+</view>
+
+<view class="nowMeBg">
+  <view class="region ">
+    <view class="white-card current-me">
+      <view class="current-me-line">
+        <text class="current-me-title">现在的我</text>
+        <image  src="/images/icons/edit.png" class="edit" />
+      </view>
+      <!-- <view class="tag-group"> -->
+        <view wx:for="{{ tags }}" wx:key="index">
+        <view class="tag">        
+          <image class="star-image" src="/images/icons/icon_star.png"></image>
+          {{ item }}
+          </view>
+      <!-- </view> -->
+    </view>
+    </view>
+  </view>
+</view>
+ 
+  
+<view class="nowMeBg">
+  <view class="region">
+  <view class="calendar">
+    <text class="calendar-title">心情日历</text>
+    <calendar></calendar>
+  </view>
+</view>
+</view>
+
+  
+</view>

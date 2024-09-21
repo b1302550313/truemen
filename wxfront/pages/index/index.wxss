@@ -1,0 +1,84 @@
+/**index.wxss**/
+/* 搜索框无返回栏 */
+.search-bar__form {
+  -webkit-box-flex: 1;
+  background: #eeeeef;
+  border-radius: 40rpx; /* 使用 rpx 单位 */
+  flex: auto;
+  position: relative;
+  margin-left: 20rpx; /* 左边距改为 rpx */
+  margin-right: 20rpx; /* 右边距改为 rpx */
+}
+
+.search-bar__box {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row;
+  padding-left: 40rpx; /* 左内边距改为 rpx */
+  padding-right: 120rpx; /* 右内边距改为 rpx */
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.search-bar__input {
+  height: 100%;
+  line-height: 100%;
+  margin-left: 10rpx; /* 左边距改为 rpx */
+}
+
+/* 滑动标签 */
+.scroll-view-tab {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 36rpx; /* 设置圆角，使用 rpx */
+  margin: 10rpx 10rpx; /* 边距改为 rpx */
+  padding: 10rpx 20rpx; /* 内边距改为 rpx */
+  border: 0.5rpx solid #97979720; /* 边框颜色和透明度, 使用 rpx */
+  font-size: 24rpx; /* 字体大小改为 rpx */
+}
+
+.tab-icon {
+  width: 48rpx; /* 图标大小改为 rpx */
+  height: 48rpx; /* 图标高度改为 rpx */
+  margin-right: 10rpx; /* 图标和文字之间的间距改为 rpx */
+}
+
+/* 地图容器样式 */
+.map-container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 50px - env(safe-area-inset-bottom));
+  box-sizing: border-box; /* 包括内边距和边框在内的总宽度和高度 */
+}
+
+/* 定位按钮样式 */
+.location-btn {
+  position: absolute;
+  bottom: 30%; /* 距离底部30rpx */
+  left: 50%; /* 水平居中 */
+  transform: translateX(-50%); /* 水平居中对齐 */
+  width: 60rpx; /* 图标大小，适当调整以适配图片 */
+  height: 60rpx; /* 确保按钮为圆形 */
+  border-radius: 50%; /* 圆形 */
+  background-color: transparent; /* 背景透明 */
+  border: none; /* 无边框 */
+  padding: 0; /* 移除内边距 */
+  overflow: hidden; /* 防止内容溢出 */
+  display: flex; /* 使用 flexbox 来居中图标 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+}
+
+.location-icon {
+  width: 100%; /* 充满按钮 */
+  height: 100%; /* 充满按钮 */
+  object-fit: cover; /* 覆盖填充，避免变形 */
+}

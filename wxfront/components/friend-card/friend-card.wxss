@@ -1,0 +1,67 @@
+/* components/friend-card/friend-card.wxss */
+.card {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 130rpx;
+  border-radius: 30rpx;
+}
+.content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.latest-message {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.meta-info {
+}
+
+.time {
+  font-size: 24rpx;
+  color: #666;
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+}
+
+.unread-count {
+  font-size: 24rpx;
+  color: #fff;
+  background-color: #f00;
+  /* 使用固定宽度和高度 */
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%; /* 圆形框 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 数字居中 */
+  position: absolute;
+  bottom: 20rpx;
+  right: 20rpx;
+}

@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/strategy/strategy",
+    "pages/activity/activity",
+    "pages/friend/friend",
+    "pages/myself/myself",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/term-of-service/term-of-service",
+    "pages/register/phone-register/phone-register",
+    "pages/register/wechat-register/wechat-register",
+    "pages/login/other-phone-login/other-phone-login",
+    "pages/friend/friend-chat/friend-chat",
+    "pages/index/search-content/search-content",
+    "pages/myself/user-profile/user-profile",
+    "pages/myself/edit-myself/edit-myself"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/strategy/strategy"
+      },
+      {
+        "pagePath": "pages/activity/activity"
+      },
+      {
+        "pagePath": "pages/index/index"
+      },
+      {
+        "pagePath": "pages/friend/friend"
+      },
+      {
+        "pagePath": "pages/myself/myself"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "tags-pannel": "/components/tags-pannel/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-icon": "@vant/weapp/icon/index"
+  }
+}

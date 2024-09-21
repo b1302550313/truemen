@@ -1,0 +1,11 @@
+<!--components/comp-term-service/comp-term-service.wxml-->
+<view class="checkbox-container">
+      <checkbox-group bindchange="onAgreeChange">
+        <label style="font-size: small;">
+          <checkbox value="agree" /> 我已经阅读并愿意遵守以下条款。
+          <navigator url="/pages/term-of-service/term-of-service" class="link">
+      《用户服务协议》
+    </navigator>
+        </label>
+      </checkbox-group>
+    </view>

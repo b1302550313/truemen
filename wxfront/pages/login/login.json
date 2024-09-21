@@ -1,0 +1,9 @@
+{
+  "usingComponents": {"term-service":"/components/comp-term-service/comp-term-service"},
+  "navigationBarTitleText": "登录",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black", 
+  "enableBackButton": true,
+  "navigationStyle": "default",
+  "renderer": "cover-view"
+}

@@ -1,0 +1,13 @@
+<!--pages/term-of-service/term-of-service.wxml-->
+<view class="container">
+  <view class="content">
+    <scroll-view scroll-y="true" style="height: calc(100vh - 120rpx);">
+      <block wx:for="{{sections}}" wx:key="section">
+        <view class="section-header">{{item.title}}</view>
+        <view wx:for="{{item.content}}" wx:key="content" class="section-content">
+          {{item}}
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
