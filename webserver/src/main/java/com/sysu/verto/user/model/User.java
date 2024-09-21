@@ -17,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
-    private String uid; // 系统生成的唯一标识符
+    private int uid; // 系统生成的唯一标识符
 
     @Column(name = "user_id")
     private String userId; // 用户自定义的标识符
@@ -34,7 +34,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "avatar")
+    @Column(name = "avatar")//头像url
     private String avatar;
 
     @Column(name = "create_time")
@@ -43,7 +43,7 @@ public class User {
     @Column(name = "permission")
     private int permission;
 
-    @Column(name = "bio")
+    @Column(name = "bio")//座右铭，自我介绍
     private String bio;
 
     @Column(name = "gender")
@@ -57,13 +57,31 @@ public class User {
         男, 女, 匿 // 新增匿藏选项
     }
 
+    // 默认构造函数
     public User() {
-        System.out.println("User created");
+        System.out.println(" Default User created");
         this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
     }
-    public User(String userId, String userName, String wechatId, String phone, String password, String avatar,
+    // 写一个复制构造函数
+    public User(User user) {
+        System.out.println(" Copy User created ");
+        this.uid = user.getUid();
+        this.userId = user.getUserId();
+        this.userName = user.getUserName();
+        this.wechatId = user.getWechatId();
+        this.phone = user.getPhone();
+        this.password = user.getPassword();
+        this.avatar = user.getAvatar();
+        this.permission = user.getPermission();
+        this.bio = user.getBio();
+        this.birthDate = user.getBirthDate();
+        this.gender = user.getGender();
+    }
+    // 参数构造函数
+    public User(int uid,String userId, String userName, String wechatId, String phone, String password, String avatar,
             int permission, String bio, Gender gender, LocalDate birthDate) {
-        System.out.println("User created param");
+        System.out.println(" Param User created");
+        this.uid = uid;
         this.userId = "user_" + System.currentTimeMillis();
         this.userName = userName;
         this.wechatId = wechatId;
@@ -74,15 +92,34 @@ public class User {
         this.bio = bio;
         this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
         this.birthDate = birthDate;
-        System.out.println(this.gender);
+    }
+    // 重写 toString 方法
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", wechatId='" + wechatId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", createTime=" + createTime +
+                ", permission=" + permission +
+                ", bio='" + bio + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                '}';
     }
 
+
+
     // Getters and Setters
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 

@@ -2,17 +2,17 @@ package com.sysu.verto.user.dao;
 
 import com.sysu.verto.user.model.User;
 
+// 注册响应类
 public class RegisterResponse extends User {
-    private String msg;
+    private String msg; // 注册结果信息
+    private int code; // 注册结果代码,0表示成功，1表示失败
 
     // 构造函数、getter 和 setter
-    public RegisterResponse(String msg, String userName, String uid, String phone) {
-        super();
+    public RegisterResponse(User user, String msg, int code) {
+        super(user);
         System.out.println("RegisterResponse constructor called");
         this.msg = msg;
-        this.setUserName(userName);
-        this.setUid(uid);
-        this.setPhone(phone);
+        this.code = code;
     }
 
     // Getter 和 Setter
@@ -24,27 +24,11 @@ public class RegisterResponse extends User {
         this.msg = msg;
     }
 
-    public String getUserName() {
-        return this.getUserName();
+    public int getCode() {
+        return code;
     }
 
-    public void setUserName(String userName) {
-        this.setUserName(userName);
-    }
-
-    public String getUid() {
-        return this.getUid();
-    }
-
-    public void setUid(String uid) {
-        this.setUid(uid);
-    }
-
-    public String getPhone() {
-        return this.getPhone();
-    }
-
-    public void setPhone(String phone) {
-        this.setPhone(phone);
+    public void setCode(int code) {
+        this.code = code;
     }
 }

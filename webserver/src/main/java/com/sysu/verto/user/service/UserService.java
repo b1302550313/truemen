@@ -58,12 +58,16 @@ public class UserService {
     }
     // 手机注册
     public boolean registerByPhone(User user) {
+        System.out.println("registerByPhone called");
         if (userDAO.checkUserByPhoneNumberOrWeChatID(user.getPhone(), user.getWechatId()) != null) {
+            System.out.println("registerByPhone checked");
             return false; // 用户已存在
         }
+        System.out.println("debug1");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreateTime(LocalDateTime.now());
         user.setPermission(1);
+        System.out.println("debug2");
 
         // 如果 userId 为空，生成默认值
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
@@ -92,7 +96,7 @@ public class UserService {
 
     public User createNewUser(WechatUserInfo userInfo) {
         User user = new User();
-        user.setUid(generateUserId(user));
+        user.setUserId(generateUserId(user));
         user.setUserId(userInfo.getOpenId());
         user.setUserName(userInfo.getNickname());
         user.setAvatar(userInfo.getAvatar());

@@ -1,5 +1,7 @@
 package com.sysu.verto.user.controller;
 
+import java.text.NumberFormat.Style;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,23 +50,20 @@ public class UserController {
         }
     }
     // 手机注册
+    @SuppressWarnings("unchecked")
     @PostMapping("/registerByPhone")
-    public ResponseEntity<User> registerUserByPhone(@RequestBody User user) {
+    public ResponseEntity<RegisterResponse> registerUserByPhone(@RequestBody User user) {
         System.out.println("controller registerByPhone");
         if (userService.registerByPhone(user)) {
-            // 获取用户的基本信息
-            String userName = user.getUserName();
-            String uid = user.getUid(); // 假设 userService.registerByPhone 返回 uid 或者你在 service 中设置了 uid
-            String phone = user.getPhone();
-
             // 创建响应对象
-            // RegisterResponse response = new RegisterResponse("User registered successfully", userName, uid, phone);
-
-            return ResponseEntity.ok(user);
-            // return ResponseEntity.ok("User registered successfully");
+            RegisterResponse response = new RegisterResponse(user,"User registered successfully", 0);
+            System.out.println("successfully register user");
+            return ResponseEntity.ok(response);
         } else {
              // 返回错误响应
-             RegisterResponse errorResponse = new RegisterResponse("User already exists", null, null, null);
+             System.out.println("registerByPhone failed");
+             RegisterResponse errorResponse = new RegisterResponse(user,"User already exists", 1);
+             System.out.println("registerByPhone failed 2");
              return ResponseEntity.badRequest().body(errorResponse);
         }
     }
