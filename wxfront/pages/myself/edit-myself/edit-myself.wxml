@@ -28,7 +28,7 @@
       <text>关于我</text>
     </view>
     <view class="input-area">
-      <input type="text"  value="{{ aboutMe }}" placeholder="妈妈再也不用担心我的自我介绍了" bindinput="onAboutMeChange" />
+      <input type="text"  value="{{ bio }}" placeholder="妈妈再也不用担心我的自我介绍了" bindinput="onBioChange" />
     </view>
   </view>
 
@@ -36,10 +36,10 @@
     <view class="name-display">
       <text>性别</text>
     </view>
-      <picker mode="selector" range="{{ genderOptions }}" bindchange="onGenderChange">
+      <picker mode="selector" range="{{ genderList }}" bindchange="onGenderChange">
         <view class="input-area">
           <view class="picker">
-            {{ genderOptions[currentGenderIndex] }}
+            {{ genderList[currentGenderIndex] }}
           </view>
         </view>
       </picker>
@@ -49,10 +49,10 @@
     <view class="name-display">
       <text>生日</text>
     </view>
-    <picker mode="date" value="{{birthday}}"bindchange="bindDateChange">
+    <picker mode="date" value="{{birthDate}}"bindchange="bindDateChange">
       <view class="input-area">
       <view class="picker">
-         {{birthday}}
+         {{birthDate}}
       </view>
       </view>
     </picker>
@@ -62,17 +62,17 @@
     <view class="name-display">
       <text>星座</text>
     </view>
-      <picker mode="selector" range="{{ constellationList }}" bindchange="handleConstellationChange">
+      <picker mode="selector" range="{{ zodiacList }}" bindchange="handleZodiacChange">
         <view class="input-area">
           <view class="picker">
-            {{ constellationList[currentConstellationIndex] }}
+            {{ zodiacList[currentZodiacIndex] }}
           </view>
         </view>
       </picker>
   </view>
   <view class="btn">
-  <button class="confirm-btn" bindtap="confirmEdit">确认</button>
-  <button class="cancel-btn" bindtap="cancelEdit">取消</button>
+  <button class="confirm-btn" bindtap="confirmButton">确认</button>
+  <button class="cancel-btn" bindtap="cancelButton">取消</button>
 </view>
 
 

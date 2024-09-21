@@ -60,34 +60,36 @@ public class UserService {
     public boolean registerByPhone(User user) {
         System.out.println("registerByPhone called");
         if (userDAO.checkUserByPhoneNumberOrWeChatID(user.getPhone(), user.getWechatId()) != null) {
-            System.out.println("registerByPhone checked");
+            System.out.println("registerByPhone 用户已经存在");
             return false; // 用户已存在
         }
-        System.out.println("debug1");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreateTime(LocalDateTime.now());
         user.setPermission(1);
-        System.out.println("debug2");
 
         // 如果 userId 为空，生成默认值
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
             user.setUserId(generateUserId(user));
         }
-        System.out.println(user.getUserId());
-        System.out.println("registerByPhone");
         return userDAO.registerUserByPhone(user);
     }
 
     public User getUserById(String userId) {
         return userDAO.getUserById(userId);
     }
-    public User getUserByUid(String userId) {
-        return userDAO.getUserByUid(userId);
+    public User getUserByUid(int uid) {
+        System.out.println("getUserByUid service called");
+        return userDAO.getUserByUid(uid);
     }
 
     public boolean updateUser(User user) {
         return userDAO.updateUser(user);
     }
+    // 更新用户基本信息
+    public boolean updateUserBase(User user) {
+        return userDAO.updateUserBase(user);
+    }
+
 
     private String generateUserId(User user) {
         // 生成 userId 的逻辑，例如基于用户名或其他规则生成

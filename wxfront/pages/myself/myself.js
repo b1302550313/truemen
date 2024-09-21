@@ -5,13 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uid:'',
+    uid:47,
+    phone:null,
+    wechatId: null,
     avatarUrl: '/images/icons/pie.png',
-    username: '用户名默认',
-    doubleArrowFriends: '120',
-    youFollowed: '130',
-    followedYou: '140',
-    userInfo:null,
+    userName: '默认用户名',
+    bio: '默认自我介绍',
+    userId: 'user_000',
+    gender: '男/女/其他',
+    birthDate: '2000-01-01',
+    zodiac: '水瓶座',
+    doubleArrowFriends: '0',
+    youFollowed: '0',
+    followedYou: '0',
     items: [
       { imageSrc: '/images/icons/pie.png', text: '我的合集1' },
       { imageSrc: '/images/icons/pie.png', text: '我的合集2' },
@@ -22,13 +28,7 @@ Page({
       { imageSrc: '/images/icons/pie.png', text: '我的合集7' },
       { imageSrc: '/images/icons/pie.png', text: '我的合集8' }
     ],
-    aboutMe: '开心每一天红红火火恍恍惚惚哈哈哈哈',
-    userId: '888',
-    gender: '男/女/其他',
-    birthday: '2007-01-04',
-    zodiac: '金牛座',
     tags: ['各种标签', '各种标签', '各种标签', '各种标签','各种标签', '各种标签', '各种标签', '各种标签'],
-    monthIndex: 0,
   },
 
   /**
@@ -49,20 +49,48 @@ Page({
   //     }
   //   });
   // },
-  onLoad: function(options) {
-    // 获取全局变量中的 uid 和 userName
-    const globalData = getApp().globalData;
-    console.log(globalData);
-    const { uid, userName } = globalData;
-
-    // 更新当前页面的数据
-    this.setData({
-      username: userName,
-      uid: uid
+  fetchAdditionalInfo: function(uid) {
+    // 发送 GET 请求到后端
+    console.log("fetchAdditonalInfo");
+    wx.request({
+      url: getApp().globalData.host + '/api/users/uid/' + uid + '/profile', // 后端 API 地址
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        if (res.statusCode === 200) {
+          // 请求成功
+          const userInfo = res.data; // 假设返回的数据格式为 { userName, phone, wechatId, birthDate, bio }
+          // 更新页面数据
+          console.log("put edit",userInfo);
+          this.setData({
+            userName: userInfo.userName ,
+            phone: userInfo.phone ,
+            wechatId: userInfo.wechatId ,
+            userId:userInfo.userId,
+            birthDate: userInfo.birthDate,
+            bio: userInfo.bio,
+            gender:userInfo.gender
+          });
+        } else {
+          // 请求失败
+          wx.showToast({
+            title: '获取用户信息失败',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+      },
+      fail: (error) => {
+        // 请求失败
+        wx.showToast({
+          title: '网络错误',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     });
-
-    // 利用 uid 向数据库发送请求获取其他信息
-    // this.fetchAdditionalInfo(uid);
   },
   openAvatarUploader: function () {
     // 打开上传头像界面
@@ -75,33 +103,59 @@ Page({
     });
   },
 
-
-  /**
+  onLoad: function(options) {
+    // 获取全局变量中的 uid 和 userName
+    console.log("myself onLoad");
+    const globalData = getApp().globalData;
+    const { uid} = globalData;   
+    // 利用 uid 向数据库发送请求获取其他信息
+    if(uid){
+      this.fetchAdditionalInfo(uid);
+    }
+    console.log("onLoad myself data",this.data);
+  },
+    /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    console.log("myself onReady")
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    console.log("myself onShow")
+    const globalData = getApp().globalData;
+    const { uid} = globalData;
+    // 更新当前页面的数据
+    if(uid){
+      this.setData({
+        uid:globalData.uid,
+        phone:globalData.phone,
+        wechatId: globalData.wechatId,
+        userName:globalData.userName,
+        bio:globalData.bio,
+        userId:globalData.userId,
+        gender:globalData.gender,
+        birthDate:globalData.birthDate,
+        zodiac: globalData.zodiac,
+      });
+    }
+    console.log("onShow myself data",this.data);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    console.log("myself onUnload")
   },
 
   /**

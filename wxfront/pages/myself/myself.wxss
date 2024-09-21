@@ -42,7 +42,7 @@
 }
 .aboutMeBg{
   width: 750rpx;
-  padding: 32rpx 32rpx 32rpx 168rpx;
+  padding: 32rpx 32rpx 32rpx 32rpx;
   gap: 52rpx;
   
   background-color: #F5F5F5;
@@ -137,8 +137,9 @@
 
 .about-me {
   margin-left: 32rpx;
+  margin-right:32rpx;
   border-radius: 16rpx;
-  width: 550rpx;
+  /* width: 550rpx; */
   /* height: 228rpx; */
   gap: 12rpx;
   border-radius: 16rpx;
@@ -185,10 +186,10 @@
 }
 
 .profile-info {
-  margin-left:64rpx;
+  margin-left:32rpx;
   margin-right: 32rpx;
   border-radius: 16rpx;
-  width: 304rpx;
+  /* width: 304rpx; */
   height: 228rpx;
   gap: 12rpx;
   border-radius: 16rpx;

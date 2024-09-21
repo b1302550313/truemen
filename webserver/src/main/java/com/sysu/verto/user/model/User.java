@@ -17,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uid")
-    private int uid; // 系统生成的唯一标识符
+    private Long uid; // 系统生成的唯一标识符
 
     @Column(name = "user_id")
     private String userId; // 用户自定义的标识符
@@ -53,6 +53,9 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate; // 新增生日信息
 
+    @Column(name = "zodiac")//星座
+    private String zodiac;
+
     public enum Gender {
         男, 女, 匿 // 新增匿藏选项
     }
@@ -76,10 +79,11 @@ public class User {
         this.bio = user.getBio();
         this.birthDate = user.getBirthDate();
         this.gender = user.getGender();
+        this.zodiac = user.getZodiac();
     }
     // 参数构造函数
-    public User(int uid,String userId, String userName, String wechatId, String phone, String password, String avatar,
-            int permission, String bio, Gender gender, LocalDate birthDate) {
+    public User(Long uid,String userId, String userName, String wechatId, String phone, String password, String avatar,
+            int permission, String bio, Gender gender, LocalDate birthDate ,String zodiac) {
         System.out.println(" Param User created");
         this.uid = uid;
         this.userId = "user_" + System.currentTimeMillis();
@@ -92,6 +96,7 @@ public class User {
         this.bio = bio;
         this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
         this.birthDate = birthDate;
+        this.zodiac=zodiac;
     }
     // 重写 toString 方法
     @Override
@@ -109,17 +114,16 @@ public class User {
                 ", bio='" + bio + '\'' +
                 ", gender=" + gender +
                 ", birthDate=" + birthDate +
+                ", zodiac=" + zodiac +
                 '}';
     }
 
-
-
     // Getters and Setters
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
@@ -209,5 +213,13 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getZodiac() {
+        return zodiac;
+    }
+
+    public void setZodiac(String zodiac) {
+        this.zodiac = zodiac;
     }
 }

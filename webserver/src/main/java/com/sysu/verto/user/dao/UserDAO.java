@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Repository
-public class UserDAO{
+public class UserDAO {
     private final JdbcTemplate jdbcTemplate;
 
     public UserDAO(JdbcTemplate jdbcTemplate) {
@@ -26,7 +26,7 @@ public class UserDAO{
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-            user.setUid(rs.getInt("uid"));
+            user.setUid(rs.getLong("uid"));
             user.setUserId(rs.getString("userId")); // 新增这一行，映射userId
             user.setUserName(rs.getString("userName"));
             user.setWechatId(rs.getString("wechatId"));
@@ -44,7 +44,7 @@ public class UserDAO{
             } else {
                 // 如果数据库中的 birthDate 是 null，可以决定如何处理
                 // 例如，可以设置为 null 或者一个默认日期
-                user.setBirthDate(null);  // 或者 user.setBirthDate(LocalDate.of(1970, 1, 1));
+                user.setBirthDate(null); // 或者 user.setBirthDate(LocalDate.of(1970, 1, 1));
             }
             user.setGender(User.Gender.valueOf(rs.getString("gender")));
             return user;
@@ -78,25 +78,26 @@ public class UserDAO{
     public boolean registerUserByPhone(User user) {
         System.out.println("userDAO registerUserByPhone");
         String sqlCoreInfo = "INSERT INTO userCoreInfo (userId, phone, password, permission, createTime) VALUES (?, ?, ?, ?, ?)";
-        int rowsAffectedCore = jdbcTemplate.update(sqlCoreInfo, user.getUserId(), user.getPhone(), 
+        int rowsAffectedCore = jdbcTemplate.update(sqlCoreInfo, user.getUserId(), user.getPhone(),
                 user.getPassword(), user.getPermission(), user.getCreateTime()); // 更新插入 userId
         // 获取自增主键值
         Long generatedUid = jdbcTemplate.queryForObject(
-            "SELECT LAST_INSERT_ID()", Long.class);
+                "SELECT LAST_INSERT_ID()", Long.class);
 
         if (generatedUid == null) {
             System.err.println("Failed to retrieve the generated UID.");
             return false;
-        }else{
+        } else {
             System.out.println("Generated UID: " + generatedUid);
-            user.setUserId(generatedUid.toString());
+            user.setUid(generatedUid);
         }
-        String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        String sqlBaseInfo = "INSERT INTO userBaseInfo (uid, userName, avatar, gender, birthDate, bio,zodiac) VALUES (?, ?, ?, ?, ?, ?,?)";
         int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, generatedUid, user.getUserName(), user.getAvatar(),
-                user.getGender().name(), user.getBirthDate(), user.getBio());
-        System.out.println(user.getPassword()+" "+user.getPhone());
+                user.getGender().name(), user.getBirthDate(), user.getBio(), user.getZodiac());
+        System.out.println(user.getPassword() + " " + user.getPhone());
         return rowsAffectedCore > 0 && rowsAffectedBase > 0;
     }
+
     public User getUserById(String userId) {
         String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.userId = ?";
         try {
@@ -106,7 +107,8 @@ public class UserDAO{
             return null;
         }
     }
-    public User getUserByUid(String uid) {
+
+    public User getUserByUid(int uid) {
         String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.uid = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, userRowMapper, uid);
@@ -125,6 +127,20 @@ public class UserDAO{
         int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, user.getUserName(), user.getAvatar(),
                 user.getGender().name(), user.getBio(), user.getUid());
 
+        return rowsAffectedCore > 0 && rowsAffectedBase > 0;
+    }
+
+    // 更新用户基本信息
+    public boolean updateUserBase(User user) {
+        System.out.println("DAO updateUserBase called");
+        System.out.println(user);
+        String sqlBaseInfo = "UPDATE userBaseInfo SET userName = ?, birthDate = ?, gender = ?, bio = ? ,zodiac= ? WHERE uid = ?";
+        int rowsAffectedBase = jdbcTemplate.update(sqlBaseInfo, user.getUserName(), user.getBirthDate(),
+                user.getGender().name(), user.getBio(), user.getZodiac(), user.getUid());
+
+        String sqlCoreInfo = "UPDATE userCoreInfo SET userId = ? WHERE uid = ?";
+        int rowsAffectedCore = jdbcTemplate.update(sqlCoreInfo,
+                user.getUserId(), user.getUid());
         return rowsAffectedCore > 0 && rowsAffectedBase > 0;
     }
 }

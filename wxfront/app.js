@@ -2,8 +2,7 @@
 App({
   globalData: {
     host: 'http://localhost:8080',
-    // host: 'http://192.168.43.216:8000',// 域名
-    userName:'',
+    // host: 'http://abc.com',// 域名
     navBarHeight: 0, // 导航栏高度
     menuRight: 0, // 胶囊距右方间距（方保持左、右间距一致）
     menuTop: 0, // 胶囊距顶部间距
@@ -12,9 +11,17 @@ App({
     searchMarginTop: 0, // 搜索框上边距
     searchWidth: 0, // 搜索框宽度
     searchHeight: 0, // 搜索框高度
-    userName: '用户名2',
-    userId: '888',
-    uid:0
+    // 身份全局变量
+    uid:null,  //用户标识符
+    phone:null,
+    wechatId: null,
+    userName:"默认用户名",
+    bio:"默认自我介绍",
+    userId:"user_000",
+    gender:"匿",
+    birthDate:"2000-01-01",
+    zodiac: '水瓶座',
+
   },
   // 设置全局变量的方法
   setGlobalData: function(obj) {
@@ -24,13 +31,14 @@ App({
     return this.globalData;
   },
   onLaunch: function (options) {
+    console.log("app onLaunch")
     const that = this
     // 获取系统信息
     const systemInfo = wx.getSystemInfoSync()
     // 胶囊按钮位置信息
     const menuButtonInfo = wx.getMenuButtonBoundingClientRect()
-    console.log(systemInfo)
-    console.log(menuButtonInfo)
+    // console.log(systemInfo)
+    // console.log(menuButtonInfo)
 
     const { screenWidth, statusBarHeight } = systemInfo
     const { top, width, height, right } = menuButtonInfo

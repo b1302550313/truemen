@@ -126,33 +126,34 @@ Page({
             data: JSON.stringify({
               phone: this.data.phoneNumber,
               password:this.data.password,
-              userName:"新用户1",
-              bio:"关于我",
-              birthDate:"2007-01-04"
+              userName:"我是新用户",
+              bio:"我的新自我介绍",
+              gender:"匿",
+              birthDate:"2000-01-01",
+              zodiac: '水瓶座',
             }),
             header: {
               'content-type': 'application/json' // 默认值
             },
             success: (res)=> {
-              console.log(res);
               if (res.statusCode === 200) {
                 // 注册成功
-                const data = res.data; // 假设返回的数据格式为 { msg, userName, uid, phone }
-                console.log(data);
+                const resValue= res.data; // 假设返回的数据格式为 { msg, userName, uid, phone }
                 // 更新全局变量
+                console.log("resValue",resValue);
                 getApp().setGlobalData({
-                  userName: data.userName,
-                  uid: data.uid,
-                  phone: data.phone
+                  uid:resValue.uid,
+                  phone:resValue.phone,
+                  wechatId: resValue.wechatId,
+                  userName:resValue.userName,
+                  bio:resValue.bio,
+                  userId:resValue.userId,
+                  gender:resValue.gender,
+                  birthDate:resValue.birthDate,
+                  zodiac: resValue.zodiac,
                 });
-                console.log('phone-register');
                 console.log(getApp().globalData);
-                // 更新当前页面的参数
-                this.setData({
-                  userName: data.userName,
-                  uid: data.uid,
-                  phone: data.phone,
-                });
+                console.log('phone-register');
                 // 注册成功
                 wx.showToast({
                   title: '注册成功',
@@ -168,7 +169,7 @@ Page({
               } else {
                 // 注册失败
                 wx.showToast({
-                  title: '注册失败',
+                  title: '注册失败,用户已存在',
                   icon: 'none',
                   duration: 2000
                 });

@@ -9,7 +9,7 @@
    
   </view>
 
-  <text class="username">{{ username }}</text>
+  <text class="username">{{ userName }}</text>
   <view class="stats">
     <view class="stat">
       <text class="stat-num">{{ doubleArrowFriends }}</text>
@@ -54,7 +54,7 @@
 
 <view class="info-item">
   <text class="info-key">生日：</text>
-  <text class="info-value">{{ birthday }}</text>
+  <text class="info-value">{{ birthDate }}</text>
 </view>
 
 <view class="info-item">
@@ -69,11 +69,11 @@
   <view class="about-me">
         <view class="about-me-line">
           <text class="about-me-title">关于我</text>
-          <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" class="edit">
+          <navigator url="/pages/myself/edit-myself/edit-myself" hover-class="navigator-hover" bindtap="navigateToEditPage" class="edit">
       <image src="/images/icons/edit.png" class="edit" />
     </navigator>
         </view>
-        <text class="about-me-content">{{ aboutMe }}</text>
+        <text class="about-me-content">{{ bio }}</text>
     </view>
 </view>
 

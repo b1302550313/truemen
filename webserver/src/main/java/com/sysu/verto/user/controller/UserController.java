@@ -58,12 +58,12 @@ public class UserController {
             // 创建响应对象
             RegisterResponse response = new RegisterResponse(user,"User registered successfully", 0);
             System.out.println("successfully register user");
+            System.out.println(user);
             return ResponseEntity.ok(response);
         } else {
              // 返回错误响应
-             System.out.println("registerByPhone failed");
              RegisterResponse errorResponse = new RegisterResponse(user,"User already exists", 1);
-             System.out.println("registerByPhone failed 2");
+             System.out.println("registerByPhone 用户已经存在");
              return ResponseEntity.badRequest().body(errorResponse);
         }
     }
@@ -80,7 +80,72 @@ public class UserController {
         }
     }
 
-    // 根据id查看个人信息
+    
+    // 根据uid查看个人信息**
+    @GetMapping("/uid/{uid}/profile")
+    public ResponseEntity<RegisterResponse> getUserProfileByUid(@PathVariable int uid) {
+        System.out.println("get userProfile controller by uid");
+        User user = userService.getUserByUid(uid);
+        if (user != null) {
+            // 创建响应对象
+            RegisterResponse response = new RegisterResponse(user,"get userProfile by uid successfully", 0);
+            System.out.println("get userProfile by uid successfully");
+            System.out.println(user);
+            return ResponseEntity.ok(response);
+        } else {
+            // 返回错误响应
+            RegisterResponse errorResponse = new RegisterResponse(user,"not get userProfile by uid", 1);
+            System.out.println("not get userProfile by uid");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+        // 用uid编辑个人基本信息**
+        @PutMapping("/uid/{uid}/profile/edit")
+        public ResponseEntity<String> editUserProfile(@PathVariable int uid, @RequestBody User user) {
+            User existingUser = userService.getUserByUid(uid);
+            System.out.println("edit userProfile controller by uid");
+            if (existingUser == null) {
+                return ResponseEntity.notFound().build();
+            }
+    
+            // 更新用户的个人信息，除了uid和permission
+            existingUser.setUserName(user.getUserName());
+            // existingUser.setAvatar(user.getAvatar());
+            existingUser.setBio(user.getBio());
+            existingUser.setGender(user.getGender());
+            existingUser.setBirthDate(user.getBirthDate());
+            existingUser.setUserId(user.getUserId());
+    
+            // // 修改phone需要发送手机验证码
+            // if (user.getPhone() != null && !user.getPhone().equals(existingUser.getPhone())) {
+            //     // 发送手机验证码逻辑
+            //     if (!sendPhoneVerificationCode(user.getPhone())) {
+            //         return ResponseEntity.badRequest().body("Failed to send phone verification code");
+            //     }
+            //     existingUser.setPhone(user.getPhone());
+            // }
+    
+            // 修改wechatId需要重新拉取微信验证
+            // if (user.getWechatId() != null && !user.getWechatId().equals(existingUser.getWechatId())) {
+            //     // 重新拉取微信验证逻辑
+            //     try {
+            //         if (!revalidateWechatId(user.getWechatId())) {
+            //             return ResponseEntity.badRequest().body("Failed to revalidate wechatId");
+            //         }
+            //         existingUser.setWechatId(user.getWechatId());
+            //     } catch (Exception e) {
+            //         return ResponseEntity.badRequest().body("Failed to revalidate wechatId: " + e.getMessage());
+            //     }
+            // }
+    
+            if (userService.updateUserBase(existingUser)) {
+                return ResponseEntity.ok("User profile updated successfully");
+            } else {
+                return ResponseEntity.badRequest().body("Failed to update user profile");
+            }
+        }
+
+    // 根据userid查看个人信息
     @GetMapping("/{userId}/profile")
     public ResponseEntity<User> getUserProfile(@PathVariable String userId) {
         User user = userService.getUserById(userId);
@@ -90,22 +155,12 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-       // 根据uid查看个人信息
-       @GetMapping("/uid/{userId}/profile")
-       public ResponseEntity<User> getUserProfileByUid(@PathVariable String userId) {
-           User user = userService.getUserByUid(userId);
-           if (user != null) {
-               return ResponseEntity.ok(user);
-           } else {
-               return ResponseEntity.notFound().build();
-           }
-       }
 
 
     // 根据id更改个人信息
     @PutMapping("/{userId}/profile")
     public ResponseEntity<String> updateUserProfile(@PathVariable String userId, @RequestBody User user) {
-        user.setUid(userId);
+        user.setUserId(userId);
         if (userService.updateUser(user)) {
             return ResponseEntity.ok("User profile updated successfully");
         } else {
