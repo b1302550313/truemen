@@ -99,7 +99,7 @@ public class UserController {
 
     // 用uid编辑个人基本信息**
     @PutMapping("/uid/{uid}/profile/edit")
-    public ResponseEntity<String> editUserProfile(@PathVariable Long uid, @RequestBody User user) {
+    public ResponseEntity<String> editUserProfile(@PathVariable("uid") Long uid, @RequestBody User user) {
         User existingUser = userService.getUserByUid(uid);
         System.out.println("edit userProfile controller by uid");
         if (existingUser == null) {
