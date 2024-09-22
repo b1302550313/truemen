@@ -5,7 +5,6 @@ import com.truemen.api.user.model.User;
 import com.truemen.api.user.dao.RegisterResponse;
 import com.truemen.api.user.service.UserService;
 import com.truemen.api.user.service.WechatClient;
-
 import java.text.NumberFormat.Style;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class UserController {
         this.wechatClient = wechatClient;
     }
 
-    // 测试
+    // 测试hello验证apifox是否连接成功
     @GetMapping("/hello")
     public String sayHello() {
         System.out.println("hello world");
@@ -81,7 +80,7 @@ public class UserController {
 
     // 根据uid查看个人信息**
     @GetMapping("/uid/{uid}/profile")
-    public ResponseEntity<RegisterResponse> getUserProfileByUid(@PathVariable int uid) {
+    public ResponseEntity<RegisterResponse> getUserProfileByUid(@PathVariable("uid") Long uid) {
         System.out.println("get userProfile controller by uid");
         User user = userService.getUserByUid(uid);
         if (user != null) {
@@ -100,7 +99,7 @@ public class UserController {
 
     // 用uid编辑个人基本信息**
     @PutMapping("/uid/{uid}/profile/edit")
-    public ResponseEntity<String> editUserProfile(@PathVariable int uid, @RequestBody User user) {
+    public ResponseEntity<String> editUserProfile(@PathVariable Long uid, @RequestBody User user) {
         User existingUser = userService.getUserByUid(uid);
         System.out.println("edit userProfile controller by uid");
         if (existingUser == null) {

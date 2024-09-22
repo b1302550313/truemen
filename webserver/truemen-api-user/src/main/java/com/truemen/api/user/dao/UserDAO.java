@@ -108,7 +108,7 @@ public class UserDAO {
         }
     }
 
-    public User getUserByUid(int uid) {
+    public User getUserByUid(Long uid) {
         String sql = "SELECT * FROM userCoreInfo uci JOIN userBaseInfo ubi ON uci.uid = ubi.uid WHERE uci.uid = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, userRowMapper, uid);
