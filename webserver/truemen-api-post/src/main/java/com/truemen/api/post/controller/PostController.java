@@ -43,6 +43,7 @@ public class PostController {
    */
   @PostMapping("/upload/normal")
   public Result<Integer> uploadPost(@Valid @RequestBody PostVo postVo) {
+    System.out.println("/upload/normal");
     Integer pid = postService.upLoadPost(postVo);
     if (pid != null) {
       return Result.ok(pid);

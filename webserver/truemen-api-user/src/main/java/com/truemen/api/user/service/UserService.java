@@ -80,7 +80,7 @@ public class UserService {
         return userDAO.getUserById(userId);
     }
 
-    public User getUserByUid(int uid) {
+    public User getUserByUid(Long uid) {
         System.out.println("getUserByUid service called");
         return userDAO.getUserByUid(uid);
     }
