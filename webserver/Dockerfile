@@ -4,7 +4,8 @@ LABEL authors="Ethan"
 WORKDIR /app
 
 # 将打包好的 JAR 文件复制到工作目录
-COPY target/verto-0.0.1-SNAPSHOT.jar app.jar
+# COPY target/verto-0.0.1-SNAPSHOT.jar app.jar
+ADD ./target/truemen-api-0.0.1-SNAPSHOT.jar app.jar
 
 # 暴露应用程序的端口
 EXPOSE 8000
