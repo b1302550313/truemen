@@ -17,16 +17,17 @@ App({
     wechatId: null,
     userName:"默认用户名",
     bio:"默认自我介绍",
-    userId:"user_000",
+    userId:"user_null",
     gender:"匿",
     birthDate:"2000-01-01",
     zodiac: '水瓶座',
-
+    isLogin:false,
   },
   // 设置全局变量的方法
   setGlobalData: function(obj) {
     Object.assign(this.globalData, obj);
   },
+  // 获取全局变量
   getGlobalData: function() {
     return this.globalData;
   },

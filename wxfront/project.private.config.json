@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/register/phone-register/phone-register",
+          "pathName": "pages/register/phone-register/phone-register",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/myself/edit-myself/edit-myself",
           "pathName": "pages/myself/edit-myself/edit-myself",
           "query": "",
@@ -75,13 +82,6 @@
         {
           "name": "pages/register/wechat-register/wechat-register",
           "pathName": "pages/register/wechat-register/wechat-register",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/register/phone-register/phone-register",
-          "pathName": "pages/register/phone-register/phone-register",
           "query": "",
           "launchMode": "default",
           "scene": null
