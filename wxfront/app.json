@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/splash/splash",
     "pages/index/index",
     "pages/strategy/strategy",
     "pages/activity/activity",
@@ -14,8 +15,8 @@
     "pages/friend/friend-chat/friend-chat",
     "pages/index/search-content/search-content",
     "pages/myself/user-profile/user-profile",
-    "pages/myself/edit-myself/edit-myself",
-    "pages/splash/splash"
+    "pages/myself/edit-myself/edit-myself"
+    
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -55,5 +56,13 @@
     "tags-pannel": "/components/tags-pannel/index",
     "van-search": "@vant/weapp/search/index",
     "van-icon": "@vant/weapp/icon/index"
+  },
+  "permission": {
+    "scope.userInfo": {
+      "desc": "您的授权有助于我们提供更好的服务"
+    },
+    "scope.phone": {
+      "desc": "您的授权有助于我们提供更好的服务"
+    }
   }
 }
