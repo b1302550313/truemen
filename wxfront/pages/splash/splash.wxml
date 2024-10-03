@@ -1,0 +1,7 @@
+<!--pages/splash/splash.wxml-->
+<!-- 开屏页面 -->
+<view class="splash-container">
+  <image src="/static/logo.png" mode="aspectFit" class="splash-logo"></image>
+  <text class="splash-slogan">欢迎使用我们的应用</text>
+  <button class="splash-button" bindtap="goToIndex">确定</button>
+</view>

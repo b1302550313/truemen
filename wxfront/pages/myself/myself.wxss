@@ -144,7 +144,6 @@
   gap: 12rpx;
   border-radius: 16rpx;
   border: 2rpx solid;
-  opacity: 0rpx;
   background-color: #fff;
   /* padding: 20rpx 32rpx 0rpx 32rpx; */
   padding:24rpx;
@@ -269,7 +268,6 @@
   width: Fill 622rpx;
   height: Hug 232rpx;
   gap: 20rpx;
-  opacity: 0px;
 
 }
 .tag {

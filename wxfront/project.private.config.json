@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/splash/splash",
+          "pathName": "pages/splash/splash",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/register/phone-register/phone-register",
           "pathName": "pages/register/phone-register/phone-register",
           "query": "",

@@ -14,7 +14,8 @@
     "pages/friend/friend-chat/friend-chat",
     "pages/index/search-content/search-content",
     "pages/myself/user-profile/user-profile",
-    "pages/myself/edit-myself/edit-myself"
+    "pages/myself/edit-myself/edit-myself",
+    "pages/splash/splash"
   ],
   "window": {
     "navigationBarTextStyle": "black",

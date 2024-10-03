@@ -2,7 +2,7 @@
 <!-- <text>pages/login/login.wxml</text> -->
 <!-- pages/login/login.wxml -->
 <view class="container">
-  <image src="../../images/register/register.webp" mode="aspectFit" class="logo"></image>
+  <image src="/images/register/register.png" mode="aspectFit" class="logo"></image>
   <text class="login-text">吉时已到，宜登录</text>
   <text class="phone">{{phone}}</text>
 

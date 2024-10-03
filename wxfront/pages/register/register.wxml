@@ -1,7 +1,9 @@
 <!--pages/register/register.wxml-->
 <view class="container">
-  <image src="../../images/register/register.webp" mode="aspectFit" class="logo"></image>
+  <image src="/images/register/register.png" mode="aspectFit" class="logo"></image>
   <text class="register-text">吉时已到，宜注册</text>
+  <button>11</button>
+  <button class="register-btn ">11</button>
   <button class="register-btn " bindtap="wechatRegister">
     <image class="icon-wx" src="/images/icons/icon-wx.png" mode="aspectFit"></image>
   <text class="btn-text">微信注册</text></button>

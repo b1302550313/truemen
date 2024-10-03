@@ -1,0 +1,30 @@
+/* pages/splash/splash.wxss */
+/* pages/splash/splash.wxss */
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.splash-logo {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.splash-slogan {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.splash-button {
+  background-color: #4CD964;
+  color: white;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+}
