@@ -1,101 +1,59 @@
-# 修改
-2024年9月21日19:47:34 修改uid为Long类型。添加zodiac。还有userId和zodiac的编辑为题没有解决。
-
 # 后端启动环境配置
 
-## 启动程序
+## 部署到本机
 
-在IDE中运行`webserver\src\main\java\com\sysu\verto\VertoApplication.java`中main方法
+### 运行数据库
 
-![image-20240807182213014](http://typoraimagess.oss-cn-beijing.aliyuncs.com/img/image-20240807182213014.png)
+运行`init3.sql`文件
 
-控制台输出如下表示运行成功：
+以Navicat为例，在Navicat中新建一个连接，选择MySQL，输入用户名和密码，连接到本地数据库，然后选择一个数据库，右键选择`运行SQL文件`，选择`init3.sql`文件，点击`确定`即可在本机上运行数据库。
 
-![image-20240807182248537](http://typoraimagess.oss-cn-beijing.aliyuncs.com/img/image-20240807182248537.png)
+如果报错，可尝试新建一个空白数据库，执行上述操作。
 
-**注意：如果修改了代码，再次调试之前记得重新run一遍**
+### 更改配置
 
-## 使用curl测试文件存储API
+在`webserver\src\main\resources\application.properties`中更改如下配置
 
-以下是使用`curl`测试文件存储API的详细说明和示例命令。在命令行中运行这些命令。
+```bash
+# 将verto改为你的数据库名
+spring.datasource.url=jdbc:mysql://localhost:3306/verto?useSSL=false&serverTimezone=UTC
 
-### 文件上传接口 `upload`
+# username一般为root,无需更改
+spring.datasource.username=root
 
-使用以下命令上传文件。确保路径使用正斜杠（`/`）。
+# 改为自己的数据库密码
+spring.datasource.password=Lwy20030403!
 
-```sh
-curl -F "file=@<path_to_file>" http://localhost:8000/files/upload/<userId>/<module>
+
+# 微信配置：改为你自己的微信号和微信密码
+wechat.appid=your_app_id
+wechat.secret=your_secret_key
 ```
 
-**示例**：
+### 安装依赖
 
-```sh
-curl -F "file=@C:/Users/HP/Desktop/temp/test1.png" http://localhost:8000/files/upload/123/avatar
+首先进入`webserver`目录
+```bash
+cd webserver
 ```
 
-解释：
-- `"file=@/path/to/your/file"`：待上传的文件路径名，建议使用正斜杠（`/`）。
-- `localhost:8000`：服务器地址和端口，可以在`webserver/src/main/resources/application.properties`中修改端口。
-- 如果路径报错，可尝试将`application.properties`中的`file.base-dir`改为绝对路径。
-
-### 文件下载接口 `download`
-
-使用以下命令下载文件到当前目录，并使用服务器提供的文件名保存。
-
-```sh
-curl -o <output_file_path> http://localhost:8000/files/download/<userId>/<module>/<fileName>
+执行
+```bash
+mvn clean install
 ```
 
-**示例**：
 
-```sh
-curl -o downloaded_test1.png http://localhost:8000/files/download/123/avatar/test1.png
+### 启动
+
+在`webserver`目录执行
+```bash
+mvn spring-boot:run
 ```
 
-解释：
-- `-o <output_file_path>`：指定下载文件的输出路径和文件名。
-- `localhost:8000`：服务器地址和端口。
-- `<userId>`和`<module>`：指定用户ID和功能模块。
+## 部署到服务器
 
-### 文件删除接口 `delete`
+待补充
 
-使用以下命令删除文件。
 
-```sh
-curl -X DELETE http://localhost:8000/files/delete/<userId>/<module>/<fileName>
-```
 
-**示例**：
-
-```sh
-curl -X DELETE http://localhost:8000/files/delete/123/avatar/test1.png
-```
-
-解释：
-- `-X DELETE`：指定HTTP DELETE请求方法。
-- `localhost:8000`：服务器地址和端口。
-- `<userId>`和`<module>`：指定用户ID和功能模块。
-
-### 列出文件接口 `list`
-
-使用以下命令列出指定用户和模块下的所有文件。
-
-```sh
-curl http://localhost:8000/files/list/<userId>/<module>
-```
-
-**示例**：
-
-```sh
-curl http://localhost:8000/files/list/123/avatar
-```
-
-解释：
-- `localhost:8000`：服务器地址和端口。
-- `<userId>`和`<module>`：指定用户ID和功能模块。
-
-### 注意事项
-- 确保服务器正在运行，并且配置正确。
-- 根据需要在`webserver/src/main/resources/application.properties`中调整端口和路径配置。
-- 如果路径报错，使用绝对路径可能会更可靠。
 
