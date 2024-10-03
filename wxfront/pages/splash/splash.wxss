@@ -1,0 +1,73 @@
+/* pages/splash/splash.wxss */
+/* pages/splash/splash.wxss */
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.splash-logo {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.splash-slogan {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.mood-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 80%;
+}
+
+.mood-item {
+  text-align: center;
+  flex: 1;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mood-image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+}
+
+.mood-label {
+  font-size: 18px;
+  color: #333;
+}
+
+[data-selected='true'] {
+  background-color: #FFD700; /* 黄色 */
+}
+
+[data-feeling='justsoso'][data-selected='true'] {
+  background-color: #008000; /* 绿色 */
+}
+
+[data-feeling='sad'][data-selected='true'] {
+  background-color: #0000FF; /* 蓝色 */
+}
+
+.confirm-button {
+  background-color: #4CD964;
+  color: white;
+  border-radius: 20rpx;
+  padding: 30rpx 60rpx;
+  font-size: 36rpx;
+  margin-top: 60rpx;
+  width:600rpx;
+}

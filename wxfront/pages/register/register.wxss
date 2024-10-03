@@ -22,13 +22,11 @@
 .register-btn {
   width: 750rpx;
   height: 112rpx;
-  padding: 16px 4px 16px 4px;
   gap: 16px;
-  opacity: 0px;
   display: flex; /* 使用flex布局 */
   align-items: center; /* 垂直居中对齐 */
   justify-content: center;
-  box-sizing: border-box; /* 包含padding和border */
+  /* box-sizing: border-box;  */
 }
 .btn-text{
   font-family: PingFang SC;

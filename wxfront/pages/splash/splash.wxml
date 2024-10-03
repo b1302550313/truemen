@@ -1,0 +1,22 @@
+<!--pages/splash/splash.wxml-->
+<!-- 开屏页面 -->
+<view class="splash-container">
+  <image src="/images/register/register.png" mode="aspectFit" class="splash-logo"></image>
+  <text class="splash-slogan">欢迎来到truemen</text>
+
+<view class="mood-buttons">
+    <view class="mood-item" bindtap="selectMood" data-feeling="happy" data-selected="{{selectedFeeling === 'happy'}}">
+      <image class="mood-image" src="/images/register/happy.png" mode="aspectFit"></image>
+      <text class="mood-label">{{selectedFeeling === 'happy' ? '非常好' : '非常好'}}</text>
+    </view>
+    <view class="mood-item" bindtap="selectMood" data-feeling="justsoso" data-selected="{{selectedFeeling === 'justsoso'}}">
+      <image class="mood-image" src="/images/register/justsoso.png"></image>
+      <text class="mood-label">{{selectedFeeling === 'justsoso' ? '般般啦' : '般般啦'}}</text>
+    </view>
+    <view class="mood-item" bindtap="selectMood" data-feeling="sad" data-selected="{{selectedFeeling === 'sad'}}">
+      <image class="mood-image" src="/images/register/sad.png"></image>
+      <text class="mood-label">{{selectedFeeling === 'sad' ? '不太妙' : '不太妙'}}</text>
+    </view>
+  </view>
+  <button class="confirm-button" bindtap="goToIndex">确定</button>
+</view>

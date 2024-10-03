@@ -10,12 +10,15 @@ Page({
     longitude: 116.404, // 默认经度
     latitude: 39.915, // 默认纬度
     markers: [],
+    gloabalData:null, //全局数据
   },
   onShow() {
+    console.log("index onShow")
     this.getTabBar().init()
   },
   onLoad: function () {
     // 初始化时获取用户当前位置
+    console.log("index onLoad")
     this.getUserLocation()
     // 模拟从后端获取的经纬度信息
     const location = {
@@ -41,6 +44,14 @@ Page({
         },
       ],
     })
+    this.data.gloabalData=getApp().globalData;
+    console.log(this.data.gloabalData);
+    if(this.data.globalData===null ||this.data.gloabalData.uid===null){
+      wx.navigateTo({
+        url: '/pages/register/register',
+      });
+    }
+
   },
   getUserLocation: function () {
     const vm = this

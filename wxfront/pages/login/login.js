@@ -7,7 +7,7 @@ Page({
   data: {
     username: '',
     password: '',
-    phone:13512341234,
+    phone:13012345678,
   },
   handleUsernameChange: function(e) {
     this.setData({
@@ -45,6 +45,30 @@ Page({
         url: '/pages/home/home'
       });
     }, 1000);
+  },
+   /**
+   * 获取手机号码
+   */
+  getPhoneNumber: function() {
+    // 请求用户授权
+    wx.requestUserPhone({
+      success(res) {
+        console.log('获取手机号成功：', res.phoneNumber);
+        // 存储手机号到全局变量
+        getApp().globalData.phone = res.phoneNumber;
+        this.setData({
+          phone:res.phoneNumber,
+        });
+      },
+      fail(err) {
+        console.error('获取手机号失败：', err);
+        wx.showToast({
+          title: '请授权手机号',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载

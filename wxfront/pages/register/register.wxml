@@ -1,6 +1,6 @@
 <!--pages/register/register.wxml-->
 <view class="container">
-  <image src="../../images/register/register.webp" mode="aspectFit" class="logo"></image>
+  <image src="/images/register/register.png" mode="aspectFit" class="logo"></image>
   <text class="register-text">吉时已到，宜注册</text>
   <button class="register-btn " bindtap="wechatRegister">
     <image class="icon-wx" src="/images/icons/icon-wx.png" mode="aspectFit"></image>
@@ -8,6 +8,8 @@
   <button class="register-btn" bindtap="phoneRegister">
     <image class="icon-wx" src="/images/icons/icon-phone.png" mode="aspectFit"></image>
   <text class="btn-text">手机号注册</text></button>
+  <button class="register-btn" bindtap="handleLogin">
+    <text class="btn-text">已有账号，去登录</text></button>
   <button class="register-btn" bindtap="skipRegister">
   <text class="skip-text">暂暂暂…暂时时跳过</text></button>
 </view>
