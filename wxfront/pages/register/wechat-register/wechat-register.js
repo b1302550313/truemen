@@ -108,8 +108,8 @@ Page({
   disagree: function () {
     console.log('不同意');
     // 不做任何事情
-    wx.switchTab({
-      url: '../../index/index'
+    wx.navigateBack({
+      delta: 1
     });
   }
 });

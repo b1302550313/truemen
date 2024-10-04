@@ -31,7 +31,25 @@ App({
   getGlobalData: function() {
     return this.globalData;
   },
+
+  login:function(){
+    // wx.login()获取code
+        wx.login({
+            success:(res)=>{
+                console.log("code: " + res.code);
+                wx.request({
+                    url:'http://127.0.0.1:3000/login',
+                    method:'POST',
+                    data:{
+                        code : res.code
+                    }
+                })
+            }
+    })
+  },
+
   onLaunch: function (options) {
+    this.login()  // 调用
     console.log("app onLaunch")
     const that = this
     // 获取系统信息
