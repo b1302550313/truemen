@@ -24,10 +24,9 @@ spring.datasource.username=root
 # 改为自己的数据库密码
 spring.datasource.password=Lwy20030403!
 
-
-# 微信配置：改为你自己的微信号和微信密码
-wechat.appid=your_app_id
-wechat.secret=your_secret_key
+# 小程序信息：appid和secret固定不变。
+appid:	wxf15109d6152eeee8   
+secret:	2fc8fd2874ae9f831bab0b13c301840b
 ```
 
 ### 安装依赖
