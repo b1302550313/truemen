@@ -38,7 +38,7 @@ App({
             success:(res)=>{
                 console.log("code: " + res.code);
                 wx.request({
-                    url:'http://127.0.0.1:3000/login',
+                    url:getApp().globalData.host+'/wechat-login',
                     method:'POST',
                     data:{
                         code : res.code
