@@ -11,7 +11,7 @@ public class Result<T> {
     private String msg = "success";
     private T data;
 
-    public static <T> Result<T> ok() {
+    public static <G> Result <G> ok() {
         return ok(null);
     }
 
