@@ -207,6 +207,14 @@ UNLOCK TABLES;
 --
 -- Table structure for table `post`
 --
+DROP TABLE IF EXISTS `guides`;
+CREATE TABLE guides (
+     id INT AUTO_INCREMENT PRIMARY KEY, -- 自增主键
+     title VARCHAR(255) NOT NULL,       -- 攻略名称
+     description TEXT NOT NULL,          -- 攻略介绍
+     type VARCHAR(50) NOT NULL,          -- 攻略类型
+     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 创建时间
+);
 
 DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
