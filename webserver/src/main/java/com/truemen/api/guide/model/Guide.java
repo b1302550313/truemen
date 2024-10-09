@@ -1,32 +1,41 @@
 package com.truemen.api.guide.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Guide {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String title;
-    private String description;
-    private String type;
-    private LocalDateTime createdAt;
+    private Long id;
 
-    public Guide() {
-        this.createdAt = LocalDateTime.now();
-    }
+    private String title;
+
+    private String description; // 攻略描述
+
+    @ElementCollection
+    private List<String> tags;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Day> days;
+
+    private LocalDateTime createdAt; // 攻略创建的时间
 
     // Getters and Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,15 +55,32 @@ public class Guide {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public List<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(List<Day> days) {
+        this.days = days;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
     }
 }
