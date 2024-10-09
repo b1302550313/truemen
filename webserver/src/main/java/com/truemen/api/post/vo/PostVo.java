@@ -1,4 +1,4 @@
-package com.truemen.api.post.model.vo;
+package com.truemen.api.post.vo;
 
 import java.util.List;
 

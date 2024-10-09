@@ -140,6 +140,17 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` (`uid`, `postId`, `content`) VALUES
+(2, 1, '这真是一个有趣的观点！'),
+(3, 3, '我完全同意你的看法。'),
+(2, 2, '可以提供更多细节吗？我很感兴趣。'),
+(3, 3, '很有见地的文章，感谢分享！'),
+(2, 1, '我觉得还可以从另一个角度来探讨这个问题。'),
+(2, 3, '这篇帖子让我想起了之前的一个项目经历。'),
+(2, 2, '学习了，谢谢作者！'),
+(1, 3, '有些地方还不太明白，可以再解释一下吗？'),
+(3, 3, '这个主题一直是我关注的重点。'),
+(3, 4, '期待更多类似的文章。');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 

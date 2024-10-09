@@ -2,8 +2,11 @@ package com.truemen.api.post.controller;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.truemen.api.common.result.PageResult;
+import com.truemen.api.post.query.BasePageQuery;
+import com.truemen.api.post.service.CommentService;
+import com.truemen.api.post.vo.CommentVo;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,21 +22,22 @@ import com.truemen.api.common.exception.ErrorCode;
 import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.common.result.Result;
 import com.truemen.api.post.model.PostCollection;
-import com.truemen.api.post.model.vo.PostUpdateQuery;
-import com.truemen.api.post.model.vo.PostVo;
-import com.truemen.api.post.model.vo.PostWithIDVo;
+import com.truemen.api.post.vo.PostUpdateQuery;
+import com.truemen.api.post.vo.PostVo;
+import com.truemen.api.post.vo.PostWithIDVo;
 import com.truemen.api.post.service.PostCollectionService;
 import com.truemen.api.post.service.PostService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/api/v1/post")
 @Validated
 public class PostController {
   @Autowired
   private PostService postService;
-
+  @Autowired
+  private CommentService commentService;
   @Autowired
   private PostCollectionService postCollectionService;
 
@@ -177,5 +181,14 @@ public class PostController {
     } else {
       return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @GetMapping("/comment/list/{postId}")
+  public @Valid PageResult<CommentVo> getCommentByPostID(
+          @PathVariable("postId") String postID,
+          @RequestBody BasePageQuery query
+          ){
+    PageResult<CommentVo> result= commentService.listCommentByPostID(Integer.parseInt(postID),query);
+    return result;
   }
 }

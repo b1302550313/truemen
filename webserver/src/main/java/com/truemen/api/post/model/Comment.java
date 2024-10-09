@@ -8,17 +8,34 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
+/**
+ * Comment
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("comment")
 public class Comment {
+    /**
+     * 评论ID
+     */
     @TableId(value = "commentId")
-    private Long commentId;
-    private Long uid;
-    private Long postId;
+    private long commentId;
+    /**
+     * 评论内容
+     */
     private String content;
+    /**
+     * 发布时间
+     */
     private Date createTime;
+    /**
+     * 帖子ID
+     */
+    private long postId;
+    /**
+     * 用户ID
+     */
+    private long uid;
 }
