@@ -190,6 +190,7 @@ CREATE TABLE `landmark` (
   `latitude` decimal(9,6) DEFAULT NULL,
   `longitude` decimal(9,6) DEFAULT NULL,
   `category` int DEFAULT NULL,
+  `landmark_id` int not null,
   PRIMARY KEY (`landmarkId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -470,3 +471,20 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-09-21 19:46:06
+CREATE TABLE `activity` (
+                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `title` VARCHAR(255) NOT NULL,
+                            `description` TEXT,
+                            `start_time` DATETIME NOT NULL,
+                            `end_time` DATETIME,
+                            `location_id` INT,
+                            `created_by` VARCHAR(100),
+                            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                            FOREIGN KEY (`location_id`) REFERENCES `landmark`(`landmark_id`) ON DELETE SET NULL
+);
+
+
+CREATE INDEX idx_activity_location_id ON `activity` (`location_id`);
+CREATE INDEX idx_activity_start_time ON `activity` (`start_time`);
+
