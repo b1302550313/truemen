@@ -36,6 +36,13 @@ secret:	2fc8fd2874ae9f831bab0b13c301840b
 cd webserver
 ```
 
+### 安装OpenJDK 17
+在使用Maven打包之前，需要安装OpenJDK 17
+```bash
+sudo apt update
+sudo apt install openjdk-17-jdk
+```
+
 执行
 ```bash
 mvn clean install

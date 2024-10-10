@@ -1,0 +1,41 @@
+server:
+  port: 8086
+
+file:
+  base-dir: "./webfiles"
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+  application:
+    name: verto
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:truemen-mysql}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:verto}?allowMultiQueries=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    hibernate:
+      ddl-atuo: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+mybatis:
+  configuration:
+    log-impl: STDOUT_LOGGING
+
+
+  wechat:
+  appid: your_app_id
+  secret: your_secret_key
+
+calendar:
+  timezone: UTC
+  language: en
+  defaultView: month
+
