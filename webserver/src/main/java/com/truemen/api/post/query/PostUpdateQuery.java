@@ -1,4 +1,4 @@
-package com.truemen.api.post.vo;
+package com.truemen.api.post.query;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

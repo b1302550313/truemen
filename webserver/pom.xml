@@ -211,6 +211,19 @@
             <artifactId>objenesis</artifactId>
             <version>${objenesis.version}</version>
         </dependency>
+
+        <!-- mapstruct mapper -->
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
     </dependencies>
     
     <!--启动程序的配置-->

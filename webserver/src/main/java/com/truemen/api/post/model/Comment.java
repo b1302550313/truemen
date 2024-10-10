@@ -22,7 +22,7 @@ public class Comment {
      * 评论ID
      */
     @TableId(value = "commentId")
-    private long commentId;
+    private Long commentId;
     /**
      * 评论内容
      */
@@ -34,9 +34,9 @@ public class Comment {
     /**
      * 帖子ID
      */
-    private long postId;
+    private Long postId;
     /**
      * 用户ID
      */
-    private long uid;
+    private Long uid;
 }

@@ -1,12 +1,12 @@
-package com.truemen.api.post.vo;
+package com.truemen.api.post.query;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 public class CommentUploadQuery {
-
     @NotNull(message = "用户ID不能为空")
     protected Long uid;
 
@@ -15,5 +15,4 @@ public class CommentUploadQuery {
 
     @NotEmpty(message = "帖子内容不能为空")
     protected String content;
-
 }

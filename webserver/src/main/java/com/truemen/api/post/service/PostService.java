@@ -7,7 +7,7 @@ import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.post.dao.PostDao;
 import com.truemen.api.post.model.Post;
 import com.truemen.api.post.model.PostCollectionPost;
-import com.truemen.api.post.vo.PostUpdateQuery;
+import com.truemen.api.post.query.PostUpdateQuery;
 import com.truemen.api.post.vo.PostVo;
 import com.truemen.api.post.vo.PostWithIDVo;
 

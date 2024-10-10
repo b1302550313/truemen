@@ -1,12 +1,13 @@
 package com.truemen.api.post.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.truemen.api.common.result.PageResult;
 import com.truemen.api.post.query.BasePageQuery;
+import com.truemen.api.post.query.CommentUploadQuery;
 import com.truemen.api.post.service.CommentService;
 import com.truemen.api.post.vo.CommentVo;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +23,7 @@ import com.truemen.api.common.exception.ErrorCode;
 import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.common.result.Result;
 import com.truemen.api.post.model.PostCollection;
-import com.truemen.api.post.vo.PostUpdateQuery;
+import com.truemen.api.post.query.PostUpdateQuery;
 import com.truemen.api.post.vo.PostVo;
 import com.truemen.api.post.vo.PostWithIDVo;
 import com.truemen.api.post.service.PostCollectionService;
@@ -184,11 +185,25 @@ public class PostController {
   }
 
   @GetMapping("/comment/list/{postId}")
-  public @Valid PageResult<CommentVo> getCommentByPostID(
+  public Result<PageResult<CommentVo>> getCommentByPostID(
           @PathVariable("postId") String postID,
           @RequestBody BasePageQuery query
           ){
-    PageResult<CommentVo> result= commentService.listCommentByPostID(Integer.parseInt(postID),query);
-    return result;
+    PageResult<CommentVo> data= commentService.listCommentByPostID(Integer.parseInt(postID),query);
+    return Result.ok(data);
+  }
+
+  @PostMapping("/comment/upload")
+  public Result<Map<String,Long>> uploadComment(
+          @Valid @RequestBody CommentUploadQuery commentUploadQuery){
+
+    Long commentID = commentService.upLoadComment(commentUploadQuery);
+    // error
+    if (commentID == null) {
+      throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
+    }
+    Map<String,Long> data = new HashMap<>();
+    data.put("commentId",commentID);
+    return Result.ok(data);
   }
 }
