@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @TableName("post")
@@ -17,11 +18,12 @@ import java.util.Date;
 public class Post {
     @TableId
     private Long postId;
+    private Long landmarkId;
     private Long uid;
     private String title;
     private String content;
-    private Date createTime;
-    private Date updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private Long tag;
     private Long visibility;
     private Long allowComment;

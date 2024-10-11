@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -19,8 +20,8 @@ public class BulletScreen {
     private Long bulletId;
     private Long uid;
     private String content;
-    private Date createTime;
-    private Date updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private Integer visibility;
     private Integer duration;
     private String contactInfo;

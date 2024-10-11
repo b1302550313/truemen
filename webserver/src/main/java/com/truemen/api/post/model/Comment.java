@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 /**
  * Comment
@@ -30,7 +31,7 @@ public class Comment {
     /**
      * 发布时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
     /**
      * 帖子ID
      */

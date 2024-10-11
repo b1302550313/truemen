@@ -3,12 +3,19 @@ package com.truemen.api.post.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.truemen.api.common.debug.Debug;
 import com.truemen.api.common.result.PageResult;
 import com.truemen.api.post.query.BasePageQuery;
 import com.truemen.api.post.query.CommentUploadQuery;
 import com.truemen.api.post.service.CommentService;
+import com.truemen.api.post.service.MediaService;
 import com.truemen.api.post.vo.CommentVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,39 +29,58 @@ import org.springframework.web.bind.annotation.RestController;
 import com.truemen.api.common.exception.ErrorCode;
 import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.common.result.Result;
-import com.truemen.api.post.model.PostCollection;
 import com.truemen.api.post.query.PostUpdateQuery;
-import com.truemen.api.post.vo.PostVo;
+import com.truemen.api.post.query.PostUploadQuery;
 import com.truemen.api.post.vo.PostWithIDVo;
-import com.truemen.api.post.service.PostCollectionService;
 import com.truemen.api.post.service.PostService;
 
 import jakarta.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/post")
 @Validated
 public class PostController {
+  // transaction
+  @Autowired
+  private PlatformTransactionManager transactionManager;
+
   @Autowired
   private PostService postService;
   @Autowired
   private CommentService commentService;
   @Autowired
-  private PostCollectionService postCollectionService;
+  private MediaService mediaService;
+
 
   /*
    * - 描述: 用户创建新帖子。帖子可以包含文本、图片、音频等内容。
-   * - 响应数据: 新创建帖子的ID
    */
-  @PostMapping("/upload/normal")
-  public Result<Integer> uploadPost(@Valid @RequestBody PostVo postVo) {
-    System.out.println("/upload/normal");
-    Integer pid = postService.upLoadPost(postVo);
-    if (pid != null) {
-      return Result.ok(pid);
-    } else {
+  @PostMapping("/upload")
+  public Result<Map<String,Long>> uploadPost(
+          @Valid @RequestBody PostUploadQuery postUploadQuery) {
+    // Debug.printFields(postUploadQuery);
+    TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+
+    // upload post
+    Long postId = postService.upLoadPost(postUploadQuery);
+    Map<String, Long> data = new HashMap<>();
+    data.put("postId",postId);
+    if (postId ==null){
+      transactionManager.rollback(status);
       throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
     }
+
+    // form media record
+    boolean success = mediaService.addMediaToPost(postId,postUploadQuery.getMedia());
+    if (!success){
+      transactionManager.rollback(status);
+      throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
+    }
+
+    transactionManager.commit(status);
+    return Result.ok(data);
+
   }
 
   /*
@@ -93,96 +119,18 @@ public class PostController {
     }
   }
 
-  /*
-   * - 描述: 创建帖子合集。
-   * - 响应数据: 操作结果（成功或失败）
-   */
-  @PostMapping("/collection")
-  public Result createCollection(@Valid @RequestBody PostCollection collection) {
-    boolean result = postCollectionService.createCollection(collection);
-    if (result) {
-      return Result.ok();
-    } else {
-      return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  /*
-   * - 描述: 更新帖子合集。
-   * - 响应数据: 操作结果（成功或失败）
-   */
-  @PutMapping("/collection/{collectionId}")
-  public Result updateCollection(@PathVariable Long collectionId, @Valid @RequestBody PostCollection collection) {
-    collection.setCollectionId(collectionId);
-    boolean result = postCollectionService.updateCollection(collection);
-    if (result) {
-      return Result.ok();
-    } else {
-      return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  /*
-   * - 描述: 删除帖子合集。
-   * - 响应数据: 操作结果（成功或失败）
-   */
-  @DeleteMapping("/collection/delete/{collectionId}")
-  public Result deleteCollection(@PathVariable Long collectionId) {
-    boolean result = postCollectionService.deleteCollection(collectionId);
-    if (result) {
-      return Result.ok();
-    } else {
-      return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  /*
-   * - 描述: 获取指定帖子合集的详细信息。
-   * - 响应数据: 帖子合集详细信息
-   */
-  @GetMapping("/collection/{collectionId}")
-  public Result<PostCollection> getCollectionDetail(@PathVariable Long collectionId) {
-    PostCollection collection = postCollectionService.getCollection(collectionId);
-    return Result.ok(collection);
-  }
 
   /*
    * - 描述: 获取不同地点的帖子数。
    * - 响应数据: 不同地点的帖子数
    */
-  @GetMapping("/location/count")
-  public Result<Map<String, Long>> getPostCountByLocation() {
-    Map<String, Long> postCountByLocation = postService.getPostCountByLocation();
-    return Result.ok(postCountByLocation);
-  }
+//  @GetMapping("/location/count")
+//  public Result<Map<String, Long>> getPostCountByLocation() {
+//    Map<String, Long> postCountByLocation = postService.getPostCountByLocation();
+//    return Result.ok(postCountByLocation);
+//  }
 
-  /*
-   * - 描述: 添加帖子到合集。
-   * - 响应数据: 操作结果（成功或失败）
-   */
-  @PostMapping("/collection/{collectionId}/post/{postId}")
-  public Result addPostToCollection(@PathVariable Long collectionId, @PathVariable Long postId) {
-    boolean result = postCollectionService.addPostToCollection(collectionId, postId);
-    if (result) {
-      return Result.ok();
-    } else {
-      return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
-    }
-  }
 
-  /*
-   * - 描述: 从合集中移除帖子。
-   * - 响应数据: 操作结果（成功或失败）
-   */
-  @DeleteMapping("/collection/{collectionId}/delete/{postId}")
-  public Result removePostFromCollection(@PathVariable Long collectionId, @PathVariable Long postId) {
-    boolean result = postCollectionService.removePostFromCollection(collectionId, postId);
-    if (result) {
-      return Result.ok();
-    } else {
-      return Result.error(ErrorCode.INTERNAL_SERVER_ERROR);
-    }
-  }
 
   @GetMapping("/comment/list/{postId}")
   public Result<PageResult<CommentVo>> getCommentByPostID(
