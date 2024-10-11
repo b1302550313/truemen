@@ -1,18 +1,18 @@
 package com.truemen.api.post.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.truemen.api.common.debug.Debug;
 import com.truemen.api.common.result.PageResult;
 import com.truemen.api.post.query.BasePageQuery;
 import com.truemen.api.post.query.CommentUploadQuery;
 import com.truemen.api.post.service.CommentService;
 import com.truemen.api.post.service.MediaService;
 import com.truemen.api.post.vo.CommentVo;
+import com.truemen.api.post.vo.PostDetailVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -31,7 +31,6 @@ import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.common.result.Result;
 import com.truemen.api.post.query.PostUpdateQuery;
 import com.truemen.api.post.query.PostUploadQuery;
-import com.truemen.api.post.vo.PostWithIDVo;
 import com.truemen.api.post.service.PostService;
 
 import jakarta.validation.Valid;
@@ -87,10 +86,14 @@ public class PostController {
    * - 描述: 获取指定帖子的详细信息。
    * - 响应数据: 帖子详细信息
    */
-  @GetMapping("/detail/normal/{postId}")
-  public Result<PostWithIDVo> getPostDetail(@PathVariable Integer postId) {
-    PostWithIDVo postWithIDVo = postService.getPost(postId);
-    return Result.ok(postWithIDVo);
+  @GetMapping("/detail/{postId}")
+  public Result<PostDetailVo> getPostDetail(@PathVariable("postId") Long postId) {
+    // base info
+    PostDetailVo postDetailVo = postService.getPostDetail(postId);
+    // media info
+    List<Long> mediaId = mediaService.getMediaInfoOfPost(postId);
+    postDetailVo.setMediaId(mediaId);
+    return Result.ok(postDetailVo);
   }
 
   /*

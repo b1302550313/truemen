@@ -17,16 +17,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class Post {
     @TableId
-    private Long postId;
-    private Long landmarkId;
-    private Long uid;
-    private String title;
-    private String content;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
-    private Long tag;
-    private Long visibility;
-    private Long allowComment;
-    private Long duration;
-    private String contactInfo;
+    protected Long postId;
+    protected Long landmarkId;
+    protected Long uid;
+    protected String title;
+    protected String content;
+    protected LocalDateTime createTime;
+    protected LocalDateTime updateTime;
+    protected Long tag;
+    protected Long visibility;
+    protected Long allowComment;
+    protected Long duration;
+    protected String contactInfo;
 }

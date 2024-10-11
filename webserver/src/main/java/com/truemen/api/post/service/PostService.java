@@ -2,7 +2,6 @@ package com.truemen.api.post.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.truemen.api.common.debug.Debug;
 import com.truemen.api.common.exception.ErrorCode;
 import com.truemen.api.common.exception.ServerException;
 import com.truemen.api.post.dao.PostDao;
@@ -10,13 +9,12 @@ import com.truemen.api.post.mapper.PostMapper;
 import com.truemen.api.post.model.Post;
 import com.truemen.api.post.query.PostUpdateQuery;
 import com.truemen.api.post.query.PostUploadQuery;
-import com.truemen.api.post.vo.PostWithIDVo;
+import com.truemen.api.post.vo.PostDetailVo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,21 +27,15 @@ public class PostService extends ServiceImpl<PostDao, Post> {
     @Autowired
     private PostCollectionPostDao postCollectionPostDao;
 
-    public PostWithIDVo getPost(Integer pid) {
+    public PostDetailVo getPostDetail(Long postId) {
 
-        Post post = baseMapper.selectById(pid.longValue());
+        Post post = baseMapper.selectById(postId);
         if (post == null)
-            throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new ServerException("不存在postId=%d".formatted(postId));
 
-        PostWithIDVo postWithIDVo = new PostWithIDVo();
-        // postWithIDVo.setPostId(pid.longValue());
-        // postWithIDVo.setPostType(PostVo.PostType.valueOf(post.getType().name()));
-        // postWithIDVo.setTitle(post.getTitle());
-        // postWithIDVo.setContent(post.getContent());
-        // postWithIDVo.setLocation(post.getLocation());
-        // postWithIDVo.setUserId(post.getUid());
-        // postWithIDVo.setMediaUrls(ConVertUrlList.convertStringToUrlList(post.getMediaUrls()));
-        return postWithIDVo;
+        PostDetailVo postDetailVo = PostMapper.INSTANCE.postToPostDetailVo(post);
+
+        return postDetailVo;
     }
 
     public Long upLoadPost(PostUploadQuery postUploadQuery) {

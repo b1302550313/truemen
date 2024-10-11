@@ -1,5 +1,7 @@
 package com.truemen.api.post.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.truemen.api.common.util.FileExtValid;
 import com.truemen.api.post.dao.PostMediaDao;
@@ -39,6 +41,16 @@ public class MediaService extends ServiceImpl<PostMediaDao, PostMedia> {
                 }).collect(Collectors.toSet());
 
         return saveBatch(media);
+    }
+
+    public List<Long> getMediaInfoOfPost(Long postId){
+        LambdaQueryWrapper<PostMedia> qw = new LambdaQueryWrapper<>();
+        qw.eq(PostMedia::getPostId,postId);
+        return list(qw).stream()
+                .map(postMedia -> {
+                    return postMedia.getMediaId();
+                })
+                .collect(Collectors.toList());
     }
 
 
