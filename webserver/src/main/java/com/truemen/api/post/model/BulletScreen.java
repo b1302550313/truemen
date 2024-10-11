@@ -18,11 +18,14 @@ import java.util.Date;
 public class BulletScreen {
     @TableId(value = "bulletId")
     private Long bulletId;
-    private Long uid;
-    private String content;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
-    private Integer visibility;
-    private Integer duration;
-    private String contactInfo;
+    protected Long landmarkId;
+    protected Long uid;
+    protected String content;
+    protected LocalDateTime createTime;
+    protected LocalDateTime updateTime;
+    protected Long tag;
+    protected Long visibility;
+    protected Long allowComment;
+    protected Long duration;
+    protected String contactInfo;
 }

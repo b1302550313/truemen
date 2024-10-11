@@ -28,16 +28,20 @@ DROP TABLE IF EXISTS `bulletscreen`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bulletscreen` (
   `bulletId` bigint NOT NULL AUTO_INCREMENT COMMENT '弹幕ID',
+  `landmarkId` bigint NOT NULL COMMENT '地标ID',
   `uid` bigint NOT NULL COMMENT '用户ID',
   `content` varchar(5000) NOT NULL COMMENT '弹幕内容',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   `updateTime` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `tag` int DEFAULT NULL COMMENT '标签，只选一个,对应0123',
   `visibility` int NOT NULL COMMENT '对谁可见，0所有人，1朋友可见，2仅自己可见',
+  `allowComment` int NOT NULL COMMENT '是否可评论，0可，1不可',
   `duration` int NOT NULL COMMENT '0永久，1一年，2一月，3一天，4一小时',
   `contactInfo` varchar(200) DEFAULT NULL COMMENT '联系方式，逗号隔开，依次为手机；qq;微信',
   PRIMARY KEY (`bulletId`),
   KEY `uid` (`uid`),
-  CONSTRAINT `bulletscreen_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE
+  CONSTRAINT `bulletscreen_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE,
+  CONSTRAINT `bulletscreen_ibfk_2` FOREIGN KEY (`landmarkId`) REFERENCES `landmark` (`landmarkId`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
