@@ -20,7 +20,7 @@ public class ActivityService {
     private LandmarkService landmarkService;
 
     public Activity createActivity(Activity activity) {
-        Long landmarkId = activity.getLocation().getId(); // 确保使用正确的 ID 获取地标
+        Long landmarkId = activity.getLocation().getLandmarkId(); // 确保使用正确的 ID 获取地标
         Landmark landmark = landmarkService.getLandmarkById(landmarkId);
         if (landmark == null) {
             throw new IllegalArgumentException("关联的地标不存在，landmarkId: " + landmarkId);
@@ -60,7 +60,7 @@ public class ActivityService {
             existingActivity.setCreatedBy(updatedActivity.getCreatedBy());
 
             if (updatedActivity.getLocation() != null) {
-                Long newLandmarkId = updatedActivity.getLocation().getId();
+                Long newLandmarkId = updatedActivity.getLocation().getLandmarkId();
                 Landmark newLandmark = landmarkService.getLandmarkById(newLandmarkId);
                 if (newLandmark != null) {
                     existingActivity.setLocation(newLandmark);
