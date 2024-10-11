@@ -158,4 +158,17 @@ public class PostController {
     data.put("commentId",commentID);
     return Result.ok(data);
   }
+
+  @PutMapping("/{uid}/like/{postId}/{yes}")
+  Result likeBulletScreen(
+          @PathVariable("uid") Long uid,
+          @PathVariable("postId") Long postId,
+          @PathVariable("yes") Boolean yes
+  ){
+    Boolean success = postService.likePost(uid, postId, yes);
+    if (success==null){
+      throw new ServerException("点赞失败");
+    }
+    return Result.ok();
+  }
 }

@@ -51,6 +51,20 @@ CREATE TABLE `bulletscreen` (
 
 LOCK TABLES `bulletscreen` WRITE;
 /*!40000 ALTER TABLE `bulletscreen` DISABLE KEYS */;
+INSERT INTO bulletscreen (landmarkId, uid, content, createTime, updateTime, tag, visibility, allowComment, duration, contactInfo)
+VALUES
+(1, 1001, '这是一个测试弹幕-1', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 0, '1234567890,123456789,wx123456'),
+(1, 1002, '这是一个测试弹幕-2', CURRENT_TIMESTAMP, NULL, 2, 1, 0, 1, '0987654321,987654321,wx987654'),
+(2, 1003, '这是一个测试弹幕-3', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-4', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-5', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 1003, '这是一个测试弹幕-6', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-7', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-8', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 1003, '这是一个测试弹幕-9', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-10', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-11', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333');
+
 /*!40000 ALTER TABLE `bulletscreen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,6 +93,18 @@ CREATE TABLE `bulletscreenlike` (
 
 LOCK TABLES `bulletscreenlike` WRITE;
 /*!40000 ALTER TABLE `bulletscreenlike` DISABLE KEYS */;
+INSERT INTO bulletscreenlike (bulletId, userId)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 3);
 /*!40000 ALTER TABLE `bulletscreenlike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +316,11 @@ CREATE TABLE `postlike` (
 
 LOCK TABLES `postlike` WRITE;
 /*!40000 ALTER TABLE `postlike` DISABLE KEYS */;
-INSERT INTO `postlike` VALUES (1,1,2),(2,1,3),(3,2,1),(4,2,1);
+INSERT INTO `postlike` VALUES
+(1,1,2),
+(2,1,3),
+(3,2,1),
+(4,3,1);
 /*!40000 ALTER TABLE `postlike` ENABLE KEYS */;
 UNLOCK TABLES;
 

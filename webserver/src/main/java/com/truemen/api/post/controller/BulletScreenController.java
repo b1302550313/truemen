@@ -10,10 +10,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,5 +34,19 @@ public class BulletScreenController {
             throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
         }
         return Result.ok(data);
+    }
+
+
+    @PutMapping("/{uid}/like/{bulletId}/{yes}")
+    Result likeBulletScreen(
+            @PathVariable("uid") Long uid,
+            @PathVariable("bulletId") Long bulletId,
+            @PathVariable("yes") Boolean yes
+    ){
+        Boolean success = bulletScreenService.likeBulletScrren(uid, bulletId, yes);
+        if (success==null){
+            throw new ServerException("点赞失败");
+        }
+        return Result.ok();
     }
 }
