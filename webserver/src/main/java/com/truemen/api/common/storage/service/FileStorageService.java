@@ -12,14 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.truemen.api.common.util.FileExtValid.validateFileType;
+
 @Service
 public class FileStorageService {
 
     @Value("${file.base-dir}")
     private String baseDir;
-
-    private static final String[] ALLOWED_FILE_TYPES = { "png", "jpg", "jpeg", "gif", "mp3", "wav", "ogg", "mp4", "avi",
-            "mov" };
 
     public String saveFile(String uid, String module, String fileName, byte[] fileContent) throws IOException {
         validateFileType(fileName);
@@ -57,20 +56,5 @@ public class FileStorageService {
         }
     }
 
-    private void validateFileType(String fileName) {
-        String fileExtension = getFileExtension(fileName);
-        for (String allowedType : ALLOWED_FILE_TYPES) {
-            if (allowedType.equalsIgnoreCase(fileExtension)) {
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Invalid file type: " + fileExtension);
-    }
 
-    private String getFileExtension(String fileName) {
-        if (fileName == null || fileName.lastIndexOf(".") == -1) {
-            return null;
-        }
-        return fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-    }
 }

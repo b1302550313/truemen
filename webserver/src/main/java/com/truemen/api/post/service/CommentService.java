@@ -5,40 +5,41 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.truemen.api.post.dao.CommentDao;
+import com.truemen.api.post.mapper.PostMapper;
 import com.truemen.api.post.model.Comment;
-import com.truemen.api.post.model.vo.CommentListPostQuery;
-import com.truemen.api.post.model.vo.CommentUploadQuery;
-import com.truemen.api.post.model.vo.CommentVo;
+import com.truemen.api.post.query.BasePageQuery;
+import com.truemen.api.post.query.CommentUploadQuery;
+import com.truemen.api.post.vo.CommentVo;
 import com.truemen.api.common.result.PageResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 
 @Service
+@Slf4j
 public class CommentService extends ServiceImpl<CommentDao, Comment> {
 
-    public PageResult<CommentVo> listPostComment(Integer postId,
-            CommentListPostQuery query) {
+    public PageResult<CommentVo> listCommentByPostID(Integer postId,
+                                                     BasePageQuery query) {
         LambdaQueryWrapper<Comment> qw = new LambdaQueryWrapper<>();
         qw.eq(Comment::getPostId, postId);
-        Page page = new Page(query.getPage(), query.getLimit());
-        IPage pageResult = baseMapper.selectPage(page, qw);
+        Page<Comment> page = new Page<Comment>(query.getPage(), query.getLimit());
+        IPage<Comment> pageResult = baseMapper.selectPage(page, qw);
 
-        System.out.println("总记录数：" + pageResult.getTotal());
-        System.out.println("当前页码：" + pageResult.getCurrent());
-        System.out.println("每页记录数：" + pageResult.getSize());
-        System.out.println("当前页数据：" + pageResult.getRecords());
-
-        return new PageResult<CommentVo>(pageResult.getRecords(), pageResult.getTotal());
+        log.info("总记录数：{}", pageResult.getTotal());
+        log.info("当前页码：{}", pageResult.getCurrent());
+        log.info("每页记录数：{}", pageResult.getSize());
+        log.info("当前页数据：{}", pageResult.getRecords());
+        List<CommentVo> records = PostMapper.INSTANCE.listCommentToCommentVo(pageResult.getRecords());
+        return new PageResult<CommentVo>(records, pageResult.getTotal());
     }
 
-    public Integer upLoadComment(CommentUploadQuery commentUploadQuery) {
-        Comment comment = Comment.builder()
-                .uid(commentUploadQuery.getUid())
-                .content(commentUploadQuery.getContent())
-                .postId(commentUploadQuery.getPostId())
-                .build();
-        return baseMapper.insert(comment);
+    public Long upLoadComment(CommentUploadQuery commentUploadQuery) {
+        Comment comment = PostMapper.INSTANCE.commentUploadQueryToComment(commentUploadQuery);
+        boolean result = save(comment);
+        if (result)return comment.getCommentId();
+        else return null;
     }
 
 }

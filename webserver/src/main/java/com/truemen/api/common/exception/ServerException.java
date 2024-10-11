@@ -14,4 +14,10 @@ public class ServerException extends RuntimeException {
         this.msg = errorCode.getMsg();
     }
 
+    public ServerException(String msg){
+        super(msg);
+        this.code=ErrorCode.INTERNAL_SERVER_ERROR.getCode();
+        this.msg=msg;
+    }
+
 }

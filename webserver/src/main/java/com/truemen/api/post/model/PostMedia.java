@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,7 +19,7 @@ public class PostMedia {
     @TableId(value = "mediaId")
     private Long mediaId;
     private Long postId;
-    private Integer type;
+    private Long type;
     private String mediaUrl;
-    private Date createTime;
+    private LocalDateTime createTime;
 }

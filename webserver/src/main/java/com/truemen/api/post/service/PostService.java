@@ -1,72 +1,69 @@
 package com.truemen.api.post.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.truemen.api.common.exception.ErrorCode;
 import com.truemen.api.common.exception.ServerException;
-import com.truemen.api.common.util.ConVertUrlList;
 import com.truemen.api.post.dao.PostDao;
+import com.truemen.api.post.dao.PostLikeDao;
+import com.truemen.api.post.mapper.PostMapper;
+import com.truemen.api.post.model.BulletScreenLike;
 import com.truemen.api.post.model.Post;
-import com.truemen.api.post.model.PostCollectionPost;
-import com.truemen.api.post.model.vo.PostUpdateQuery;
-import com.truemen.api.post.model.vo.PostVo;
-import com.truemen.api.post.model.vo.PostWithIDVo;
+import com.truemen.api.post.model.PostLike;
+import com.truemen.api.post.query.PostUpdateQuery;
+import com.truemen.api.post.query.PostUploadQuery;
+import com.truemen.api.post.vo.PostDetailVo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.truemen.api.post.dao.PostCollectionPostDao;
 
+@Slf4j
 @Service
 public class PostService extends ServiceImpl<PostDao, Post> {
 
     @Autowired
     private PostCollectionPostDao postCollectionPostDao;
+    @Autowired
+    private PostLikeDao postLikeMapper;
 
-    public PostWithIDVo getPost(Integer pid) {
+    public PostDetailVo getPostDetail(Long postId) {
 
-        Post post = baseMapper.selectById(pid.longValue());
+        Post post = baseMapper.selectById(postId);
         if (post == null)
-            throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new ServerException("不存在postId=%d".formatted(postId));
 
-        PostWithIDVo postWithIDVo = new PostWithIDVo();
-        // postWithIDVo.setPostId(pid.longValue());
-        // postWithIDVo.setPostType(PostVo.PostType.valueOf(post.getType().name()));
-        // postWithIDVo.setTitle(post.getTitle());
-        // postWithIDVo.setContent(post.getContent());
-        // postWithIDVo.setLocation(post.getLocation());
-        // postWithIDVo.setUserId(post.getUid());
-        // postWithIDVo.setMediaUrls(ConVertUrlList.convertStringToUrlList(post.getMediaUrls()));
-        return postWithIDVo;
+        PostDetailVo postDetailVo = PostMapper.INSTANCE.postToPostDetailVo(post);
+
+        return postDetailVo;
     }
 
-    public Integer upLoadPost(PostVo postVo) {
-        Post post = Post.builder()
-                .uid(postVo.getUserId())
-                .title(postVo.getTitle())
-                .content(postVo.getContent())
-                // .type(Post.PostType.valueOf(postVo.postType.name()))
-                .createTime(new Date())
-                // .mediaUrls(ConVertUrlList.convertMediaUrlsToString(postVo.getMediaUrls()))
-                // .location(postVo.getLocation())
-                .build();
-        baseMapper.insert(post);
+    public Long upLoadPost(PostUploadQuery postUploadQuery) {
+        Post post = PostMapper.INSTANCE.postUploadQueryToPost(postUploadQuery);
+//        Debug.printFields(post);
 
-        // 添加帖子到合集
-        if (postVo.getCollectionId() != null) {
-            PostCollectionPost collectionPost = PostCollectionPost.builder()
-                    .collectionId(postVo.getCollectionId())
-                    .postId(post.getPostId())
-                    .build();
-            postCollectionPostDao.insert(collectionPost);
+        int affectLine = baseMapper.insert(post);
+        if (affectLine!=1){
+            return null;
+        }else {
+            return post.getPostId();
         }
-        return baseMapper.insert(post);
+
+        //todo
+        //这里添加合集考虑前端调用添加合集api
+        // 添加帖子到合集
+//        if (postVo.getCollectionId() != null) {
+//            PostCollectionPost collectionPost = PostCollectionPost.builder()
+//                    .collectionId(postVo.getCollectionId())
+//                    .postId(post.getPostId())
+//                    .build();
+//            postCollectionPostDao.insert(collectionPost);
+//        }
+//        return (long) baseMapper.insert(post);
     }
 
     public boolean deletePost(Integer pid) {
@@ -77,12 +74,10 @@ public class PostService extends ServiceImpl<PostDao, Post> {
         return true;
     }
 
-    public boolean updatePost(Integer pid, PostUpdateQuery query) {
+    public boolean updatePost(Long pid, PostUpdateQuery query) {
         LambdaQueryWrapper<Post> qw = new LambdaQueryWrapper();
         qw.eq(Post::getPostId, pid);
-        Post post = new Post();
-        post.setContent(query.getContent());
-        post.setTitle(query.getTitle());
+        Post post = PostMapper.INSTANCE.postUpdateQueryToPost(query);
         int rows = baseMapper.update(post, qw);
         if (rows == 0)
             return false;
@@ -96,5 +91,21 @@ public class PostService extends ServiceImpl<PostDao, Post> {
         // .filter(post -> post.getLocation() != null)
         // .collect(Collectors.groupingBy(Post::getLocation, Collectors.counting()));
         return null;
+    }
+
+    public Boolean likePost(Long uid, Long postId, Boolean yes) {
+        LambdaQueryWrapper<PostLike> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PostLike::getUserId,uid);
+        queryWrapper.eq(PostLike::getPostId,postId);
+        Long count = postLikeMapper.selectCount(queryWrapper);
+//        log.info("count {}",count);
+        if (count!=0 && !yes){
+            return postLikeMapper.delete(queryWrapper) == 1;
+        }
+        if(count==0 && yes){
+            PostLike like= new PostLike(null,postId,uid);
+            return postLikeMapper.insert(like) == 1;
+        }
+        return true;
     }
 }
