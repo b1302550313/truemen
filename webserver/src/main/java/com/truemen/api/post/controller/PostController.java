@@ -100,8 +100,9 @@ public class PostController {
    * - 描述: 更新已有帖子的内容。用户可以修改文本内容，或添加/删除媒体文件
    * - 响应数据: 操作结果（成功或失败）
    */
-  @PutMapping("/detail/normal/{postId}")
-  public Result updatePostDetail(@PathVariable Integer postId, @Valid @RequestBody PostUpdateQuery query) {
+  @PutMapping("/detail/{postId}")
+  public Result<Void> updatePostDetail(@PathVariable("postId") Long postId,
+                                       @Valid @RequestBody PostUpdateQuery query) {
     boolean res = postService.updatePost(postId, query);
     if (res == false)
       throw new ServerException(ErrorCode.INTERNAL_SERVER_ERROR);

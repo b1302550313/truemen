@@ -70,12 +70,10 @@ public class PostService extends ServiceImpl<PostDao, Post> {
         return true;
     }
 
-    public boolean updatePost(Integer pid, PostUpdateQuery query) {
+    public boolean updatePost(Long pid, PostUpdateQuery query) {
         LambdaQueryWrapper<Post> qw = new LambdaQueryWrapper();
         qw.eq(Post::getPostId, pid);
-        Post post = new Post();
-        post.setContent(query.getContent());
-        post.setTitle(query.getTitle());
+        Post post = PostMapper.INSTANCE.postUpdateQueryToPost(query);
         int rows = baseMapper.update(post, qw);
         if (rows == 0)
             return false;

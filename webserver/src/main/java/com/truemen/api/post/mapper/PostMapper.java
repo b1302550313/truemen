@@ -3,6 +3,7 @@ package com.truemen.api.post.mapper;
 import com.truemen.api.post.model.Comment;
 import com.truemen.api.post.model.Post;
 import com.truemen.api.post.query.CommentUploadQuery;
+import com.truemen.api.post.query.PostUpdateQuery;
 import com.truemen.api.post.query.PostUploadQuery;
 import com.truemen.api.post.vo.CommentVo;
 import com.truemen.api.post.vo.PostDetailVo;
@@ -71,4 +72,7 @@ public interface PostMapper {
     default String extractWeChatId(String contactInfo) {
         return contactInfo != null ? contactInfo.split(",")[2] : null;
     }
+
+    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())") // 设置更新时间为当前时间
+    Post postUpdateQueryToPost(PostUpdateQuery postUpdateQuery);
 }
