@@ -28,16 +28,20 @@ DROP TABLE IF EXISTS `bulletscreen`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bulletscreen` (
   `bulletId` bigint NOT NULL AUTO_INCREMENT COMMENT '弹幕ID',
+  `landmarkId` bigint NOT NULL COMMENT '地标ID',
   `uid` bigint NOT NULL COMMENT '用户ID',
   `content` varchar(5000) NOT NULL COMMENT '弹幕内容',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   `updateTime` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `tag` int DEFAULT NULL COMMENT '标签，只选一个,对应0123',
   `visibility` int NOT NULL COMMENT '对谁可见，0所有人，1朋友可见，2仅自己可见',
+  `allowComment` int NOT NULL COMMENT '是否可评论，0可，1不可',
   `duration` int NOT NULL COMMENT '0永久，1一年，2一月，3一天，4一小时',
   `contactInfo` varchar(200) DEFAULT NULL COMMENT '联系方式，逗号隔开，依次为手机；qq;微信',
   PRIMARY KEY (`bulletId`),
   KEY `uid` (`uid`),
-  CONSTRAINT `bulletscreen_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE
+  CONSTRAINT `bulletscreen_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE,
+  CONSTRAINT `bulletscreen_ibfk_2` FOREIGN KEY (`landmarkId`) REFERENCES `landmark` (`landmarkId`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,6 +51,20 @@ CREATE TABLE `bulletscreen` (
 
 LOCK TABLES `bulletscreen` WRITE;
 /*!40000 ALTER TABLE `bulletscreen` DISABLE KEYS */;
+INSERT INTO bulletscreen (landmarkId, uid, content, createTime, updateTime, tag, visibility, allowComment, duration, contactInfo)
+VALUES
+(1, 1001, '这是一个测试弹幕-1', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 0, '1234567890,123456789,wx123456'),
+(1, 1002, '这是一个测试弹幕-2', CURRENT_TIMESTAMP, NULL, 2, 1, 0, 1, '0987654321,987654321,wx987654'),
+(2, 1003, '这是一个测试弹幕-3', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-4', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-5', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 1003, '这是一个测试弹幕-6', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-7', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-8', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 1003, '这是一个测试弹幕-9', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 1004, '这是一个测试弹幕-10', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1005, '这是一个测试弹幕-11', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333');
+
 /*!40000 ALTER TABLE `bulletscreen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,6 +93,18 @@ CREATE TABLE `bulletscreenlike` (
 
 LOCK TABLES `bulletscreenlike` WRITE;
 /*!40000 ALTER TABLE `bulletscreenlike` DISABLE KEYS */;
+INSERT INTO bulletscreenlike (bulletId, userId)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 3);
 /*!40000 ALTER TABLE `bulletscreenlike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,6 +170,17 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` (`uid`, `postId`, `content`) VALUES
+(2, 1, '这真是一个有趣的观点！'),
+(3, 3, '我完全同意你的看法。'),
+(2, 2, '可以提供更多细节吗？我很感兴趣。'),
+(3, 3, '很有见地的文章，感谢分享！'),
+(2, 1, '我觉得还可以从另一个角度来探讨这个问题。'),
+(2, 3, '这篇帖子让我想起了之前的一个项目经历。'),
+(2, 2, '学习了，谢谢作者！'),
+(1, 3, '有些地方还不太明白，可以再解释一下吗？'),
+(3, 3, '这个主题一直是我关注的重点。'),
+(3, 4, '期待更多类似的文章。');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +317,11 @@ CREATE TABLE `postlike` (
 
 LOCK TABLES `postlike` WRITE;
 /*!40000 ALTER TABLE `postlike` DISABLE KEYS */;
-INSERT INTO `postlike` VALUES (1,1,2),(2,1,3),(3,2,1),(4,2,1);
+INSERT INTO `postlike` VALUES
+(1,1,2),
+(2,1,3),
+(3,2,1),
+(4,3,1);
 /*!40000 ALTER TABLE `postlike` ENABLE KEYS */;
 UNLOCK TABLES;
 

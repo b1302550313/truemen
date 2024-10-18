@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -17,11 +18,14 @@ import java.util.Date;
 public class BulletScreen {
     @TableId(value = "bulletId")
     private Long bulletId;
-    private Long uid;
-    private String content;
-    private Date createTime;
-    private Date updateTime;
-    private Integer visibility;
-    private Integer duration;
-    private String contactInfo;
+    protected Long landmarkId;
+    protected Long uid;
+    protected String content;
+    protected LocalDateTime createTime;
+    protected LocalDateTime updateTime;
+    protected Long tag;
+    protected Long visibility;
+    protected Long allowComment;
+    protected Long duration;
+    protected String contactInfo;
 }
