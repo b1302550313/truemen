@@ -1,0 +1,17 @@
+<!--components/strategy-card/strategy-card.wxml-->
+<view class="strategy-card">
+  <view class="card-header">
+    <text class="strategy-name">{{ strategy.name }}</text>
+    <text class="strategy-type">{{ strategy.type }}</text>
+  </view>
+  <view class="card-body">
+    <view class="card-info">
+      <text>发布时间: {{ strategy.publishTime }}</text>
+      <text>攻略天数: {{ strategy.days }} 天</text>
+      <text>景点数量: {{ strategy.sights }} 个</text>
+    </view>
+    <view class="strategy-intro">
+      <text>{{ strategy.intro }}</text>
+    </view>
+  </view>
+</view>

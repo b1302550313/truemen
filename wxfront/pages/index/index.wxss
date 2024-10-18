@@ -16,7 +16,7 @@
   display: flex;
   flex-flow: row;
   padding-left: 40rpx; /* 左内边距改为 rpx */
-  padding-right: 120rpx; /* 右内边距改为 rpx */
+  /* padding-right: 120rpx;  */
   position: relative;
   width: 100%;
   z-index: 1;
@@ -24,6 +24,7 @@
 
 .search-bar__input {
   height: 100%;
+  width: 100%;
   line-height: 100%;
   margin-left: 10rpx; /* 左边距改为 rpx */
 }

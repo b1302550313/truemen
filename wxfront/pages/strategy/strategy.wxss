@@ -79,3 +79,7 @@
 .edit-panel.show {
   height: 50%; /* 展开时覆盖页面的下半部分 */
 }
+.strategy-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
