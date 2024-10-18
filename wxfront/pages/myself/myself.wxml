@@ -9,7 +9,15 @@
    
   </view>
 
-  <text class="username">{{ userName }}</text>
+  <!-- <text class="username">{{ userName }}</text> -->
+  <view class="user-info">
+  <block wx:if="{{ uid || phoneNumber }}">
+    <text class="username">{{ userName }}</text>
+  </block>
+  <block wx:else>
+    <button bindtap="navigateToLogin" class="login-button">去登录</button>
+  </block>
+</view>
   <view class="stats">
     <view class="stat">
       <text class="stat-num">{{ doubleArrowFriends }}</text>

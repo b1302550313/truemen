@@ -3,7 +3,8 @@
 <view class="container">
   <open-data type="userAvatarUrl"></open-data>
 <open-data type="userNickName"></open-data>
-  <button class="btn agree-button" wx:if="{{canIUse}}"open-type="getUserInfo" bindtap="onGetUserInfo"><text class="btn-text">我愿意</text></button>
+  <button class="btn agree-button" wx:if="{{canIUse}}"open-type="getUserInfo" bindtap="bindGetUserInfo"><text class="btn-text">我愿意</text></button>
+  <view wx:else>请升级微信版本</view>
   <button class="btn disagree-button" bindtap="disagree">
     <text class="btn-text">我婉拒</text></button>
 </view>

@@ -21,7 +21,11 @@ App({
     gender:"匿",
     birthDate:"2000-01-01",
     zodiac: '水瓶座',
+    userInfo:null,
     isLogin:false,
+    openid:null,
+    token:null,
+    session_key:null,
   },
   // 设置全局变量的方法
   setGlobalData: function(obj) {
@@ -49,7 +53,7 @@ App({
   },
 
   onLaunch: function (options) {
-    this.login()  // 调用
+    // this.login() 
     console.log("app onLaunch")
     const that = this
     // 获取系统信息
