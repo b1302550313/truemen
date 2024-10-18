@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uid:47,
+    uid:null,
     phone:null,
     wechatId: null,
     avatarUrl: '/images/icons/pie.png',
@@ -49,6 +49,12 @@ Page({
   //     }
   //   });
   // },
+  navigateToLogin: function() {
+    // 跳转到登录页面
+    wx.navigateTo({
+      url: '/pages/login/login'
+    });
+  },
   fetchAdditionalInfo: function(uid) {
     // 发送 GET 请求到后端
     console.log("fetchAdditonalInfo");

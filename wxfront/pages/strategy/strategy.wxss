@@ -6,7 +6,7 @@
   flex: auto;
   position: relative;
   margin-left: 20rpx; /* 左边距改为 rpx */
-  margin-right: 20rpx; /* 右边距改为 rpx */
+  margin-right: 20rpx; 
 }
 
 .search-bar__box {
@@ -15,7 +15,7 @@
   display: flex;
   flex-flow: row;
   padding-left: 40rpx; /* 左内边距改为 rpx */
-  padding-right: 120rpx; /* 右内边距改为 rpx */
+  /* padding-right: 120rpx; */
   position: relative;
   width: 100%;
   z-index: 1;
@@ -24,7 +24,8 @@
 .search-bar__input {
   height: 100%;
   line-height: 100%;
-  margin-left: 10rpx; /* 左边距改为 rpx */
+  margin-left: 10rpx; 
+  width: 100%;
 }
 
 /* 标签栏样式 */
@@ -77,4 +78,8 @@
 
 .edit-panel.show {
   height: 50%; /* 展开时覆盖页面的下半部分 */
+}
+.strategy-container {
+  padding: 20px;
+  background-color: #f9f9f9;
 }

@@ -27,3 +27,8 @@
         </view>
     </view>
 </view>
+<view class="strategy-container">
+  <block wx:for="{{ strategies }}" wx:key="id">
+    <strategy-card strategy="{{ item }}"></strategy-card>
+  </block>
+</view>
