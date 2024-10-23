@@ -1,11 +1,7 @@
 package com.truemen.api.user.controller;
 
-import com.truemen.api.user.service.UserService;
-import com.truemen.api.user.model.User;
-import com.truemen.api.user.dao.RegisterResponse;
-import com.truemen.api.user.service.UserService;
-import com.truemen.api.user.service.WechatClient;
-import java.text.NumberFormat.Style;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.truemen.api.user.dao.RegisterResponse;
+import com.truemen.api.user.model.User;
+import com.truemen.api.user.service.UserService;
+import com.truemen.api.user.service.WechatClient;
 
 @RestController
 @RequestMapping("/api/users")
@@ -212,6 +213,27 @@ public class UserController {
             return ResponseEntity.ok("User profile updated successfully");
         } else {
             return ResponseEntity.badRequest().body("Failed to update user profile");
+        }
+    }
+
+    // 保存用户的标签
+    @PostMapping("/{uid}/savetags")
+    public ResponseEntity<String> saveTags(@PathVariable Long uid, @RequestBody List<String> tags) {
+        if (userService.saveTags(uid, tags)) {
+            return ResponseEntity.ok("Tags saved successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to save tags");
+        }
+    }
+
+    // 获取用户的标签
+    @GetMapping("/{uid}/gettags")
+    public ResponseEntity<List<String>> getTags(@PathVariable Long uid) {
+        List<String> tags = userService.getTags(uid);
+        if (tags != null) {
+            return ResponseEntity.ok(tags);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

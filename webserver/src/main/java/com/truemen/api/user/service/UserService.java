@@ -1,6 +1,7 @@
 package com.truemen.api.user.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +14,6 @@ import com.truemen.api.user.storage.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-// 登录注册相关
 @Service
 public class UserService {
     private final UserDAO userDAO;
@@ -111,5 +111,24 @@ public class UserService {
         httpSession.setAttribute("user", savedUser);
 
         return savedUser;
+    }
+
+    // 保存用户的标签
+    public boolean saveTags(Long uid, List<String> tags) {
+        User user = userDAO.getUserByUid(uid);
+        if (user != null) {
+            user.setTagsFromList(tags);
+            return userDAO.updateUser(user);
+        }
+        return false;
+    }
+
+    // 获取用户的标签
+    public List<String> getTags(Long uid) {
+        User user = userDAO.getUserByUid(uid);
+        if (user != null) {
+            return user.getTagsAsList();
+        }
+        return null;
     }
 }
