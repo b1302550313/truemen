@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/myself/page-modify-tags/page-modify-tags",
+          "pathName": "pages/myself/page-modify-tags/page-modify-tags",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/splash/splash",
           "pathName": "pages/splash/splash",
           "query": "",
