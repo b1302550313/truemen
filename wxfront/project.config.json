@@ -1,11 +1,5 @@
 {
-  "appid": "wxf15109d6152eeee8",
   "compileType": "miniprogram",
-  "libVersion": "3.5.1",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
   "setting": {
     "coverView": true,
     "es6": true,
@@ -24,7 +18,8 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "urlCheck": true
+    "urlCheck": true,
+    "ignoreUploadUnusedFiles": true
   },
   "condition": {},
   "editorSetting": {
@@ -32,5 +27,9 @@
     "tabSize": 2
   },
   "simulatorPluginLibVersion": {},
-  "projectname": "verto"
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wxf15109d6152eeee8"
 }
