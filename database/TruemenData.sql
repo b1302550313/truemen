@@ -3,9 +3,9 @@
 -- ------------------------------------------------------
 -- Server version	8.0.36
 
-drop schema if exists verto_project;
-create schema verto_project;
-use verto_project;
+drop schema if exists verto;
+create schema verto;
+use verto;
 -- Table structure for table `usercoreinfo`
 --
 
@@ -22,7 +22,7 @@ CREATE TABLE `usercoreinfo` (
   UNIQUE KEY `userId` (`userId`),
   UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `wechatId` (`wechatId`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 -- Table structure for table `userbaseinfo`
 --
 
@@ -41,6 +41,21 @@ CREATE TABLE `userbaseinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 -- Table structure for table `bulletscreen`
 --
+
+DROP TABLE IF EXISTS `landmark`;
+CREATE TABLE `landmark` (
+  `landmarkId` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `address` varchar(255) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `province` varchar(100) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `latitude` decimal(9,6) DEFAULT NULL,
+  `longitude` decimal(9,6) DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  PRIMARY KEY (`landmarkId`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 DROP TABLE IF EXISTS `bulletscreen`;
 CREATE TABLE `bulletscreen` (
@@ -75,18 +90,7 @@ CREATE TABLE `bulletscreenlike` (
   CONSTRAINT `bulletscreenlike_ibfk_1` FOREIGN KEY (`bulletId`) REFERENCES `bulletscreen` (`bulletId`),
   CONSTRAINT `bulletscreenlike_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `usercoreinfo` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-INSERT INTO bulletscreenlike (bulletId, userId)
-VALUES
-(1, 1),
-(1, 2),
-(2, 1),
-(2, 2),
-(3, 3),
-(4, 1),
-(5, 2),
-(6, 3),
-(7, 1),
-(8, 3);
+
 -- Table structure for table `chatrecord`
 --
 
@@ -107,21 +111,7 @@ CREATE TABLE `chatrecord` (
   CONSTRAINT `chatrecord_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `usercoreinfo` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chatrecord_ibfk_2` FOREIGN KEY (`friendId`) REFERENCES `usercoreinfo` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
--- Table structure for table `comment`
---
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment` (
-  `commentId` bigint NOT NULL AUTO_INCREMENT COMMENT '评论ID',
-  `uid` bigint NOT NULL COMMENT '用户ID',
-  `postId` bigint NOT NULL COMMENT '帖子ID',
-  `content` varchar(200) NOT NULL COMMENT '评论内容',
-  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
-  PRIMARY KEY (`commentId`),
-  KEY `uid` (`uid`),
-  KEY `postId` (`postId`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE,
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`postId`) REFERENCES `post` (`postId`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 -- Table structure for table `groups`
 --
 
@@ -139,21 +129,7 @@ CREATE TABLE `groups` (
 -- Table structure for table `landmark`
 --
 
-DROP TABLE IF EXISTS `landmark`;
-CREATE TABLE `landmark` (
-  `landmarkId` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
-  `province` varchar(100) DEFAULT NULL,
-  `country` varchar(100) DEFAULT NULL,
-  `latitude` decimal(9,6) DEFAULT NULL,
-  `longitude` decimal(9,6) DEFAULT NULL,
-  `category` int DEFAULT NULL,
-  `landmark_id` int not null,
-  PRIMARY KEY (`landmarkId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+
 --
 DROP TABLE IF EXISTS `guides`;
 CREATE TABLE guides (
@@ -183,7 +159,25 @@ CREATE TABLE `post` (
   KEY `landmarkId` (`landmarkId`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE,
   CONSTRAINT `post_ibfk_2` FOREIGN KEY (`landmarkId`) REFERENCES `landmark` (`landmarkId`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+
+-- Table structure for table `comment`
+--
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `commentId` bigint NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `uid` bigint NOT NULL COMMENT '用户ID',
+  `postId` bigint NOT NULL COMMENT '帖子ID',
+  `content` varchar(200) NOT NULL COMMENT '评论内容',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
+  PRIMARY KEY (`commentId`),
+  KEY `uid` (`uid`),
+  KEY `postId` (`postId`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `usercoreinfo` (`uid`) ON UPDATE CASCADE,
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`postId`) REFERENCES `post` (`postId`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
 -- Table structure for table `postlike`
 --
 
@@ -258,16 +252,16 @@ CREATE TABLE `usergroup` (
   CONSTRAINT `usergroup_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `usercoreinfo` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 CREATE TABLE `activity` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
+                            `id` bigint AUTO_INCREMENT PRIMARY KEY,
                             `title` VARCHAR(255) NOT NULL,
                             `description` TEXT,
                             `start_time` DATETIME NOT NULL,
                             `end_time` DATETIME,
-                            `location_id` INT,
+                            `location_id` bigint,
                             `created_by` VARCHAR(100),
                             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                             `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            FOREIGN KEY (`location_id`) REFERENCES `landmark`(`landmark_id`) ON DELETE SET NULL
+                            FOREIGN KEY (`location_id`) REFERENCES `landmark`(`landmarkId`) ON DELETE SET NULL
 );
 CREATE INDEX idx_activity_location_id ON `activity` (`location_id`);
 CREATE INDEX idx_activity_start_time ON `activity` (`start_time`);
@@ -781,14 +775,26 @@ VALUES
     );
 INSERT INTO bulletscreen (landmarkId, uid, content, createTime, updateTime, tag, visibility, allowComment, duration, contactInfo)
 VALUES
-(1, 1001, '这是一个测试弹幕-1', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 0, '1234567890,123456789,wx123456'),
-(1, 1002, '这是一个测试弹幕-2', CURRENT_TIMESTAMP, NULL, 2, 1, 0, 1, '0987654321,987654321,wx987654'),
-(2, 1003, '这是一个测试弹幕-3', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
-(2, 1004, '这是一个测试弹幕-4', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
-(3, 1005, '这是一个测试弹幕-5', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
-(2, 1003, '这是一个测试弹幕-6', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
-(2, 1004, '这是一个测试弹幕-7', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
-(3, 1005, '这是一个测试弹幕-8', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
-(2, 1003, '这是一个测试弹幕-9', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
-(2, 1004, '这是一个测试弹幕-10', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
-(3, 1005, '这是一个测试弹幕-11', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333');
+(1, 1, '这是一个测试弹幕-1', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 0, '1234567890,123456789,wx123456'),
+(1, 1, '这是一个测试弹幕-2', CURRENT_TIMESTAMP, NULL, 2, 1, 0, 1, '0987654321,987654321,wx987654'),
+(2, 2, '这是一个测试弹幕-3', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 3, '这是一个测试弹幕-4', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1, '这是一个测试弹幕-5', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 2, '这是一个测试弹幕-6', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 3, '这是一个测试弹幕-7', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1, '这是一个测试弹幕-8', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333'),
+(2, 2, '这是一个测试弹幕-9', CURRENT_TIMESTAMP, NULL, 3, 0, 1, 2, '1111111111,111111111,wx111111'),
+(2, 3, '这是一个测试弹幕-10', CURRENT_TIMESTAMP, NULL, 0, 2, 0, 3, '2222222222,222222222,wx222222'),
+(3, 1, '这是一个测试弹幕-11', CURRENT_TIMESTAMP, NULL, 1, 0, 0, 4, '3333333333,333333333,wx333333');
+INSERT INTO bulletscreenlike (bulletId, userId)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 3);
