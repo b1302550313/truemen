@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Table;
@@ -33,6 +34,7 @@ public class Landmark {
     private String province; // 省份
     private String country; // 国家
     private Double latitude; // 纬度
+    @Getter
     private Double longitude; // 经度
     private Integer category; // 类别
     private String iconPath; // 图标路径
@@ -164,10 +166,6 @@ public class Landmark {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
     }
 
     public void setLongitude(Double longitude) {

@@ -1,7 +1,12 @@
 package com.truemen.api.user.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.truemen.api.user.dao.UserBaseInfoDAO;
+import com.truemen.api.user.model.UserBaseInfo;
+import com.truemen.api.user.model.UserLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,11 +28,12 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository, HttpSession httpSession, UserDAO userDAO,
-            BCryptPasswordEncoder passwordEncoder) {
+                       BCryptPasswordEncoder passwordEncoder, UserBaseInfoDAO userBaseInfoDAO) {
         this.userRepository = userRepository;
         this.httpSession = httpSession;
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+        this.userBaseInfoDAO = userBaseInfoDAO;
     }
 
     public User getUserByUserId(String userId) {
@@ -112,4 +118,24 @@ public class UserService {
 
         return savedUser;
     }
+
+    public List<UserLocation> getUserLocations() {
+        List<UserLocation> userLocations = new ArrayList<>();
+        // 示例数据，实际应该从数据库获取
+        userLocations.add(new UserLocation("123", "http://example.com/avatar123.jpg", 34.0522, -118.2437));
+        userLocations.add(new UserLocation("456", "http://example.com/avatar456.jpg", 34.0523, -118.2438));
+        return userLocations;
+    }
+
+    private final UserBaseInfoDAO userBaseInfoDAO;
+
+    @Autowired
+    public UserService(UserBaseInfoDAO userBaseInfoDAO) {
+        this.userBaseInfoDAO = userBaseInfoDAO;
+    }
+
+    public UserBaseInfo getUserBaseInfo(Long uid) {
+        return userBaseInfoDAO.getUserBaseInfoByUid(uid);
+    }
+
 }

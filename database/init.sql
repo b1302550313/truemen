@@ -533,3 +533,73 @@ CREATE TABLE `activity` (
 CREATE INDEX idx_activity_location_id ON `activity` (`location_id`);
 CREATE INDEX idx_activity_start_time ON `activity` (`start_time`);
 
+
+CREATE TABLE `landmark_map` (
+                                `landmark_id` INT NOT NULL AUTO_INCREMENT COMMENT '地标唯一标识符',
+                                `landmark_name` VARCHAR(255) NOT NULL COMMENT '地标名称',
+                                `description` TEXT DEFAULT NULL COMMENT '地标描述',
+                                `contact_phone` VARCHAR(20) DEFAULT NULL COMMENT '负责人电话号码',
+                                `is_food_place` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '是否为餐饮地标（食堂/餐厅）',
+                                `location_coordinates` POINT DEFAULT NULL COMMENT '地标地理位置（使用GIS类型）',
+                                PRIMARY KEY (`landmark_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `landmark_reviews` (
+                                    `review_id` INT NOT NULL AUTO_INCREMENT COMMENT '评论唯一标识符',
+                                    `landmark_id` INT NOT NULL COMMENT '对应地标的ID',
+                                    `user_id` INT NOT NULL COMMENT '发布评论的用户ID',
+                                    `review_text` TEXT NOT NULL COMMENT '评论内容',
+                                    `rating` INT NOT NULL COMMENT '评分（1-5星）',
+                                    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '评论创建时间',
+                                    `updated_at` DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '评论更新时间',
+                                    PRIMARY KEY (`review_id`),
+                                    KEY `landmark_id` (`landmark_id`),
+                                    KEY `user_id` (`user_id`),
+                                    CONSTRAINT `landmark_reviews_ibfk_1` FOREIGN KEY (`landmark_id`) REFERENCES `landmark_map` (`landmark_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+                                    CONSTRAINT `landmark_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_profiles` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `food_recommendations` (
+                                        `dish_id` INT NOT NULL AUTO_INCREMENT COMMENT '菜品唯一标识符',
+                                        `landmark_id` INT NOT NULL COMMENT '对应地标的ID',
+                                        `dish_name` VARCHAR(255) NOT NULL COMMENT '菜品名称',
+                                        `price` DECIMAL(10,2) NOT NULL COMMENT '菜品价格',
+                                        `dish_image_url` VARCHAR(255) DEFAULT NULL COMMENT '菜品图片URL',
+                                        `like_count` INT NOT NULL DEFAULT 0 COMMENT '点赞数',
+                                        PRIMARY KEY (`dish_id`),
+                                        KEY `landmark_id` (`landmark_id`),
+                                        CONSTRAINT `food_recommendations_ibfk_1` FOREIGN KEY (`landmark_id`) REFERENCES `landmark_map` (`landmark_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `landmark_posts` (
+                                  `post_id` INT NOT NULL AUTO_INCREMENT COMMENT '帖子唯一标识符',
+                                  `landmark_id` INT NOT NULL COMMENT '对应地标的ID',
+                                  `user_id` INT NOT NULL COMMENT '发布帖子的用户ID',
+                                  `post_title` VARCHAR(255) NOT NULL COMMENT '帖子标题',
+                                  `post_content` TEXT NOT NULL COMMENT '帖子详情',
+                                  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '帖子创建时间',
+                                  `updated_at` DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '帖子更新时间',
+                                  PRIMARY KEY (`post_id`),
+                                  KEY `landmark_id` (`landmark_id`),
+                                  KEY `user_id` (`user_id`),
+                                  CONSTRAINT `landmark_posts_ibfk_1` FOREIGN KEY (`landmark_id`) REFERENCES `landmark_map` (`landmark_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+                                  CONSTRAINT `landmark_posts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_profiles` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `post_media_files` (
+                                    `media_id` INT NOT NULL AUTO_INCREMENT COMMENT '媒体文件唯一标识符',
+                                    `post_id` INT NOT NULL COMMENT '对应帖子ID',
+                                    `media_type` ENUM('image', 'audio') NOT NULL COMMENT '媒体类型（图片或音频）',
+                                    `media_url` VARCHAR(255) NOT NULL COMMENT '媒体文件URL',
+                                    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '媒体上传时间',
+                                    PRIMARY KEY (`media_id`),
+                                    KEY `post_id` (`post_id`),
+                                    CONSTRAINT `post_media_files_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `landmark_posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `user_profiles` (
+                                 `user_id` INT NOT NULL AUTO_INCREMENT COMMENT '用户唯一标识符',
+                                 `username` VARCHAR(255) NOT NULL COMMENT '用户名',
+                                 `email` VARCHAR(255) NOT NULL COMMENT '用户邮箱',
+                                 `password_hash` VARCHAR(255) NOT NULL COMMENT '密码哈希值',
+                                 `phone_number` VARCHAR(20) DEFAULT NULL COMMENT '用户电话号码',
+                                 `registration_date` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '用户注册时间',
+                                 PRIMARY KEY (`user_id`),
+                                 UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
