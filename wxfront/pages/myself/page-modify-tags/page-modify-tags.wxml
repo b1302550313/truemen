@@ -1,0 +1,60 @@
+<!-- page-modify-tags.wxml -->
+<view class="container">
+  <view class="selected-tags-container">
+    <view class="title">已选择的标签</view>
+    <view class="selected-tag-item" wx:for="{{selectedTags}}" wx:key="id">
+      <text class="tag-text" bindtap="addSelectedTag">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 卡片容器 -->
+  <view class="cards-container">
+    <!-- 爱好卡片 -->
+    <view class="card">
+      <view class="card-title">爱好</view>
+      <view class="tags-list">
+        <view class="tag-button" wx:for="{{hobbies}}" wx:key="id" bindtap="selectTag" data-id="{{item.id}}">
+          <text class="tag-text">{{item.name}}+</text>
+        </view>
+        <button class="custom-button" bindtap="openCustomPopup('hobbies')">+自定义</button>
+      </view>
+    </view>
+
+    <!-- 生活方式卡片 -->
+    <view class="card">
+      <view class="card-title">生活方式</view>
+      <view class="tags-list">
+        <view class="tag-button" wx:for="{{lifestyles}}" wx:key="id" bindtap="selectTag" data-id="{{item.id}}">
+          <text class="tag-text">{{item.name}}+</text>
+        </view>
+        <button class="custom-button" bindtap="openCustomPopup('lifestyles')">+自定义</button>
+      </view>
+    </view>
+
+    <!-- 流行文化卡片 -->
+    <view class="card">
+      <view class="card-title">流行文化</view>
+      <view class="tags-list">
+        <view class="tag-button" wx:for="{{popcultures}}" wx:key="id" bindtap="selectTag" data-id="{{item.id}}">
+          <text class="tag-text">{{item.name}}+</text>
+        </view>
+        <button class="custom-button" bindtap="openCustomPopup('popcultures')">+自定义</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <button class="save-button" bindtap="saveTags">保存</button>
+
+  <!-- 自定义标签弹窗 -->
+  <view class="custom-popup" wx:if="{{isCustomPopupVisible}}">
+    <view class="popup-content">
+      <view class="popup-title">自定义标签</view>
+      <input class="custom-input" placeholder="请输入标签" bindinput="onCustomInput"/>
+      <view class="popup-buttons">
+        <button class="popup-button cancel" bindtap="closeCustomPopup">取消</button>
+        <button class="popup-button confirm" bindtap="addCustomTag">{{currentCategory}}</button>
+      </view>
+    </view>
+  </view>
+</view>

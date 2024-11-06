@@ -2,6 +2,10 @@ package com.truemen.api.user.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +61,9 @@ public class User {
     @Column(name = "zodiac") // 星座
     private String zodiac;
 
+    @Column(name = "tags") // 标签，以逗号分隔的字符串
+    private String tags;
+
     public enum Gender {
         男, 女, 匿 // 新增匿藏选项
     }
@@ -82,11 +89,12 @@ public class User {
         this.birthDate = user.getBirthDate();
         this.gender = user.getGender();
         this.zodiac = user.getZodiac();
+        this.tags = user.getTags();
     }
 
     // 参数构造函数
     public User(Long uid, String userId, String userName, String wechatId, String phone, String password, String avatar,
-            int permission, String bio, Gender gender, LocalDate birthDate, String zodiac) {
+            int permission, String bio, Gender gender, LocalDate birthDate, String zodiac, String tags) {
         System.out.println(" Param User created");
         this.uid = uid;
         this.userId = "user_" + System.currentTimeMillis();
@@ -97,9 +105,10 @@ public class User {
         this.avatar = avatar;
         this.permission = permission;
         this.bio = bio;
-        this.gender = gender == null ? Gender.匿 : gender; // 设置默认值
+        this.gender = gender != null ? gender : Gender.匿; // 设置默认值
         this.birthDate = birthDate;
         this.zodiac = zodiac;
+        this.tags = tags;
     }
 
     // 重写 toString 方法
@@ -119,6 +128,7 @@ public class User {
                 ", gender=" + gender +
                 ", birthDate=" + birthDate +
                 ", zodiac=" + zodiac +
+                ", tags=" + tags +
                 '}';
     }
 
@@ -225,5 +235,31 @@ public class User {
 
     public void setZodiac(String zodiac) {
         this.zodiac = zodiac;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    // 将标签列表转换为逗号分隔的字符串
+    public void setTagsFromList(List<String> tags) {
+        if (tags != null) {
+            this.tags = tags.stream().collect(Collectors.joining(","));
+        } else {
+            this.tags = null;
+        }
+    }
+
+    // 将逗号分隔的字符串转换为标签列表
+    public List<String> getTagsAsList() {
+        if (tags != null && !tags.isEmpty()) {
+            return Arrays.asList(tags.split(","));
+        } else {
+            return Collections.emptyList();
+        }
     }
 }
